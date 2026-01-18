@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Report Form View: add is_zpl -->
+        <record id="view_ir_actions_report_form_inherit_seisei_is_zpl" model="ir.ui.view">
+            <field name="name">ir.actions.report.form.inherit.seisei.is_zpl</field>
+            <field name="model">ir.actions.report</field>
+            <field name="inherit_id" ref="base.act_report_xml_view"/>
+            <field name="arch" type="xml">
+                <field name="report_name" position="after">
+                    <field name="is_zpl" widget="boolean_toggle"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Inherit Report List View: add is_zpl -->
+        <record id="view_ir_actions_report_tree_inherit_seisei_is_zpl" model="ir.ui.view">
+            <field name="name">ir.actions.report.list.inherit.seisei.is_zpl</field>
+            <field name="model">ir.actions.report</field>
+            <field name="inherit_id" ref="base.act_report_xml_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="report_type" position="after">
+                    <field name="is_zpl" widget="boolean_toggle"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
+

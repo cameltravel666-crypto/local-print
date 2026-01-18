@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Demo打印机数据 -->
+        <record id="demo_printer_1" model="seisei.printer">
+            <field name="name">HP LaserJet P1108</field>
+            <field name="system_name">HP LaserJet P1108</field>
+            <field name="station_id" ref="station_office_1f"/>
+            <field name="printer_uuid">hp-p1108-001</field>
+            <field name="manufacturer">HP</field>
+            <field name="model">LaserJet P1108</field>
+            <field name="location">前台接待处</field>
+            <field name="description">前台专用黑白激光打印机</field>
+            <field name="status">idle</field>
+            <field name="is_default">False</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="demo_printer_2" model="seisei.printer">
+            <field name="name">Canon PIXMA G3800</field>
+            <field name="system_name">Canon PIXMA G3800</field>
+            <field name="station_id" ref="station_office_2f"/>
+            <field name="printer_uuid">canon-g3800-001</field>
+            <field name="manufacturer">Canon</field>
+            <field name="model">PIXMA G3800</field>
+            <field name="location">技术部办公室</field>
+            <field name="description">技术部彩色喷墨多功能一体机</field>
+            <field name="status">idle</field>
+            <field name="is_default">True</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="demo_printer_3" model="seisei.printer">
+            <field name="name">Epson LQ-630K</field>
+            <field name="system_name">Epson LQ-630K</field>
+            <field name="station_id" ref="station_finance"/>
+            <field name="printer_uuid">epson-lq630k-001</field>
+            <field name="manufacturer">Epson</field>
+            <field name="model">LQ-630K</field>
+            <field name="location">财务部</field>
+            <field name="description">财务专用票据针式打印机</field>
+            <field name="status">idle</field>
+            <field name="is_default">False</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="demo_printer_4" model="seisei.printer">
+            <field name="name">Zebra GK888t</field>
+            <field name="system_name">Zebra GK888t</field>
+            <field name="station_id" ref="station_warehouse"/>
+            <field name="printer_uuid">zebra-gk888t-001</field>
+            <field name="manufacturer">Zebra</field>
+            <field name="model">GK888t</field>
+            <field name="location">仓库包装区</field>
+            <field name="description">仓库标签打印机</field>
+            <field name="status">idle</field>
+            <field name="is_default">False</field>
+            <field name="active">True</field>
+        </record>
+
+    </data>
+</odoo>

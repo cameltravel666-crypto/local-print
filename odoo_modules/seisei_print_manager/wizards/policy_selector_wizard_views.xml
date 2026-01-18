@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Print Policy Selector Line List View -->
+        <record id="view_print_policy_selector_line_list" model="ir.ui.view">
+            <field name="name">seisei.print.policy.selector.line.list</field>
+            <field name="model">seisei.print.policy.selector.line</field>
+            <field name="arch" type="xml">
+                <list string="Available Print Policies" editable="top">
+                    <field name="is_selected" widget="mutex_toggle"/>
+                    <field name="name"/>
+                    <field name="printer_name"/>
+                    <field name="action_type"/>
+                    <field name="copies"/>
+                    <field name="description"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Print Policy Selector Wizard Form -->
+        <record id="view_print_policy_selector_wizard_form" model="ir.ui.view">
+            <field name="name">seisei.print.policy.selector.wizard.form</field>
+            <field name="model">seisei.print.policy.selector.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Select Print Policy">
+                    <sheet>
+                        <group>
+                            <field name="report_id" invisible="1" />
+                            <field name="report_name" readonly="1"/>
+                        </group>
+                        
+                        <field name="policy_ids">
+                            <list create="0" delete="0" editable="top">
+                                <field name="mapping_id" column_invisible="1" force_save="1" />
+                                <field name="is_selected" widget="mutex_toggle" />
+                                <field name="name" readonly="1" force_save="1" />
+                                <field name="printer_name" readonly="1" force_save="1" />
+                                <field name="action_type" readonly="1" force_save="1" />
+                                <field name="copies" readonly="1" force_save="1"  />
+                            </list>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Print Policy Selector Wizard Action -->
+        <record id="action_print_policy_selector_wizard" model="ir.actions.act_window">
+            <field name="name">Select Print Policy</field>
+            <field name="res_model">seisei.print.policy.selector.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

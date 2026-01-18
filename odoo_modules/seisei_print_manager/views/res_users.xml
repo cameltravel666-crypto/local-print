@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- User Form View Enhancement -->
+        <record id="view_res_users_form_inherit_print_manager" model="ir.ui.view">
+            <field name="name">res.users.form.inherit.print.manager</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Printer Settings" name="printer_settings">
+                        <group>
+                            <group string="Mapping Groups">
+                                <field name="mapping_group_ids" widget="many2many_tags"/>
+                                <field name="default_mapping_group_id"/>
+                            </group>
+                            <group string="Default Print Settings">
+                                <field name="default_print_action"/>
+                                <field name="default_printer_id"/>
+                                <field name="default_print_copies"/>
+                                <field name="default_print_duplex"/>
+                                <field name="default_print_color_mode"/>
+                            </group>
+                        </group>
+                        <field name="report_mapping_ids">
+                            <list>
+                                <field name="name"/>
+                                <field name="report_name"/>
+                                <field name="printer_name"/>
+                                <field name="priority"/>
+                                <field name="active"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

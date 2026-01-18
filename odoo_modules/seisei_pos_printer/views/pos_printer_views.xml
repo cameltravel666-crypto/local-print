@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend pos.printer form view to add Seisei fields -->
+    <record id="view_pos_printer_form_seisei" model="ir.ui.view">
+        <field name="name">pos.printer.form.seisei</field>
+        <field name="model">pos.printer</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_printer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='printer_type']" position="after">
+                <field name="seisei_printer_id" 
+                       invisible="printer_type != 'cloud_printer'"
+                       required="printer_type == 'cloud_printer'"
+                       options="{'no_create': True}"/>
+            </xpath>
+            <!-- Hide proxy_ip when using Seisei printer -->
+            <xpath expr="//field[@name='proxy_ip']" position="attributes">
+                <attribute name="invisible">printer_type == 'cloud_printer'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend pos.printer list view to show Seisei info -->
+    <record id="view_pos_printer_list_seisei" model="ir.ui.view">
+        <field name="name">pos.printer.list.seisei</field>
+        <field name="model">pos.printer</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_printer"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="seisei_printer_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Cloud Kitchen Printers Action -->
+    <record id="action_pos_cloud_printer" model="ir.actions.act_window">
+        <field name="name">Cloud Kitchen Printers</field>
+        <field name="res_model">pos.printer</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('printer_type', '=', 'cloud_printer')]</field>
+        <field name="context">{'default_printer_type': 'cloud_printer'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Cloud Kitchen Printer
+            </p>
+            <p>
+                Cloud Kitchen Printers use Seisei Print Manager to send orders to remote printers.
+                Configure which product categories each printer handles for automatic order routing.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu under POS Configuration -->
+    <menuitem
+        name="Cloud Kitchen Printers"
+        id="menu_pos_cloud_kitchen_printer"
+        parent="point_of_sale.menu_point_config_product"
+        action="action_pos_cloud_printer"
+        sequence="98"/>
+        
+</odoo>

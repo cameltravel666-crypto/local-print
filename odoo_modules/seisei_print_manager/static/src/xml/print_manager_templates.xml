@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Main Print Manager Widget Template -->
+    <t t-name="seisei_print_manager.PrintManagerWidget">
+        <div class="seisei-print-manager">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <i class="fa fa-print"/> Print Manager
+                        <button class="btn btn-sync-printers btn-sm float-right">
+                            <i class="fa fa-refresh"/> Sync Printers
+                        </button>
+                    </h3>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="printer-section">
+                        <h4>Available Printers</h4>
+                        <div class="printer-grid">
+                            <!-- Printers will be rendered here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="print-jobs-section">
+                        <h4>Recent Print Jobs</h4>
+                        <div class="print-job-list">
+                            <!-- Print jobs will be rendered here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Printer Status Widget Template -->
+    <t t-name="seisei_print_manager.PrinterStatusWidget">
+        <div class="printer-status-widget">
+            <div class="printer-list">
+                <!-- Printer items will be rendered here -->
+            </div>
+        </div>
+    </t>
+
+    <!-- Individual Printer Item Template -->
+    <t t-name="seisei_print_manager.PrinterItem">
+        <div class="printer-item fade-in" t-att-data-printer-id="printer.id">
+            <div class="printer-header">
+                <div class="printer-name">
+                    <i class="fa fa-print"/> <t t-esc="printer.name"/>
+                    <span t-if="printer.is_default" class="badge badge-success ml-2">Default</span>
+                </div>
+                <div t-att-class="'printer-status status-' + printer.status">
+                    <t t-esc="printer.status"/>
+                </div>
+            </div>
+            
+            <div class="printer-details">
+                <div class="detail-item" t-if="printer.description">
+                    <span class="detail-label">Description:</span> <t t-esc="printer.description"/>
+                </div>
+                <div class="detail-item" t-if="printer.location">
+                    <span class="detail-label">Location:</span> <t t-esc="printer.location"/>
+                </div>
+                <div class="detail-item" t-if="printer.make_model">
+                    <span class="detail-label">Model:</span> <t t-esc="printer.make_model"/>
+                </div>
+                <div class="detail-item" t-if="printer.is_remote">
+                    <span class="detail-label">Type:</span> Remote Printer
+                </div>
+            </div>
+            
+            <div class="printer-actions">
+                <button class="btn btn-test-printer btn-sm" t-att-data-printer-id="printer.id">
+                    <i class="fa fa-check-circle"/> Test
+                </button>
+                <button class="btn btn-print-report btn-sm" t-att-data-printer-id="printer.id">
+                    <i class="fa fa-print"/> Print Test
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- Print Job Item Template -->
+    <t t-name="seisei_print_manager.PrintJobItem">
+        <div class="print-job" t-att-data-job-id="job.id">
+            <div class="job-header">
+                <div class="job-name">
+                    <i class="fa fa-file-text-o"/> <t t-esc="job.name"/>
+                </div>
+                <div t-att-class="'job-status status-' + job.state">
+                    <t t-esc="job.state"/>
+                </div>
+            </div>
+            
+            <div class="job-details">
+                <div>Report: <t t-esc="job.report_name"/></div>
+                <div>Printer: <t t-esc="job.printer_name"/></div>
+                <div>Requested by: <t t-esc="job.user_name"/></div>
+                <div>Date: <t t-esc="job.print_date"/></div>
+            </div>
+            
+            <div class="job-error" t-if="job.error_message">
+                <i class="fa fa-exclamation-triangle"/> <t t-esc="job.error_message"/>
+            </div>
+        </div>
+    </t>
+
+    <!-- Printer Configuration Dialog -->
+    <t t-name="seisei_print_manager.PrinterConfigDialog">
+        <div class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <i class="fa fa-cog"/> Printer Configuration
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="printer-config-form">
+                            <div class="form-group">
+                                <label>Printer Name</label>
+                                <input type="text" class="form-control" name="name" t-att-value="printer.name"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" class="form-control" name="description" t-att-value="printer.description"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Location</label>
+                                <input type="text" class="form-control" name="location" t-att-value="printer.location"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Make and Model</label>
+                                <input type="text" class="form-control" name="make_model" t-att-value="printer.make_model"/>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="is_default" t-att-checked="printer.is_default"/>
+                                <label class="form-check-label">Default Printer</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="is_remote" t-att-checked="printer.is_remote"/>
+                                <label class="form-check-label">Remote Printer</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary btn-save-printer">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Report Mapping Widget -->
+    <t t-name="seisei_print_manager.ReportMappingWidget">
+        <div class="report-mapping-widget">
+            <h4>Report-Printer Mappings</h4>
+            <div class="mapping-list">
+                <!-- Mapping items will be rendered here -->
+            </div>
+            <button class="btn btn-primary btn-add-mapping">
+                <i class="fa fa-plus"/> Add New Mapping
+            </button>
+        </div>
+    </t>
+
+    <!-- Report Mapping Item -->
+    <t t-name="seisei_print_manager.ReportMappingItem">
+        <div class="mapping-item">
+            <div class="report-name">
+                <i class="fa fa-file-text-o"/> <t t-esc="mapping.report_name"/>
+            </div>
+            <div class="arrow">
+                <i class="fa fa-arrow-right"/>
+            </div>
+            <div class="printer-name">
+                <i class="fa fa-print"/> <t t-esc="mapping.printer_name"/>
+            </div>
+            <div class="actions">
+                <button class="btn btn-sm btn-warning btn-edit-mapping" t-att-data-mapping-id="mapping.id">
+                    <i class="fa fa-edit"/>
+                </button>
+                <button class="btn btn-sm btn-danger btn-delete-mapping" t-att-data-mapping-id="mapping.id">
+                    <i class="fa fa-trash"/>
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- Loading Spinner -->
+    <t t-name="seisei_print_manager.LoadingSpinner">
+        <div class="loading-spinner"></div>
+    </t>
+
+    <!-- Notification Template -->
+    <t t-name="seisei_print_manager.Notification">
+        <div t-att-class="'alert alert-print-manager alert-' + type + ' fade-in'">
+            <strong t-if="title"><t t-esc="title"/>:</strong>
+            <span t-esc="message"/>
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_seisei_station_user,seisei.station.user,model_seisei_station,base.group_user,1,0,0,0
+access_seisei_station_manager,seisei.station.manager,model_seisei_station,base.group_system,1,1,1,1
+access_seisei_printer_user,seisei.printer.user,model_seisei_printer,base.group_user,1,0,0,0
+access_seisei_printer_manager,seisei.printer.manager,model_seisei_printer,base.group_system,1,1,1,1
+access_seisei_report_mapping_user,seisei.report.mapping.user,model_seisei_report_mapping,base.group_user,1,0,0,0
+access_seisei_report_mapping_manager,seisei.report.mapping.manager,model_seisei_report_mapping,base.group_system,1,1,1,1
+access_seisei_print_job_user,seisei.print.job.user,model_seisei_print_job,base.group_user,1,1,1,0
+access_seisei_print_job_manager,seisei.print.job.manager,model_seisei_print_job,base.group_system,1,1,1,1
+access_seisei_report_mapping_group_user,seisei.report.mapping.group.user,model_seisei_report_mapping_group,base.group_user,1,0,0,0
+access_seisei_report_mapping_group_manager,seisei.report.mapping.group.manager,model_seisei_report_mapping_group,base.group_system,1,1,1,1
+access_seisei_print_policy_selector_wizard_user,seisei.print.policy.selector.wizard.user,model_seisei_print_policy_selector_wizard,base.group_user,1,1,1,1
+access_seisei_print_policy_selector_line_user,seisei.print.policy.selector.line.user,model_seisei_print_policy_selector_line,base.group_user,1,1,1,1
+access_seisei_ticket_template_user,seisei.ticket.template.user,model_seisei_ticket_template,base.group_user,1,0,0,0
+access_seisei_ticket_template_manager,seisei.ticket.template.manager,model_seisei_ticket_template,base.group_system,1,1,1,1
+access_seisei_ticket_element_user,seisei.ticket.element.user,model_seisei_ticket_element,base.group_user,1,0,0,0
+access_seisei_ticket_element_manager,seisei.ticket.element.manager,model_seisei_ticket_element,base.group_system,1,1,1,1

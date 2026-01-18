@@ -1,0 +1,234 @@
+<div class="container">
+
+    <div class="oe_styling_v8">
+
+        <div class="mb-5 mt-4">
+            <div class="jumbotron text-center bg-white border">
+                <h1 class="display-4 text-primary mb-3">
+                    <i class="fa fa-toggle-on"></i> Mutex Toggle Field
+                </h1>
+                <p class="lead text-info mb-4">
+                    Mutually Exclusive Toggle Widget for Odoo List Views
+                </p>
+                <hr class="my-4">
+                <p class="h5 mb-3">
+                    <span class="badge badge-primary">Technical Widget Module</span>
+                </p>
+                <p class="text-muted px-3">
+                    Ylhc Mutex Toggle Field provides a <strong>mutually exclusive toggle widget</strong> for boolean fields in Odoo list views. When enabled on a record, it automatically disables the toggle on all other records in the list, ensuring only one item can be active at a time. <strong>Perfect for selecting a default item, primary record, or exclusive option!</strong>
+                </p>
+                <div class="alert alert-info mt-4" role="alert">
+                    <strong><i class="fa fa-info-circle"></i> How It Works:</strong><br>
+                    This widget extends Odoo's standard boolean toggle field with mutex (mutually exclusive) functionality. When you toggle a field ON in one record, the widget automatically sets the same field to OFF in all other records. This ensures only one record can have the toggle enabled at any given time - perfect for scenarios like "set as default", "is primary", "featured item", or "active selection".
+                    <br><br>
+                    <a href="https://www.ylhctec.com" target="_blank" class="btn btn-sm btn-info mr-2">
+                        <i class="fa fa-external-link"></i> Visit Our Website for More Information
+                    </a>
+                    <a href="mailto:support@ylhctec.com" class="btn btn-sm btn-success">
+                        <i class="fa fa-envelope"></i> Contact Support: support@ylhctec.com
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <a href="#usage" class="btn btn-primary btn-lg m-2"><i class="fa fa-book"></i> Usage Guide</a>
+                    <a href="#features" class="btn btn-info btn-lg m-2"><i class="fa fa-star"></i> See Features</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="usage" class="mb-5">
+            <div class="card rounded-lg shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h3 class="mb-0 text-success">
+                        <i class="fa fa-book"></i> Usage Guide
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">
+                        Implementing the mutex toggle widget is simple and straightforward. Follow these steps to add mutually exclusive toggle functionality to your boolean fields:
+                    </p>
+                    
+                    <h5 class="text-primary mb-3"><i class="fa fa-download"></i> Installation</h5>
+                    <ol class="text-muted mb-4">
+                        <li class="mb-2">Navigate to <strong>Apps</strong> menu in Odoo</li>
+                        <li class="mb-2">Search for "Mutex Toggle Field"</li>
+                        <li class="mb-2">Click <strong>Install</strong> button</li>
+                        <li class="mb-2">Wait for installation to complete</li>
+                    </ol>
+
+                    <h5 class="text-primary mb-3"><i class="fa fa-code"></i> Basic Usage</h5>
+                    <p class="text-muted mb-3">
+                        Add the widget to any boolean field in your list view XML:
+                    </p>
+                    <pre class="bg-light p-3 rounded"><code>&lt;field name="is_default" widget="mutex_toggle"/&gt;</code></pre>
+                    
+                    <h5 class="text-primary mb-3 mt-4"><i class="fa fa-sitemap"></i> Complete Example</h5>
+                    <p class="text-muted mb-3">
+                        Here's a complete example showing how to use the mutex toggle widget in a list view:
+                    </p>
+                    <pre class="bg-light p-3 rounded"><code>&lt;odoo&gt;
+    &lt;record id="view_partner_bank_tree" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;partner.bank.tree&lt;/field&gt;
+        &lt;field name="model"&gt;res.partner.bank&lt;/field&gt;
+        &lt;field name="arch" type="xml"&gt;
+            &lt;tree&gt;
+                &lt;field name="acc_number"/&gt;
+                &lt;field name="bank_name"/&gt;
+                &lt;field name="is_default" widget="mutex_toggle"/&gt;
+            &lt;/tree&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+&lt;/odoo&gt;</code></pre>
+
+                    <h5 class="text-primary mb-3 mt-4"><i class="fa fa-lightbulb-o"></i> Common Use Cases</h5>
+                    <ul class="text-muted mb-4">
+                        <li class="mb-2"><strong>Default Selection:</strong> Mark one item as the default (e.g., default bank account, default address)</li>
+                        <li class="mb-2"><strong>Primary Record:</strong> Designate a primary contact, primary phone number, etc.</li>
+                        <li class="mb-2"><strong>Featured Item:</strong> Highlight one featured product, article, or image</li>
+                        <li class="mb-2"><strong>Active Selection:</strong> Set one active configuration from multiple options</li>
+                        <li class="mb-2"><strong>Preferred Option:</strong> Choose preferred shipping method, payment method, etc.</li>
+                    </ul>
+
+                    <div class="alert alert-warning" role="alert">
+                        <strong><i class="fa fa-exclamation-circle"></i> Important Notes:</strong><br>
+                        <ul class="mb-0">
+                            <li>The widget only works in list/tree views</li>
+                            <li>All records must be loaded in the current list view for proper mutex behavior</li>
+                            <li>The widget patches Odoo's boolean toggle to prevent auto-save</li>
+                            <li>Works with standard Odoo boolean fields - no model modifications required</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="features" class="mb-5">
+            <div class="card rounded-lg shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h3 class="mb-0 text-primary">
+                        <i class="fa fa-diamond"></i> Key Features
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-center text-muted lead mb-4">
+                        Ylhc Mutex Toggle Field provides essential functionality for managing mutually exclusive boolean fields in Odoo list views. Simple, efficient, and developer-friendly.
+                    </p>
+                    <div class="row">
+                        <!-- Mutex Functionality -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-check-circle fa-3x text-primary mb-3"></i>
+                                    <h5 class="card-title text-primary">Mutex Functionality</h5>
+                                    <p class="card-text text-muted small">Automatic mutual exclusion - only one record can have the toggle enabled at a time.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Easy Integration -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-puzzle-piece fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title text-primary">Easy Integration</h5>
+                                    <p class="card-text text-muted small">Simply add widget="mutex_toggle" to any boolean field - no model changes required.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- List View Only -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-list fa-3x text-info mb-3"></i>
+                                    <h5 class="card-title text-primary">List View Optimized</h5>
+                                    <p class="card-text text-muted small">Designed specifically for Odoo list/tree views with seamless user experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- No Auto-Save -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-save fa-3x text-warning mb-3"></i>
+                                    <h5 class="card-title text-primary">Controlled Saving</h5>
+                                    <p class="card-text text-muted small">Patches boolean toggle to prevent auto-save, giving you full control over when changes persist.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Clean Code -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-code fa-3x text-primary mb-3"></i>
+                                    <h5 class="card-title text-primary">Clean Code</h5>
+                                    <p class="card-text text-muted small">Well-structured, maintainable JavaScript code following Odoo best practices.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Lightweight -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-feather fa-3x text-success mb-3"></i>
+                                    <h5 class="card-title text-primary">Lightweight</h5>
+                                    <p class="card-text text-muted small">Minimal code footprint with no performance impact on your Odoo instance.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Compatible -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-check-square fa-3x text-info mb-3"></i>
+                                    <h5 class="card-title text-primary">Odoo 18 Ready</h5>
+                                    <p class="card-text text-muted small">Fully compatible with Odoo 18.0 and OWL 2.0 framework.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Developer Friendly -->
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100 text-center" style="transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+                                <div class="card-body">
+                                    <i class="fa fa-wrench fa-3x text-warning mb-3"></i>
+                                    <h5 class="card-title text-primary">Developer Friendly</h5>
+                                    <p class="card-text text-muted small">Simple API, clear documentation, and straightforward implementation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <div class="card rounded-lg shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h3 class="mb-0 text-info">
+                        <i class="fa fa-question-circle"></i> Frequently Asked Questions
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5 class="text-primary"><i class="fa fa-question"></i> Do I need to modify my models to use this widget?</h5>
+                        <p class="text-muted">No! The mutex toggle widget works with standard Odoo boolean fields. No model modifications, custom fields, or database changes are required.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary"><i class="fa fa-question"></i> Does it work in form views?</h5>
+                        <p class="text-muted">The mutex toggle widget is specifically designed for list/tree views. In form views, it will behave as a standard boolean field.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary"><i class="fa fa-question"></i> What happens if I toggle a field ON?</h5>
+                        <p class="text-muted">When you enable a toggle, the widget automatically sets the same field to OFF in all other visible records in the list. Only one record will have the toggle enabled.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary"><i class="fa fa-question"></i> Can I use it on multiple fields?</h5>
+                        <p class="text-muted">Yes! You can use the mutex_toggle widget on multiple different boolean fields in the same view. Each field operates independently with its own mutex behavior.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-primary"><i class="fa fa-question"></i> Is it compatible with Odoo Community Edition?</h5>
+                        <p class="text-muted">Yes! The widget works perfectly with both Odoo Community and Enterprise editions for version 18.0.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

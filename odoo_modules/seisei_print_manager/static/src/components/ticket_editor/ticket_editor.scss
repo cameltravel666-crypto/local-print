@@ -1,0 +1,318 @@
+// Seisei Ticket Editor Styles
+
+.seisei-ticket-editor {
+    background-color: #f8f9fa;
+
+    // Toolbar
+    .ticket-editor-toolbar {
+        background-color: #fff !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+
+        h5 {
+            font-weight: 600;
+        }
+    }
+
+    // Toolbox (Left Panel)
+    .ticket-editor-toolbox {
+        background-color: #fff;
+        overflow-y: auto;
+
+        h6 {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toolbox-item {
+            cursor: grab;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+
+            &:hover {
+                background-color: #e9ecef !important;
+                border-color: #007bff !important;
+            }
+
+            &:active {
+                cursor: grabbing;
+            }
+
+            i {
+                width: 20px;
+                text-align: center;
+                color: #6c757d;
+            }
+        }
+    }
+
+    // Canvas Container
+    .ticket-editor-canvas-container {
+        background-color: #6c757d;
+        background-image:
+            linear-gradient(45deg, #5a6268 25%, transparent 25%),
+            linear-gradient(-45deg, #5a6268 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, #5a6268 75%),
+            linear-gradient(-45deg, transparent 75%, #5a6268 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    // Canvas
+    .ticket-editor-canvas {
+        position: relative;
+        min-height: 500px;
+        padding: 10px;
+        background: #fff;
+
+        // Simulate thermal paper texture
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(0, 0, 0, 0.02) 1px,
+            rgba(0, 0, 0, 0.02) 2px
+        );
+    }
+
+    // Element Item
+    .ticket-element {
+        position: relative;
+        border: 2px solid transparent;
+        margin: 2px 0;
+        padding: 4px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        background-color: #fff;
+
+        &:hover {
+            border-color: #007bff;
+            background-color: #f8f9fa;
+
+            .element-actions {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &.selected {
+            border-color: #007bff;
+            background-color: #e7f1ff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        // Drag feedback
+        &[draggable="true"] {
+            cursor: grab;
+
+            &:active {
+                cursor: grabbing;
+            }
+        }
+
+        // Element Actions (hover buttons)
+        .element-actions {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            display: flex;
+            gap: 2px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+            z-index: 10;
+
+            .btn {
+                padding: 2px 6px;
+                font-size: 0.75rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    // Element Preview
+    .element-preview {
+        min-height: 20px;
+
+        // Font size classes
+        .font-size-small {
+            font-size: 10px;
+        }
+
+        .font-size-normal {
+            font-size: 12px;
+        }
+
+        .font-size-large {
+            font-size: 16px;
+        }
+
+        .font-size-xlarge {
+            font-size: 20px;
+        }
+
+        // Separator styles
+        hr {
+            margin: 8px 0;
+            border: none;
+
+            &.separator-solid {
+                border-top: 1px solid #000;
+            }
+
+            &.separator-dashed {
+                border-top: 1px dashed #000;
+            }
+
+            &.separator-double {
+                border-top: 3px double #000;
+            }
+
+            &.separator-dotted {
+                border-top: 1px dotted #000;
+            }
+        }
+
+        // Border dashed for barcode/qr placeholders
+        .border-dashed {
+            border: 1px dashed #dee2e6;
+            background-color: #f8f9fa;
+        }
+    }
+
+    // Property Panel (Right Panel)
+    .ticket-editor-properties {
+        background-color: #fff;
+        overflow-y: auto;
+
+        h6 {
+            font-weight: 600;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 8px;
+        }
+
+        .form-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 4px;
+        }
+
+        .form-control,
+        .form-select {
+            font-size: 0.875rem;
+        }
+
+        .btn-group {
+            .btn {
+                padding: 6px 12px;
+            }
+        }
+
+        .form-check-label {
+            font-size: 0.875rem;
+        }
+
+        // Preview image in properties
+        img.img-fluid {
+            border-radius: 4px;
+        }
+    }
+
+    // Preview Modal
+    .ticket-preview-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+
+        .ticket-preview-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+            h5 {
+                font-weight: 600;
+            }
+
+            img {
+                max-height: 70vh;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+
+// Drag and Drop Visual Feedback
+.seisei-ticket-editor {
+    .ticket-element.dragging {
+        opacity: 0.5;
+    }
+
+    .ticket-editor-canvas.drag-over {
+        background-color: #e7f1ff;
+        border: 2px dashed #007bff;
+    }
+
+    // Drop indicator
+    .drop-indicator {
+        height: 4px;
+        background-color: #007bff;
+        margin: 4px 0;
+        border-radius: 2px;
+    }
+}
+
+// Cursor utilities
+.cursor-move {
+    cursor: move !important;
+}
+
+.cursor-grab {
+    cursor: grab !important;
+}
+
+.cursor-grabbing {
+    cursor: grabbing !important;
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+    .seisei-ticket-editor {
+        .ticket-editor-toolbox {
+            width: 160px !important;
+        }
+
+        .ticket-editor-properties {
+            width: 240px !important;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .seisei-ticket-editor {
+        flex-direction: column !important;
+
+        .ticket-editor-toolbox,
+        .ticket-editor-properties {
+            width: 100% !important;
+            max-height: 200px;
+        }
+
+        .ticket-editor-canvas-container {
+            order: -1;
+        }
+    }
+}

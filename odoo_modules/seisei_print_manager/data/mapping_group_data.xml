@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 默认组 -->
+        <record id="mapping_group_default" model="seisei.report.mapping.group">
+            <field name="name">默认组</field>
+            <field name="code">DEFAULT</field>
+            <field name="description">默认的报表映射组，适用于所有用户</field>
+            <field name="sequence">10</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- 财务组 -->
+        <record id="mapping_group_finance" model="seisei.report.mapping.group">
+            <field name="name">财务组</field>
+            <field name="code">FINANCE</field>
+            <field name="description">财务部门专用的报表映射组，包含发票、收据等报表的打印配置</field>
+            <field name="sequence">20</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- 销售组 -->
+        <record id="mapping_group_sales" model="seisei.report.mapping.group">
+            <field name="name">销售组</field>
+            <field name="code">SALES</field>
+            <field name="description">销售部门专用的报表映射组，包含订单、报价单等报表的打印配置</field>
+            <field name="sequence">30</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- 仓库组 -->
+        <record id="mapping_group_warehouse" model="seisei.report.mapping.group">
+            <field name="name">仓库组</field>
+            <field name="code">WAREHOUSE</field>
+            <field name="description">仓库部门专用的报表映射组，包含出库单、入库单等报表的打印配置</field>
+            <field name="sequence">40</field>
+            <field name="active">True</field>
+        </record>
+
+        <!-- 管理组 -->
+        <record id="mapping_group_admin" model="seisei.report.mapping.group">
+            <field name="name">管理组</field>
+            <field name="code">ADMIN</field>
+            <field name="description">管理员专用的报表映射组，包含所有类型的报表打印配置</field>
+            <field name="sequence">50</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo> 

@@ -1,0 +1,105 @@
+name: Build Clients
+
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            platform: windows
+            artifact_name: LocalPrintAgent.exe
+
+          - os: ubuntu-latest
+            platform: linux
+            artifact_name: LocalPrintAgent
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # Linux: Install system dependencies for PyQt6
+      - name: Install Linux dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libxcb-cursor0 \
+            libxkbcommon0 \
+            libxcb-xinerama0 \
+            libxcb-icccm4 \
+            libxcb-image0 \
+            libxcb-keysyms1 \
+            libxcb-randr0 \
+            libxcb-render-util0 \
+            libxcb-shape0 \
+            libegl1 \
+            libgl1
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable
+        run: python build.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LocalPrintAgent-${{ matrix.platform }}
+          path: output/builds/${{ matrix.platform }}/${{ matrix.artifact_name }}
+          retention-days: 30
+
+  # Create release when a tag is pushed
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LocalPrintAgent-windows
+          path: ./release/windows
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: LocalPrintAgent-linux
+          path: ./release/linux
+
+      - name: Prepare release assets
+        run: |
+          cd release
+          zip -j LocalPrintAgent-windows.zip windows/LocalPrintAgent.exe
+          tar -czvf LocalPrintAgent-linux.tar.gz -C linux LocalPrintAgent
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release/LocalPrintAgent-windows.zip
+            release/LocalPrintAgent-linux.tar.gz
+          generate_release_notes: true

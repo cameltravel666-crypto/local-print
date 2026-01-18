@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Print Job List View -->
+        <record id="view_seisei_print_job_list" model="ir.ui.view">
+            <field name="name">seisei.print.job.list</field>
+            <field name="model">seisei.print.job</field>
+            <field name="arch" type="xml">
+                <list string="Print Jobs" decoration-success="status=='completed'" decoration-warning="status in ['pending','processing']" decoration-info="status=='printing'" decoration-danger="status=='failed'" decoration-muted="status=='cancelled'">
+                    <field name="job_id"/>
+                    <field name="name"/>
+                    <field name="report_name"/>
+                    <field name="printer_name"/>
+                    <field name="status"/>
+                    <field name="priority"/>
+                    <field name="copies"/>
+                    <field name="create_date"/>
+                    <field name="duration"/>
+                    <field name="user_id"/>
+                    <field name="is_test"/>
+                    <button name="action_retry" type="object" string="Retry" icon="fa-refresh" invisible="status not in ['failed', 'cancelled']"/>
+                    <button name="action_cancel" type="object" string="Cancel" icon="fa-times" invisible="status not in ['pending', 'processing']"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Print Job Form View -->
+        <record id="view_seisei_print_job_form" model="ir.ui.view">
+            <field name="name">seisei.print.job.form</field>
+            <field name="model">seisei.print.job</field>
+            <field name="arch" type="xml">
+                <form string="Print Job">
+                    <header>
+                        <button name="action_process" type="object" string="Process Job" class="btn-primary" invisible="status != 'pending'"/>
+                        <button name="action_retry" type="object" string="Retry" class="btn-warning" invisible="status not in ['failed', 'cancelled']"/>
+                        <button name="action_cancel" type="object" string="Cancel" class="btn-secondary" invisible="status not in ['pending', 'processing']"/>
+                        <button name="action_view_document" type="object" string="View Document" class="btn-info" invisible="not document_model or not document_id"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_document" type="object" class="oe_stat_button" icon="fa-file-o" invisible="not document_model or not document_id">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Related</span>
+                                    <span class="o_stat_text">Document</span>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <div class="o_ribbon o_ribbon_warning" invisible="not is_test">
+                            <span>Test Job</span>
+                        </div>
+                        
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="o_text_overflow"/>
+                            </h1>
+                            <h3>
+                                <span class="text-muted">Job ID: </span>
+                                <field name="job_id" readonly="1"/>
+                            </h3>
+                        </div>
+                        
+                        <group>
+                            <group string="Job Information">
+                                <field name="report_name"/>
+                                <field name="report_display_name"/>
+                                <field name="printer_name"/>
+                                <field name="printer_id" readonly="1"/>
+                                <field name="mapping_id" readonly="1"/>
+                            </group>
+                            <group string="Job Configuration">
+                                <field name="format"/>
+                                <field name="copies"/>
+                                <field name="priority"/>
+                                <field name="scheduled_time"/>
+                                <field name="user_id" readonly="1"/>
+                                <field name="is_test"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Document Information" invisible="not document_id">
+                            <field name="document_model"/>
+                            <field name="document_id"/>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Status Information">
+                                <group>
+                                    <group string="Execution Status">
+                                        <field name="status"/>
+                                        <field name="error_message" invisible="not error_message"/>
+                                        <field name="retry_count"/>
+                                        <field name="max_retries"/>
+                                    </group>
+                                    <group string="Time Information">
+                                        <field name="create_date" readonly="1"/>
+                                        <field name="started_at" readonly="1"/>
+                                        <field name="completed_at" readonly="1"/>
+                                        <field name="duration" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            
+                            <page string="Settings and Metadata">
+                                <group>
+                                    <group string="Print Settings">
+                                        <field name="settings"/>
+                                    </group>
+                                    <group string="Job Metadata">
+                                        <field name="metadata"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Print Job Kanban View -->
+        <record id="view_seisei_print_job_kanban" model="ir.ui.view">
+            <field name="name">seisei.print.job.kanban</field>
+            <field name="model">seisei.print.job</field>
+            <field name="arch" type="xml">
+                <kanban string="Print Jobs" default_group_by="status">
+                    <field name="job_id"/>
+                    <field name="name"/>
+                    <field name="report_name"/>
+                    <field name="printer_name"/>
+                    <field name="status"/>
+                    <field name="priority"/>
+                    <field name="user_id"/>
+                    <field name="create_date"/>
+                    <field name="is_test"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                                <span t-if="record.is_test.raw_value" class="badge badge-warning ml-2">Test</span>
+                                            </strong>
+                                            <small class="o_kanban_record_subtitle text-muted">
+                                                ID: <t t-esc="record.job_id.value"/>
+                                            </small>
+                                        </div>
+                                        <div class="o_kanban_record_top_right">
+                                            <span t-if="record.priority.raw_value &gt; 0" class="badge badge-info">
+                                                Priority: <t t-esc="record.priority.value"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <div>
+                                            📊 <t t-esc="record.report_name.value"/>
+                                        </div>
+                                        <div>
+                                            🖨️ <t t-esc="record.printer_name.value"/>
+                                        </div>
+                                        <div class="text-muted">
+                                            👤 <t t-esc="record.user_id.value"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <time class="text-muted">
+                                                <t t-esc="record.create_date.value"/>
+                                            </time>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <button t-if="record.status.raw_value == 'failed' || record.status.raw_value == 'cancelled'" 
+                                                    name="action_retry" type="object" class="btn btn-sm btn-secondary">
+                                                Retry
+                                            </button>
+                                            <button t-if="record.status.raw_value == 'pending' || record.status.raw_value == 'processing'" 
+                                                    name="action_cancel" type="object" class="btn btn-sm btn-outline-danger">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Print Job Search View -->
+        <record id="view_seisei_print_job_search" model="ir.ui.view">
+            <field name="name">seisei.print.job.search</field>
+            <field name="model">seisei.print.job</field>
+            <field name="arch" type="xml">
+                <search string="Search Print Jobs">
+                    <field name="job_id" string="Job ID"/>
+                    <field name="name" string="Job Name"/>
+                    <field name="report_name" string="Report"/>
+                    <field name="printer_name" string="Printer"/>
+                    <field name="user_id" string="User"/>
+                    <separator/>
+                    <filter name="filter_pending" string="Pending" domain="[('status', '=', 'pending')]"/>
+                    <filter name="filter_processing" string="Processing" domain="[('status', '=', 'processing')]"/>
+                    <filter name="filter_printing" string="Printing" domain="[('status', '=', 'printing')]"/>
+                    <filter name="filter_completed" string="Completed" domain="[('status', '=', 'completed')]"/>
+                    <filter name="filter_failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                    <separator/>
+                    <filter name="filter_my_jobs" string="My Jobs" domain="[('user_id', '=', uid)]"/>
+                    <filter name="filter_test_jobs" string="Test Jobs" domain="[('is_test', '=', True)]"/>
+                    <filter name="filter_high_priority" string="High Priority" domain="[('priority', '&gt;', 5)]"/>
+                    <separator/>
+                    <filter name="filter_today" string="Today" domain="[('create_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter name="filter_week" string="This Week" domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_status" string="Status" domain="[]" context="{'group_by': 'status'}"/>
+                        <filter name="group_printer" string="Printer" domain="[]" context="{'group_by': 'printer_name'}"/>
+                        <filter name="group_report" string="Report" domain="[]" context="{'group_by': 'report_name'}"/>
+                        <filter name="group_user" string="User" domain="[]" context="{'group_by': 'user_id'}"/>
+                        <filter name="group_date" string="Date" domain="[]" context="{'group_by': 'create_date:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Print Job Action -->
+        <record id="action_seisei_print_job" model="ir.actions.act_window">
+            <field name="name">Print Jobs</field>
+            <field name="res_model">seisei.print.job</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="context">{'search_default_filter_today': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No print jobs yet!
+                </p>
+                <p>
+                    Print jobs are automatically created when users submit print requests, or when print commands are received from Service.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

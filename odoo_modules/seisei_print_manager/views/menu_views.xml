@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Root Menu -->
+        <menuitem
+            id="menu_seisei_print_manager_root"
+            name="Print Management"
+            sequence="90"
+            groups="base.group_user"
+            web_icon="seisei_print_manager,static/description/icon.png"/>
+
+        <!-- Printer Management Menu -->
+        <menuitem
+            id="menu_seisei_printer_management"
+            name="Printer Management"
+            parent="menu_seisei_print_manager_root"
+            sequence="10"
+            groups="base.group_user"/>
+
+        <menuitem
+            id="menu_seisei_station"
+            name="Print Stations"
+            parent="menu_seisei_printer_management"
+            action="action_station"
+            sequence="5"
+            groups="base.group_user"/>
+
+        <menuitem
+            id="menu_seisei_printer"
+            name="Printer Information"
+            parent="menu_seisei_printer_management"
+            action="action_seisei_printer"
+            sequence="10"
+            groups="base.group_user"/>
+
+        <!-- Ticket Templates Menu -->
+        <menuitem
+            id="menu_seisei_ticket_templates"
+            name="Ticket Templates"
+            parent="menu_seisei_print_manager_root"
+            action="action_ticket_template"
+            sequence="15"
+            groups="base.group_user"/>
+
+        <!-- Mapping Management Menu -->
+        <menuitem
+            id="menu_seisei_mapping_management"
+            name="Mapping Management"
+            parent="menu_seisei_print_manager_root"
+            sequence="20"
+            groups="base.group_user"/>
+
+        <menuitem
+            id="menu_seisei_report_mapping"
+            name="Report Mapping"
+            parent="menu_seisei_mapping_management"
+            action="action_seisei_report_mapping"
+            sequence="10"
+            groups="base.group_user"/>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_report_mapping_group"
+                name="Mapping Groups"
+                parent="menu_seisei_print_manager_root"
+                action="action_report_mapping_group"
+                sequence="20"/>
+                
+        <!-- Task Management Menu -->
+        <menuitem
+            id="menu_seisei_job_management"
+            name="Task Management"
+            parent="menu_seisei_print_manager_root"
+            sequence="30"
+            groups="base.group_user"/>
+
+        <menuitem
+            id="menu_seisei_print_job"
+            name="Print Jobs"
+            parent="menu_seisei_job_management"
+            action="action_seisei_print_job"
+            sequence="10"
+            groups="base.group_user"/>
+
+        <!-- System Configuration Menu -->
+        <menuitem
+            id="menu_seisei_system_config"
+            name="System Configuration"
+            parent="menu_seisei_print_manager_root"
+            sequence="90"
+            groups="base.group_system"/>
+
+    </data>
+</odoo>

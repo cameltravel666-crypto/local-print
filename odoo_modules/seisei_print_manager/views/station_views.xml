@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Station list View -->
+        <record id="view_station_list" model="ir.ui.view">
+            <field name="name">seisei.station.list</field>
+            <field name="model">seisei.station</field>
+            <field name="arch" type="xml">
+                <list string="Print Stations" default_order="is_default desc, sequence, name">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="location"/>
+                    <field name="ip_address"/>
+                    <field name="printer_count" string="Printers"/>
+                    <field name="active_printer_count" string="Active"/>
+                    <field name="is_default" widget="boolean_toggle"/>
+                    <field name="is_active" widget="boolean_toggle"/>
+                    <field name="responsible_user_id"/>
+                    <field name="last_sync_time"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Station Form View -->
+        <record id="view_station_form" model="ir.ui.view">
+            <field name="name">seisei.station.form</field>
+            <field name="model">seisei.station</field>
+            <field name="arch" type="xml">
+                <form string="Print Station">
+                    <header>
+                        <button name="action_sync_printers" type="object" string="Sync Printers" 
+                                class="btn-primary" icon="fa-refresh"/>
+                        <field name="is_active" widget="boolean_button" 
+                               options="{'terminology': {'string_true': 'Active', 'string_false': 'Inactive'}}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                        </div>
+                        
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Station Name"/>
+                                <field name="is_default" invisible="1"/>
+                                <span invisible="is_default == False" class="fa fa-star text-warning" title="Default Station"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group name="basic_info" string="Basic Information">
+                                <field name="code"/>
+                                <field name="sequence"/>
+                                <field name="location"/>
+                                <field name="description"/>
+                                <field name="is_default"/>
+                            </group>
+                            <group name="network_info" string="Network Information">
+                                <field name="ip_address"/>
+                                <field name="mac_address"/>
+                                <field name="hostname"/>
+                                <field name="last_sync_time" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group name="contact_info" string="Contact Information">
+                                <field name="responsible_user_id"/>
+                                <field name="contact_phone"/>
+                                <field name="contact_email"/>
+                            </group>
+                            <group name="timestamps" string="Timestamp Information">
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Related Printers" name="printers">
+                                <field name="printer_ids">
+                                    <list string="Printer List" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="system_name"/>
+                                        <field name="manufacturer"/>
+                                        <field name="model"/>
+                                        <field name="status"/>
+                                        <field name="is_default" widget="boolean_toggle"/>
+                                        <field name="active" widget="boolean_toggle"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Station Search View -->
+        <record id="view_station_search" model="ir.ui.view">
+            <field name="name">seisei.station.search</field>
+            <field name="model">seisei.station</field>
+            <field name="arch" type="xml">
+                <search string="Print Stations">
+                    <field name="name" string="Station" 
+                           filter_domain="['|','|','|',('name','ilike',self),('code','ilike',self),('location','ilike',self),('hostname','ilike',self)]"/>
+                    <field name="code"/>
+                    <field name="location"/>
+                    <field name="responsible_user_id"/>
+                    <field name="ip_address"/>
+                    
+                    <separator/>
+                    <filter string="Active" name="active" domain="[('is_active','=',True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('is_active','=',False)]"/>
+                    <filter string="Default Station" name="default" domain="[('is_default','=',True)]"/>
+                    
+                    <separator/>
+                    <filter string="Synced Today" name="synced_today" 
+                            domain="[('last_sync_time','>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                    <filter string="Synced in Last 7 Days" name="synced_week" 
+                            domain="[('last_sync_time','>=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_status" context="{'group_by':'is_active'}"/>
+                        <filter string="Responsible User" name="group_responsible" context="{'group_by':'responsible_user_id'}"/>
+                        <filter string="Location" name="group_location" context="{'group_by':'location'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Station Kanban View -->
+        <record id="view_station_kanban" model="ir.ui.view">
+            <field name="name">seisei.station.kanban</field>
+            <field name="model">seisei.station</field>
+            <field name="arch" type="xml">
+                <kanban string="Print Stations" default_group_by="is_active">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="location"/>
+                    <field name="ip_address"/>
+                    <field name="printer_count"/>
+                    <field name="active_printer_count"/>
+                    <field name="is_default"/>
+                    <field name="is_active"/>
+                    <field name="responsible_user_id"/>
+                    <field name="last_sync_time"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top mb16">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="display_name"/>
+                                                <t t-if="record.is_default.raw_value">
+                                                    <span class="fa fa-star text-warning" title="Default Station"/>
+                                                </t>
+                                            </strong>
+                                            <small class="o_kanban_record_subtitle text-muted">
+                                                <field name="code"/> 
+                                                <t t-if="record.location.raw_value"> - <field name="location"/></t>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <field name="ip_address" t-if="record.ip_address.raw_value"/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <span class="fa fa-print" title="Total Printers" /> <field name="printer_count"/> Printers
+                                            </div>
+                                            <div class="col-6">
+                                                <span class="fa fa-check-circle text-success" title="Active Printers" /> <field name="active_printer_count"/> Active
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="responsible_user_id" widget="many2one_avatar_user"/>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <t t-if="record.last_sync_time.raw_value">
+                                                <small class="text-muted">
+                                                    <i class="fa fa-clock-o" title="Last Sync Time"/> <field name="last_sync_time" widget="relative"/>
+                                                </small>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Station Action -->
+        <record id="action_station" model="ir.actions.act_window">
+            <field name="name">Print Stations</field>
+            <field name="res_model">seisei.station</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="search_view_id" ref="view_station_search"/>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first print station
+                </p>
+                <p>
+                    Stations are used to organize and manage printers. Each printer belongs to a station.<br/>
+                    Through stations, you can better manage printer resources across multiple locations or departments.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

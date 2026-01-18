@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Default Report Mapping Data -->
+        <record id="mapping_sale_order" model="seisei.report.mapping">
+            <field name="name">Sales Order Mapping</field>
+            <field name="report_name">sale.report_saleorder</field>
+            <field name="priority">5</field>
+            <field name="copies">1</field>
+            <field name="duplex">False</field>
+            <field name="color_mode">auto</field>
+            <field name="condition">{"department": "sales"}</field>
+        </record>
+
+        <record id="mapping_purchase_order" model="seisei.report.mapping">
+            <field name="name">Purchase Order Mapping</field>
+            <field name="report_name">purchase.report_purchaseorder</field>
+            <field name="priority">5</field>
+            <field name="copies">2</field>
+            <field name="duplex">True</field>
+            <field name="color_mode">grayscale</field>
+            <field name="condition">{"department": "purchase"}</field>
+        </record>
+
+        <record id="mapping_account_invoice" model="seisei.report.mapping">
+            <field name="name">Invoice Mapping</field>
+            <field name="report_name">account.report_invoice</field>
+            <field name="priority">10</field>
+            <field name="copies">1</field>
+            <field name="duplex">False</field>
+            <field name="color_mode">auto</field>
+            <field name="condition">{"urgent": true, "amount_total": {"operator": "gt", "value": 1000}}</field>
+        </record>
+
+        <record id="mapping_stock_picking" model="seisei.report.mapping">
+            <field name="name">Picking List Mapping</field>
+            <field name="report_name">stock.report_picking</field>
+            <field name="priority">3</field>
+            <field name="copies">1</field>
+            <field name="duplex">False</field>
+            <field name="color_mode">grayscale</field>
+            <field name="condition">{"location": "warehouse"}</field>
+        </record>
+
+    </data>
+</odoo>

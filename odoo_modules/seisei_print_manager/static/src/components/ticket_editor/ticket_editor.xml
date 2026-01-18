@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Main Ticket Editor Template -->
+    <t t-name="seisei_print_manager.TicketEditor">
+        <div class="seisei-ticket-editor h-100 d-flex flex-column">
+            <!-- Toolbar -->
+            <div class="ticket-editor-toolbar d-flex align-items-center p-2 bg-light border-bottom">
+                <button class="btn btn-outline-secondary me-2" t-on-click="goBack">
+                    <i class="fa fa-arrow-left"/> Back
+                </button>
+                <h5 class="mb-0 me-3" t-esc="state.templateName"/>
+                <span class="badge bg-secondary me-3" t-esc="state.templateCode"/>
+
+                <div class="ms-auto d-flex align-items-center">
+                    <!-- Undo/Redo -->
+                    <button class="btn btn-outline-secondary btn-sm me-1"
+                            t-on-click="undo"
+                            t-att-disabled="!canUndo"
+                            title="Undo (Ctrl+Z)">
+                        <i class="fa fa-undo"/>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm me-3"
+                            t-on-click="redo"
+                            t-att-disabled="!canRedo"
+                            title="Redo (Ctrl+Y)">
+                        <i class="fa fa-repeat"/>
+                    </button>
+
+                    <!-- Preview -->
+                    <button class="btn btn-outline-info me-2" t-on-click="generatePreview">
+                        <i class="fa fa-eye"/> Preview
+                    </button>
+
+                    <!-- Save -->
+                    <button class="btn btn-primary" t-on-click="saveTemplate"
+                            t-att-disabled="state.isSaving">
+                        <t t-if="state.isSaving">
+                            <i class="fa fa-spinner fa-spin"/> Saving...
+                        </t>
+                        <t t-else="">
+                            <i class="fa fa-save"/> Save
+                        </t>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div t-if="state.isLoading" class="flex-grow-1 d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                    <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                    <p class="mt-2">Loading template...</p>
+                </div>
+            </div>
+
+            <!-- Main Editor Area -->
+            <div t-else="" class="flex-grow-1 d-flex overflow-hidden">
+                <!-- Left: Toolbox -->
+                <div class="ticket-editor-toolbox border-end p-2" style="width: 200px;">
+                    <h6 class="text-muted mb-2">Elements</h6>
+                    <div class="d-flex flex-column gap-1">
+                        <t t-foreach="elementTypes" t-as="elType" t-key="elType.type">
+                            <div class="toolbox-item p-2 border rounded bg-white cursor-move"
+                                 draggable="true"
+                                 t-on-dragstart="(ev) => onToolboxDragStart(ev, elType)">
+                                <i t-attf-class="fa {{ elType.icon }} me-2"/>
+                                <span t-esc="elType.label"/>
+                            </div>
+                        </t>
+                    </div>
+
+                    <!-- Paper Width Selector -->
+                    <h6 class="text-muted mb-2 mt-4">Paper Width</h6>
+                    <select class="form-select form-select-sm"
+                            t-model="state.paperWidth">
+                        <option value="58">58mm</option>
+                        <option value="80">80mm</option>
+                    </select>
+                </div>
+
+                <!-- Center: Canvas -->
+                <div class="ticket-editor-canvas-container flex-grow-1 p-4 bg-secondary overflow-auto">
+                    <div class="ticket-editor-canvas mx-auto bg-white shadow"
+                         t-ref="canvas"
+                         t-attf-style="width: {{ canvasWidth }}px; min-height: 400px;"
+                         t-on-dragover="onCanvasDragOver"
+                         t-on-drop="(ev) => onCanvasDrop(ev, null)">
+
+                        <!-- Empty State -->
+                        <div t-if="!state.elements.length"
+                             class="text-center text-muted p-5">
+                            <i class="fa fa-plus-circle fa-3x mb-3"/>
+                            <p>Drag elements here to build your template</p>
+                        </div>
+
+                        <!-- Elements -->
+                        <t t-foreach="state.elements" t-as="element" t-key="element._uid">
+                            <div t-attf-class="ticket-element {{ state.selectedElement?._uid === element._uid ? 'selected' : '' }}"
+                                 draggable="true"
+                                 t-on-click.stop="() => selectElement(element)"
+                                 t-on-dragstart="(ev) => onElementDragStart(ev, element)"
+                                 t-on-dragover="(ev) => ev.preventDefault()"
+                                 t-on-drop.stop="(ev) => onCanvasDrop(ev, element_index)">
+
+                                <!-- Element Content Preview -->
+                                <t t-call="seisei_print_manager.TicketElementPreview">
+                                    <t t-set="el" t-value="element"/>
+                                </t>
+
+                                <!-- Quick Actions (visible on hover) -->
+                                <div class="element-actions">
+                                    <button class="btn btn-sm btn-light"
+                                            t-on-click.stop="() => moveElementUp(element)"
+                                            title="Move Up">
+                                        <i class="fa fa-chevron-up"/>
+                                    </button>
+                                    <button class="btn btn-sm btn-light"
+                                            t-on-click.stop="() => moveElementDown(element)"
+                                            title="Move Down">
+                                        <i class="fa fa-chevron-down"/>
+                                    </button>
+                                    <button class="btn btn-sm btn-light"
+                                            t-on-click.stop="() => duplicateElement(element)"
+                                            title="Duplicate">
+                                        <i class="fa fa-copy"/>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger"
+                                            t-on-click.stop="() => deleteElement(element)"
+                                            title="Delete">
+                                        <i class="fa fa-trash"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Right: Property Panel -->
+                <div class="ticket-editor-properties border-start p-3" style="width: 280px;">
+                    <t t-if="state.selectedElement">
+                        <h6 class="mb-3">
+                            <i t-attf-class="fa {{ getElementIcon(state.selectedElement.type) }} me-1"/>
+                            <t t-esc="getElementLabel(state.selectedElement.type)"/>
+                        </h6>
+
+                        <!-- Text Properties -->
+                        <t t-if="state.selectedElement.type === 'text'">
+                            <div class="mb-3">
+                                <label class="form-label">Text Content</label>
+                                <textarea class="form-control" rows="3"
+                                          t-model="state.selectedElement.text_content"
+                                          t-on-change="() => saveHistory()"/>
+                            </div>
+                        </t>
+
+                        <!-- Dynamic Field Properties -->
+                        <t t-if="state.selectedElement.type === 'dynamic_field'">
+                            <div class="mb-3">
+                                <label class="form-label">Field Name</label>
+                                <input type="text" class="form-control"
+                                       t-model="state.selectedElement.field_name"
+                                       t-on-change="() => saveHistory()"
+                                       placeholder="e.g., order.name"/>
+                                <small class="text-muted">Use dot notation for nested fields</small>
+                            </div>
+                        </t>
+
+                        <!-- Text Style Properties -->
+                        <t t-if="state.selectedElement.type in ['text', 'dynamic_field']">
+                            <div class="mb-3">
+                                <label class="form-label">Font Size</label>
+                                <select class="form-select"
+                                        t-model="state.selectedElement.font_size"
+                                        t-on-change="() => saveHistory()">
+                                    <option value="small">Small</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="large">Large</option>
+                                    <option value="xlarge">Extra Large</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Alignment</label>
+                                <div class="btn-group w-100">
+                                    <button t-attf-class="btn btn-outline-secondary {{ state.selectedElement.text_align === 'left' ? 'active' : '' }}"
+                                            t-on-click="() => { state.selectedElement.text_align = 'left'; saveHistory(); }">
+                                        <i class="fa fa-align-left"/>
+                                    </button>
+                                    <button t-attf-class="btn btn-outline-secondary {{ state.selectedElement.text_align === 'center' ? 'active' : '' }}"
+                                            t-on-click="() => { state.selectedElement.text_align = 'center'; saveHistory(); }">
+                                        <i class="fa fa-align-center"/>
+                                    </button>
+                                    <button t-attf-class="btn btn-outline-secondary {{ state.selectedElement.text_align === 'right' ? 'active' : '' }}"
+                                            t-on-click="() => { state.selectedElement.text_align = 'right'; saveHistory(); }">
+                                        <i class="fa fa-align-right"/>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="boldCheck"
+                                       t-model="state.selectedElement.is_bold"
+                                       t-on-change="() => saveHistory()"/>
+                                <label class="form-check-label" for="boldCheck">Bold</label>
+                            </div>
+                        </t>
+
+                        <!-- Image Properties -->
+                        <t t-if="state.selectedElement.type === 'image'">
+                            <div class="mb-3">
+                                <label class="form-label">Image</label>
+                                <input type="file" class="form-control" accept="image/*"
+                                       t-on-change="(ev) => onImageUpload(ev, state.selectedElement)"/>
+                                <t t-if="state.selectedElement.image_data">
+                                    <img t-attf-src="data:image/png;base64,{{ state.selectedElement.image_data }}"
+                                         class="img-fluid mt-2 border" style="max-height: 100px;"/>
+                                </t>
+                            </div>
+                        </t>
+
+                        <!-- Separator Properties -->
+                        <t t-if="state.selectedElement.type === 'separator'">
+                            <div class="mb-3">
+                                <label class="form-label">Style</label>
+                                <select class="form-select"
+                                        t-model="state.selectedElement.separator_style"
+                                        t-on-change="() => saveHistory()">
+                                    <option value="solid">Solid ────</option>
+                                    <option value="dashed">Dashed - - -</option>
+                                    <option value="double">Double ════</option>
+                                    <option value="dotted">Dotted ····</option>
+                                </select>
+                            </div>
+                        </t>
+
+                        <!-- Barcode/QR Properties -->
+                        <t t-if="state.selectedElement.type in ['barcode', 'qrcode']">
+                            <div class="mb-3">
+                                <label class="form-label">Data Field</label>
+                                <input type="text" class="form-control"
+                                       t-model="state.selectedElement.barcode_field"
+                                       t-on-change="() => saveHistory()"
+                                       placeholder="e.g., order.name"/>
+                            </div>
+                            <t t-if="state.selectedElement.type === 'barcode'">
+                                <div class="mb-3">
+                                    <label class="form-label">Barcode Type</label>
+                                    <select class="form-select"
+                                            t-model="state.selectedElement.barcode_type"
+                                            t-on-change="() => saveHistory()">
+                                        <option value="code128">Code 128</option>
+                                        <option value="code39">Code 39</option>
+                                        <option value="ean13">EAN-13</option>
+                                        <option value="ean8">EAN-8</option>
+                                    </select>
+                                </div>
+                            </t>
+                        </t>
+
+                        <!-- Common: Height -->
+                        <div class="mb-3">
+                            <label class="form-label">Height (px)</label>
+                            <input type="number" class="form-control"
+                                   t-model.number="state.selectedElement.height"
+                                   t-on-change="() => saveHistory()"/>
+                        </div>
+                    </t>
+
+                    <!-- No Selection -->
+                    <t t-else="">
+                        <div class="text-center text-muted py-5">
+                            <i class="fa fa-mouse-pointer fa-2x mb-2"/>
+                            <p>Select an element to edit its properties</p>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Preview Modal -->
+            <div t-if="state.showPreview" class="ticket-preview-modal"
+                 t-on-click="closePreview">
+                <div class="ticket-preview-content" t-on-click.stop="">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Preview</h5>
+                        <button class="btn btn-close" t-on-click="closePreview"/>
+                    </div>
+                    <div class="text-center">
+                        <img t-if="state.previewImage"
+                             t-att-src="state.previewImage"
+                             class="img-fluid border shadow"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Element Preview Template -->
+    <t t-name="seisei_print_manager.TicketElementPreview">
+        <div class="element-preview" t-attf-style="min-height: {{ el.height || 30 }}px;">
+            <!-- Text -->
+            <t t-if="el.type === 'text'">
+                <div t-attf-style="text-align: {{ el.text_align }}; font-weight: {{ el.is_bold ? 'bold' : 'normal' }};"
+                     t-attf-class="font-size-{{ el.font_size }}">
+                    <t t-esc="el.text_content || 'Empty text'"/>
+                </div>
+            </t>
+
+            <!-- Dynamic Field -->
+            <t t-if="el.type === 'dynamic_field'">
+                <div t-attf-style="text-align: {{ el.text_align }};"
+                     class="text-primary">
+                    <i class="fa fa-code me-1"/>
+                    <span t-esc="'{' + (el.field_name || 'field') + '}'"/>
+                </div>
+            </t>
+
+            <!-- Image -->
+            <t t-if="el.type === 'image'">
+                <div class="text-center">
+                    <t t-if="el.image_data">
+                        <img t-attf-src="data:image/png;base64,{{ el.image_data }}"
+                             style="max-width: 100%; max-height: 80px;"/>
+                    </t>
+                    <t t-else="">
+                        <div class="text-muted py-2">
+                            <i class="fa fa-image fa-2x"/>
+                            <div>Image placeholder</div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+            <!-- Separator -->
+            <t t-if="el.type === 'separator'">
+                <div class="text-center separator-preview"
+                     t-att-data-style="el.separator_style">
+                    <hr t-attf-class="separator-{{ el.separator_style }}"/>
+                </div>
+            </t>
+
+            <!-- Barcode -->
+            <t t-if="el.type === 'barcode'">
+                <div class="text-center p-2 border-dashed">
+                    <i class="fa fa-barcode fa-2x"/>
+                    <div class="small text-muted">
+                        <t t-esc="el.barcode_type.toUpperCase()"/>:
+                        <t t-esc="'{' + (el.barcode_field || 'data') + '}'"/>
+                    </div>
+                </div>
+            </t>
+
+            <!-- QR Code -->
+            <t t-if="el.type === 'qrcode'">
+                <div class="text-center p-2 border-dashed">
+                    <i class="fa fa-qrcode fa-2x"/>
+                    <div class="small text-muted">
+                        QR: <t t-esc="'{' + (el.barcode_field || 'data') + '}'"/>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>
