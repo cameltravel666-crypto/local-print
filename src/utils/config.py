@@ -52,11 +52,21 @@ class ServerConfig:
 
     def get_http_url(self) -> str:
         """Get full HTTP URL"""
-        return f"{self.server_url}:{self.http_port}"
+        url = self.server_url.rstrip('/')
+        # Don't add port for standard ports
+        if (url.startswith('https://') and self.http_port == 443) or \
+           (url.startswith('http://') and self.http_port == 80):
+            return url
+        return f"{url}:{self.http_port}"
 
     def get_websocket_url(self) -> str:
         """Get full WebSocket URL"""
-        base = self.server_url.replace('http://', 'ws://').replace('https://', 'wss://')
+        url = self.server_url.rstrip('/')
+        base = url.replace('http://', 'ws://').replace('https://', 'wss://')
+        # Don't add port for standard ports
+        if (url.startswith('https://') and self.websocket_port == 443) or \
+           (url.startswith('http://') and self.websocket_port == 80):
+            return f"{base}/websocket"
         return f"{base}:{self.websocket_port}/websocket"
 
 

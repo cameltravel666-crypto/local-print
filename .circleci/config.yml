@@ -1,0 +1,66 @@
+version: 2.1
+
+jobs:
+  build-linux:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: Install system dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y \
+              libxcb-cursor0 \
+              libxkbcommon0 \
+              libxcb-xinerama0 \
+              libxcb-icccm4 \
+              libxcb-image0 \
+              libxcb-keysyms1 \
+              libxcb-randr0 \
+              libxcb-render-util0 \
+              libxcb-shape0 \
+              libegl1 \
+              libgl1
+      - run:
+          name: Install Python dependencies
+          command: |
+            pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install pyinstaller
+      - run:
+          name: Build Linux executable
+          command: python build.py
+      - store_artifacts:
+          path: output/builds/linux/LocalPrintAgent
+          destination: LocalPrintAgent-linux
+
+  build-windows:
+    machine:
+      image: windows-server-2022-gui:current
+    resource_class: windows.medium
+    shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: Install Python
+          command: choco install python311 -y
+      - run:
+          name: Install dependencies
+          command: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+            pip install pyinstaller
+      - run:
+          name: Build Windows executable
+          command: python build.py
+      - store_artifacts:
+          path: output/builds/windows/LocalPrintAgent.exe
+          destination: LocalPrintAgent-windows.exe
+
+workflows:
+  build:
+    jobs:
+      - build-linux
+      # Windows builds require paid plan
+      # - build-windows
