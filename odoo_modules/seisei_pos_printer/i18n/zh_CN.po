@@ -1,0 +1,134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* seisei_pos_printer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-19 00:00+0000\n"
+"PO-Revision-Date: 2026-01-19 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: seisei_pos_printer
+#: model:ir.module.module,name:seisei_pos_printer.module_seisei_pos_printer
+msgid "Seisei POS Printer"
+msgstr "Seisei POS 打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.module.module,summary:seisei_pos_printer.module_seisei_pos_printer
+msgid "Bridge POS printers to Seisei Print Manager for remote ESC/POS printing"
+msgstr "将POS打印机桥接到Seisei打印管理器，实现远程ESC/POS打印"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields.selection,name:seisei_pos_printer.selection__pos_printer__printer_type__cloud_printer
+msgid "Cloud Printer"
+msgstr "云打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,field_description:seisei_pos_printer.field_pos_printer__seisei_printer_id
+msgid "Cloud Printer"
+msgstr "云打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,help:seisei_pos_printer.field_pos_printer__seisei_printer_id
+msgid "Associate this POS printer with a Seisei Printer for remote printing"
+msgstr "将此POS打印机与Seisei打印机关联以实现远程打印"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,field_description:seisei_pos_printer.field_pos_config__use_seisei_cloud_print
+#: model:ir.model.fields,field_description:seisei_pos_printer.field_res_config_settings__pos_use_seisei_cloud_print
+msgid "Use Cloud Print"
+msgstr "使用云打印"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,help:seisei_pos_printer.field_pos_config__use_seisei_cloud_print
+msgid "Enable Seisei Cloud Print for remote receipt printing via seisei_print_manager"
+msgstr "通过seisei_print_manager启用Seisei云打印进行远程小票打印"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,help:seisei_pos_printer.field_res_config_settings__pos_use_seisei_cloud_print
+msgid "Enable Seisei Cloud Print for remote receipt printing"
+msgstr "启用Seisei云打印进行远程小票打印"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,field_description:seisei_pos_printer.field_pos_config__seisei_receipt_printer_id
+#: model:ir.model.fields,field_description:seisei_pos_printer.field_res_config_settings__pos_seisei_receipt_printer_id
+msgid "Cloud Receipt Printer"
+msgstr "云小票打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.model.fields,help:seisei_pos_printer.field_pos_config__seisei_receipt_printer_id
+#: model:ir.model.fields,help:seisei_pos_printer.field_res_config_settings__pos_seisei_receipt_printer_id
+msgid "Select the Seisei printer for receipt printing"
+msgstr "选择用于小票打印的Seisei打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.actions.act_window,name:seisei_pos_printer.action_pos_cloud_printer
+msgid "Cloud Kitchen Printers"
+msgstr "云厨房打印机"
+
+#. module: seisei_pos_printer
+#: model:ir.ui.menu,name:seisei_pos_printer.menu_pos_cloud_kitchen_printer
+msgid "Cloud Kitchen Printers"
+msgstr "云厨房打印机"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.actions.act_window,help:seisei_pos_printer.action_pos_cloud_printer
+msgid "Add a new Cloud Kitchen Printer"
+msgstr "添加新的云厨房打印机"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.actions.act_window,help:seisei_pos_printer.action_pos_cloud_printer
+msgid "Cloud Kitchen Printers use Seisei Print Manager to send orders to remote printers. Configure which product categories each printer handles for automatic order routing."
+msgstr "云厨房打印机使用Seisei打印管理器将订单发送到远程打印机。配置每个打印机处理的产品类别以实现自动订单路由。"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.ui.view,arch_db:seisei_pos_printer.res_config_settings_view_form
+msgid "Cloud Print"
+msgstr "云打印"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.ui.view,arch_db:seisei_pos_printer.res_config_settings_view_form
+msgid "Print receipts via Cloud Print"
+msgstr "通过云打印打印小票"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.ui.view,arch_db:seisei_pos_printer.res_config_settings_view_form
+msgid "Receipt Printer"
+msgstr "小票打印机"
+
+#. module: seisei_pos_printer
+#: model_terms:ir.ui.view,arch_db:seisei_pos_printer.res_config_settings_view_form
+msgid "Select a printer..."
+msgstr "选择打印机..."
+
+#. module: seisei_pos_printer
+#. odoo-python
+#: code:addons/seisei_pos_printer/controllers/main.py:0
+msgid "POS Cloud Receipt Print"
+msgstr "POS云小票打印"
+
+#. module: seisei_pos_printer
+#. odoo-python
+#: code:addons/seisei_pos_printer/controllers/main.py:0
+msgid "POS Cloud Cash Drawer"
+msgstr "POS云钱箱"
+
+#. module: seisei_pos_printer
+#. odoo-python
+#: code:addons/seisei_pos_printer/controllers/main.py:0
+msgid "Printer not found"
+msgstr "打印机未找到"
+
+#. module: seisei_pos_printer
+#. odoo-python
+#: code:addons/seisei_pos_printer/controllers/main.py:0
+msgid "No Seisei printer associated"
+msgstr "未关联Seisei打印机"

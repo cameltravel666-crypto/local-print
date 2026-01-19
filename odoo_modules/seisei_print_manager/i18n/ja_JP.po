@@ -1,0 +1,593 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* seisei_print_manager
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-19 00:00+0000\n"
+"PO-Revision-Date: 2026-01-19 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: seisei_print_manager
+#: model:ir.module.module,name:seisei_print_manager.module_seisei_print_manager
+msgid "Seisei Print Manager"
+msgstr "Seisei 印刷マネージャー"
+
+#. module: seisei_print_manager
+#: model:ir.module.module,summary:seisei_print_manager.module_seisei_print_manager
+msgid "Print Management System for Odoo"
+msgstr "Odoo 印刷管理システム"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_station
+msgid "Print Station"
+msgstr "印刷ステーション"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_printer
+msgid "Printer"
+msgstr "プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_print_job
+msgid "Print Job"
+msgstr "印刷ジョブ"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_report_mapping
+msgid "Report Mapping"
+msgstr "レポートマッピング"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_report_mapping_group
+msgid "Report Mapping Group"
+msgstr "レポートマッピンググループ"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_ticket_template
+msgid "Ticket Template"
+msgstr "チケットテンプレート"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_ticket_element
+msgid "Ticket Element"
+msgstr "チケット要素"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__name
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__name
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__name
+msgid "Name"
+msgstr "名前"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__code
+msgid "Station Code"
+msgstr "ステーションコード"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__location
+msgid "Location"
+msgstr "場所"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__ip_address
+msgid "IP Address"
+msgstr "IPアドレス"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__mac_address
+msgid "MAC Address"
+msgstr "MACアドレス"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__hostname
+msgid "Hostname"
+msgstr "ホスト名"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__is_active
+msgid "Active"
+msgstr "有効"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__is_default
+msgid "Default Station"
+msgstr "デフォルトステーション"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__last_sync_time
+msgid "Last Sync Time"
+msgstr "最終同期時刻"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__printer_ids
+msgid "Printers"
+msgstr "プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__printer_count
+msgid "Printer Count"
+msgstr "プリンター数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__active_printer_count
+msgid "Active Printer Count"
+msgstr "アクティブプリンター数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__station_id
+msgid "Station"
+msgstr "ステーション"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__status
+msgid "Status"
+msgstr "ステータス"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__idle
+msgid "Idle"
+msgstr "待機中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__printing
+msgid "Printing"
+msgstr "印刷中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__error
+msgid "Error"
+msgstr "エラー"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__offline
+msgid "Offline"
+msgstr "オフライン"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__model
+msgid "Model"
+msgstr "モデル"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__is_default
+msgid "Default Printer"
+msgstr "デフォルトプリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__printer_type
+msgid "Printer Type"
+msgstr "プリンタータイプ"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__thermal
+msgid "Thermal"
+msgstr "感熱式プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__laser
+msgid "Laser"
+msgstr "レーザープリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__inkjet
+msgid "Inkjet"
+msgstr "インクジェットプリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__job_id
+msgid "Job ID"
+msgstr "ジョブID"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__printer_id
+msgid "Printer"
+msgstr "プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__report_name
+msgid "Report Name"
+msgstr "レポート名"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__copies
+msgid "Copies"
+msgstr "部数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__priority
+msgid "Priority"
+msgstr "優先度"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__pending
+msgid "Pending"
+msgstr "保留中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__processing
+msgid "Processing"
+msgstr "処理中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__completed
+msgid "Completed"
+msgstr "完了"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__failed
+msgid "Failed"
+msgstr "失敗"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__cancelled
+msgid "Cancelled"
+msgstr "キャンセル済"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__error_message
+msgid "Error Message"
+msgstr "エラーメッセージ"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__retry_count
+msgid "Retry Count"
+msgstr "リトライ回数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__max_retries
+msgid "Max Retries"
+msgstr "最大リトライ回数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__scheduled_time
+msgid "Scheduled Time"
+msgstr "予定時刻"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__started_at
+msgid "Started At"
+msgstr "開始時刻"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__completed_at
+msgid "Completed At"
+msgstr "完了時刻"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__report_id
+msgid "Report"
+msgstr "レポート"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__printer_id
+msgid "Target Printer"
+msgstr "対象プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__auto_print
+msgid "Auto Print"
+msgstr "自動印刷"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__copies
+msgid "Copies"
+msgstr "印刷部数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_ticket_template__paper_width
+msgid "Paper Width"
+msgstr "用紙幅"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_ticket_template__element_ids
+msgid "Elements"
+msgstr "要素"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_root
+msgid "Print Manager"
+msgstr "印刷管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_stations
+msgid "Stations"
+msgstr "ステーション"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_printers
+msgid "Printers"
+msgstr "プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_jobs
+msgid "Print Jobs"
+msgstr "印刷ジョブ"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_mappings
+msgid "Report Mappings"
+msgstr "レポートマッピング"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_templates
+msgid "Ticket Templates"
+msgstr "チケットテンプレート"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_config
+msgid "Configuration"
+msgstr "設定"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_station_list
+msgid "Print Stations"
+msgstr "印刷ステーション"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_printer_list
+msgid "Printers"
+msgstr "プリンター"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_print_job_list
+msgid "Print Jobs"
+msgstr "印刷ジョブ"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Test Print"
+msgstr "テスト印刷"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Sync Printers"
+msgstr "プリンター同期"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Processing print management sync message: %s"
+msgstr "印刷管理同期メッセージを処理中: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Unknown print management sync type: %s"
+msgstr "不明な印刷管理同期タイプ: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Job status updated from client: %s -> %s"
+msgstr "クライアントからジョブステータス更新: %s -> %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Starting to process station sync data: %s"
+msgstr "ステーション同期データの処理を開始: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Station information: machine_name=%s, location_tag=%s"
+msgstr "ステーション情報: マシン名=%s, ロケーションタグ=%s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Processing station sync: %s (type: %s, %d printers)"
+msgstr "ステーション同期を処理中: %s (タイプ: %s, %d台のプリンター)"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Station sync completed: %s, synchronized %d printers"
+msgstr "ステーション同期完了: %s、%d台のプリンターを同期"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Printer lacks station information, cannot perform test print"
+msgstr "プリンターにステーション情報がないため、テスト印刷を実行できません"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Updated printer info: %s @ %s"
+msgstr "プリンター情報を更新: %s @ %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Print job published to message queue: %s"
+msgstr "印刷ジョブをメッセージキューに公開: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Job status updated %s: %s -> %s - %s"
+msgstr "ジョブステータス更新 %s: %s -> %s - %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Retry %s/%s: %s"
+msgstr "リトライ %s/%s: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "User cancelled"
+msgstr "ユーザーがキャンセル"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Station Information"
+msgstr "ステーション情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Network Information"
+msgstr "ネットワーク情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Contact Information"
+msgstr "連絡先情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_printer_form
+msgid "Printer Information"
+msgstr "プリンター情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Job Information"
+msgstr "ジョブ情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Document Information"
+msgstr "ドキュメント情報"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Time Information"
+msgstr "時間情報"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__description
+msgid "Description"
+msgstr "説明"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_phone
+msgid "Contact Phone"
+msgstr "連絡先電話番号"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_email
+msgid "Contact Email"
+msgstr "連絡先メール"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__responsible_user_id
+msgid "Responsible User"
+msgstr "担当者"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__pdf
+msgid "PDF"
+msgstr "PDF"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__html
+msgid "HTML"
+msgstr "HTML"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__txt
+msgid "Text"
+msgstr "テキスト"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__format
+msgid "Format"
+msgstr "フォーマット"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__type
+msgid "Job Type"
+msgstr "ジョブタイプ"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_model
+msgid "Document Model"
+msgstr "ドキュメントモデル"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_id
+msgid "Document ID"
+msgstr "ドキュメントID"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Retry"
+msgstr "リトライ"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Cancel"
+msgstr "キャンセル"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "View Document"
+msgstr "ドキュメントを表示"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Related Document"
+msgstr "関連ドキュメント"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_station__code
+msgid "Unique station identifier used for WebSocket channel subscription"
+msgstr "WebSocketチャンネル購読に使用される一意のステーション識別子"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_printer__is_default
+msgid "If checked, this printer will be used as the default printer for this station"
+msgstr "チェックすると、このプリンターがこのステーションのデフォルトプリンターとして使用されます"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_report_mapping__auto_print
+msgid "If checked, the report will be automatically printed when generated"
+msgstr "チェックすると、レポート生成時に自動印刷されます"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "A printer named \"%s\" already exists in station \"%s\"."
+msgstr "ステーション「%s」に「%s」という名前のプリンターがすでに存在します。"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Test Print - %s"
+msgstr "テスト印刷 - %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Test print initiated for printer %s"
+msgstr "プリンター %s のテスト印刷を開始しました"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__metadata
+msgid "Metadata"
+msgstr "メタデータ"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__settings
+msgid "Print Settings"
+msgstr "印刷設定"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__is_test
+msgid "Is Test Job"
+msgstr "テストジョブ"

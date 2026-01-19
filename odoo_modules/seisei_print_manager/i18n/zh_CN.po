@@ -1,2538 +1,593 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* ylhc_print_manager
+# 	* seisei_print_manager
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-17 15:02+0000\n"
-"PO-Revision-Date: 2025-11-17 15:02+0000\n"
+"POT-Creation-Date: 2026-01-19 00:00+0000\n"
+"PO-Revision-Date: 2026-01-19 00:00+0000\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "%s Status Sync"
-msgstr "%s 状态同步"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "%s job failed: %s"
-msgstr "%s 作业失败: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "%s job successful: %s"
-msgstr "%s 作业成功: %s"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-msgid "<i class=\"fa fa-clock-o\" title=\"Last Sync Time\"/>"
-msgstr "<i class=\"fa fa-clock-o\" title=\"最后同步时间\"/>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-msgid "<span class=\"fa fa-check-circle text-success\" title=\"Active Printers\"/>"
-msgstr "<span class=\"fa fa-check-circle text-success\" title=\"活跃打印机\"/>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-msgid "<span class=\"fa fa-print\" title=\"Total Printers\"/>"
-msgstr "<span class=\"fa fa-print\" title=\"打印机总数\"/>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-msgid "<span class=\"fa fa-star text-warning\" title=\"Default Station\"/>"
-msgstr "<span class=\"fa fa-star text-warning\" title=\"默认工作站\"/>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid ""
-"<span class=\"o_stat_text\">Related</span>\n"
-"                                    <span class=\"o_stat_text\">Document</span>"
-msgstr ""
-"<span class=\"o_stat_text\">关联</span>\n"
-"                                    <span class=\"o_stat_text\">文档</span>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "<span class=\"text-muted\">Job ID: </span>"
-msgstr "<span class=\"text-muted\">作业ID: </span>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid ""
-"<span invisible=\"is_default == False\" class=\"fa fa-star text-warning\" "
-"title=\"Default Station\"/>"
-msgstr ""
-"<span invisible=\"is_default == False\" class=\"fa fa-star text-warning\" "
-"title=\"默认工作站\"/>"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "<span>Test Job</span>"
-msgstr "<span>测试作业</span>"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "A printer named \"%s\" already exists in station \"%s\"."
-msgstr "工作站 \"%s\" 中已存在名为 \"%s\" 的打印机。"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__action_type
-msgid "Action Type"
-msgstr "操作类型"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__active
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__active
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__active
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__is_active
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_list
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Active"
-msgstr "启用"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__active_printer_count
-msgid "Active Printer Count"
-msgstr "活跃打印机数量"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__system_name
-msgid "Actual printer name in the operating system"
-msgstr "操作系统中的实际打印机名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__printer_ids
-msgid "All printers under this station"
-msgstr "此工作站下的所有打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Architecture: %s"
-msgstr "架构: %s"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Archived"
-msgstr "已归档"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid "At least one default station must be maintained!"
-msgstr "至少需要保留一个默认工作站!"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Attempting to remove non-existent printer: %s"
-msgstr "尝试删除不存在的打印机: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_color_mode__auto
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__color_mode__auto
-msgid "Auto"
-msgstr "自动"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Basic Information"
-msgstr "基本信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Basic Settings"
-msgstr "基本设置"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_list
-msgid "Cancel"
-msgstr "取消"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__cancelled
-msgid "Cancelled"
-msgstr "已取消"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid ""
-"Cannot delete a station that contains printers! Please remove all printers "
-"first."
-msgstr "不能删除包含打印机的工作站!请先删除所有打印机。"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__channel_name
-msgid "Channel Name"
-msgstr "通道名称"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_printer
-msgid ""
-"Click the \"New\" button to add a printer, or use the \"Sync\" function to "
-"get printer information from Service."
-msgstr "点击“新建”按钮添加打印机，或使用“同步”功能从服务获取打印机信息。"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__station_code
-msgid "Code of the station this job belongs to"
-msgstr "此作业所属工作站的代码"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_color_mode__color
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__color_mode__color
-msgid "Color"
-msgstr "彩色"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__color_mode
-msgid "Color Mode"
-msgstr "颜色模式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__completed
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Completed"
-msgstr "已完成"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__completed_at
-msgid "Completed At"
-msgstr "完成时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/report_mapping.py:0
-msgid "Conditions must be in valid JSON format"
-msgstr "条件必须为有效的JSON格式"
-
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_res_config_settings
-msgid "Config Settings"
-msgstr "配置设定"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__config_id
-msgid "Configuration ID"
-msgstr "配置ID"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__config_id
-msgid "Configuration ID, used for printer identification"
-msgstr "配置ID，用于打印机识别"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__contact_email
-msgid "Contact Email"
-msgstr "联系邮箱"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Contact Information"
-msgstr "联系信息"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__contact_phone
-msgid "Contact Phone"
-msgstr "联系电话"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__contact_email
-msgid "Contact email of the responsible person"
-msgstr "负责人的联系邮箱"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__contact_phone
-msgid "Contact phone of the responsible person"
-msgstr "负责人的联系电话"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__copies
-msgid "Copies"
-msgstr "份数"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-msgid "Could not sent to printer!"
-msgstr "无法发送到打印机!"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-msgid "Couldn't be printed. Click on the button below to download it !"
-msgstr "无法打印。点击下面的按钮下载!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__create_date
-msgid "Create Date"
-msgstr "创建时间"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_station
-msgid "Create your first print station"
-msgstr "创建您的第一个打印工作站"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_report_mapping_group
-msgid "Create your first report mapping group!"
-msgstr "创建您的第一个报表映射组!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__create_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__create_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__create_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__create_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__create_uid
-msgid "Created by"
-msgstr "创建者"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__user_id
-msgid "Created by User"
-msgstr "创建用户"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Created new printer: %s @ %s"
-msgstr "已创建新打印机: %s @ %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Created new station: %s"
-msgstr "已创建新工作站: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__create_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__create_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__create_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__create_date
-msgid "Created on"
-msgstr "创建时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__status
-msgid "Current printer status"
-msgstr "当前打印机状态"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Date"
-msgstr "日期"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_kanban
-msgid "Default"
-msgstr "默认"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_print_color_mode
-msgid "Default Color Mode"
-msgstr "默认颜色模式"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_print_copies
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__default_copies
-msgid "Default Copies"
-msgstr "默认份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_print_duplex
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__default_duplex
-msgid "Default Duplex"
-msgstr "默认双面打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_mapping_group_id
-msgid "Default Mapping Group"
-msgstr "默认映射组"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_print_action
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__default_print_action
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-msgid "Default Print Action"
-msgstr "默认打印动作"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_res_users_form_inherit_print_manager
-msgid "Default Print Settings"
-msgstr "默认打印设置"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__default_printer_id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__is_default
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__default_printer_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Default Printer"
-msgstr "默认打印机"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_res_users_form_inherit_mapping_group
-msgid "Default Settings"
-msgstr "默认设置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__is_default
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-msgid "Default Station"
-msgstr "默认工作站"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_print_color_mode
-msgid "Default color mode for this user"
-msgstr "此用户的默认颜色模式"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_config_settings__global_print_duplex
-msgid "Default duplex setting for all users"
-msgstr "所有用户的默认双面打印设置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__default_duplex
-msgid "Default duplex setting for this group"
-msgstr "此组的默认双面打印设置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_print_duplex
-msgid "Default duplex setting for this user"
-msgstr "此用户的默认双面打印设置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_mapping_group_id
-msgid "Default mapping group for this user"
-msgstr "此用户的默认映射组"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_config_settings__global_print_copies
-msgid "Default number of copies for all users"
-msgstr "所有用户的默认打印份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_print_copies
-msgid "Default number of copies for this user"
-msgstr "此用户的默认打印份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__copies
-msgid "Default number of print copies"
-msgstr "默认打印份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__default_copies
-msgid "Default number of print copies for this group"
-msgstr "此组的默认打印份数"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-msgid "Default print action for all users if no mapping is found"
-msgstr "未找到映射时所有用户的默认打印动作"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_config_settings__global_default_print_action
-msgid "Default print action for all users if no mapping is found !"
-msgstr "未找到映射时所有用户的默认打印动作!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_print_action
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__default_print_action
-msgid "Default print action if no mapping is found !"
-msgstr "未找到映射时的默认打印动作!"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-msgid "Default printer for all users if no mapping is found"
-msgstr "未找到映射时所有用户的默认打印机"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_config_settings__global_default_printer_id
-msgid "Default printer for all users if no mapping is found !"
-msgstr "未找到映射时所有用户的默认打印机!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__default_printer_id
-msgid "Default printer for this user if no mapping is found !"
-msgstr "未找到映射时此用户的默认打印机!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__default_printer_id
-msgid "Default printer for users in this group"
-msgstr "此组用户的默认打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__description
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__description
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__description
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_form
-msgid "Description"
-msgstr "描述"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__description
-msgid "Description of the group"
-msgstr "组的描述"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__description
-msgid "Detailed description of the station"
-msgstr "工作站的详细描述"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__status_message
-msgid "Detailed status information"
-msgstr "详细状态信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__display_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__display_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__display_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__display_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__display_name
-msgid "Display Name"
-msgstr "显示名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__sequence
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__sequence
-msgid "Display order"
-msgstr "显示顺序"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__sequence
-msgid "Display order, smaller numbers appear first"
-msgstr "显示顺序，数字越小越靠前"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__document_id
-msgid "Document ID"
-msgstr "文档ID"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Document Information"
-msgstr "文档信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__document_model
-msgid "Document Model"
-msgstr "文档模型"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__format
-msgid "Document format"
-msgstr "文档格式"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_config_settings__global_default_print_action__download
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_action__download
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__action_type__download
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping_group__default_print_action__download
-msgid "Download"
-msgstr "下载"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__download_after_print
-msgid "Download After Print"
-msgstr "打印后下载"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_config_settings__global_default_print_action__download_print
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_action__download_print
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping_group__default_print_action__download_print
-msgid "Download Print"
-msgstr "下载并打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__action_type
-msgid "Download after print"
-msgstr "打印后下载"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__action_type__download_and_print
-msgid "Download and Print"
-msgstr "下载并打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__duplex
-msgid "Duplex Print"
-msgstr "双面打印"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__duration
-msgid "Duration (seconds)"
-msgstr "时长(秒)"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_printer__status__error
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Error"
-msgstr "错误"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__error_message
-msgid "Error Message"
-msgstr "错误信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error getting or creating station: %s"
-msgstr "获取或创建工作站时出错: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__error_message
-msgid "Error message when job fails"
-msgstr "作业失败时的错误信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error occurred while processing print job message: %s"
-msgstr "处理打印作业消息时发生错误: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error occurred while removing printer: %s"
-msgstr "删除打印机时发生错误: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error occurred while sending printer sync notification: %s"
-msgstr "发送打印机同步通知时发生错误: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error processing print management sync message: %s"
-msgstr "处理打印管理同步消息时出错: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error processing printer %s: %s"
-msgstr "处理打印机%s时出错: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Error processing station sync: %s"
-msgstr "处理工作站同步时出错: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__format__xlsx
-msgid "Excel"
-msgstr "Excel"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Execution Status"
-msgstr "执行状态"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__failed
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Failed"
-msgstr "失败"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__failed_jobs
-msgid "Failed Jobs"
-msgstr "失败作业"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-msgid "Failed to print on"
-msgstr "打印失败于"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Failed to send to printer"
-msgstr "发送到打印机失败"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Failed to update print job status: %s -> %s"
-msgstr "更新打印作业状态失败: %s -> %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__format
-msgid "Format"
-msgstr "格式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__report_display_name
-msgid "Friendly display name of the report"
-msgstr "报表的友好显示名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__display_name
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__display_name
-msgid "Friendly name for display"
-msgstr "友好显示名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_config_settings__global_print_copies
-msgid "Global Default Copies"
-msgstr "全局默认份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_config_settings__global_print_duplex
-msgid "Global Default Duplex"
-msgstr "全局默认双面打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_config_settings__global_default_printer_id
-msgid "Global Default Printer"
-msgstr "全局默认打印机"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_config_settings__global_default_print_action
-msgid "Global Print Action"
-msgstr "全局打印动作"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_color_mode__grayscale
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__color_mode__grayscale
-msgid "Grayscale"
-msgstr "灰度"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Group By"
-msgstr "分组"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__code
-msgid "Group Code"
-msgstr "组代码"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_form
-msgid "Group Name"
-msgstr "组名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__group_id
-msgid "Group this mapping belongs to"
-msgstr "此映射所属的组"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_report_mapping_group
-msgid ""
-"Groups allow you to organize report mappings and assign them to users.\n"
-"                Users in a group will inherit all mappings from that group."
-msgstr ""
-"组允许您组织报表映射并将其分配给用户。\n"
-"                组中的用户将继承该组的所有映射。"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__format__html
-msgid "HTML"
-msgstr "HTML"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "High Priority"
-msgstr "高优先级"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__hostname
-msgid "Hostname"
-msgstr "主机名"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__hostname
-msgid "Hostname of the station"
-msgstr "工作站的主机名"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__id
-msgid "ID"
-msgstr "ID"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__document_id
-msgid "ID of the document record to print"
-msgstr "要打印的文档记录ID"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-msgid "ID:"
-msgstr "ID:"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__ip_address
-msgid "IP Address"
-msgstr "IP地址"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_printer__status__idle
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Idle"
-msgstr "空闲"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Inactive"
-msgstr "非活动"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__job_data
-msgid "JSON format job data"
-msgstr "JSON格式的作业数据"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__metadata
-msgid "JSON format job metadata"
-msgstr "JSON格式的作业元数据"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__settings
-msgid "JSON format print settings"
-msgstr "JSON格式的打印设置"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Job Configuration"
-msgstr "作业配置"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__job_data
-msgid "Job Data"
-msgstr "作业数据"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__job_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Job ID"
-msgstr "作业ID"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Job Information"
-msgstr "作业信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Job Metadata"
-msgstr "作业元数据"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Job Name"
-msgstr "作业名称"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Job Statistics"
-msgstr "作业统计"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__type
-msgid "Job Type"
-msgstr "作业类型"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__completed_at
-msgid "Job completion time"
-msgstr "作业完成时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__duration
-msgid "Job execution duration"
-msgstr "作业执行时长"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__priority
-msgid "Job priority, higher number means higher priority"
-msgstr "作业优先级，数字越大优先级越高"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__started_at
-msgid "Job processing start time"
-msgstr "作业处理开始时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__status
-msgid "Job status"
-msgstr "作业状态"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__success_rate
-msgid "Job success rate percentage"
-msgstr "作业成功率百分比"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_kanban
-msgid ""
-"Jobs\n"
-"                                            | ✅"
-msgstr ""
-"作业\n"
-"                                            | ✅"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__last_sync_time
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__last_sync_time
-msgid "Last Sync Time"
-msgstr "最后同步时间"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__write_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__write_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__write_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__write_uid
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__write_uid
-msgid "Last Updated by"
-msgstr "最后更新者"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__write_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__write_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__write_date
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__write_date
-msgid "Last Updated on"
-msgstr "最后更新时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__last_sync_time
-msgid "Last time synced from service"
-msgstr "从服务最后同步时间"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__last_sync_time
-msgid "Last time synchronized with service"
-msgstr "与服务最后同步时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__location
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Location"
-msgstr "位置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__mac_address
-msgid "MAC Address"
-msgstr "MAC地址"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__mac_address
-msgid "MAC address of the station"
-msgstr "工作站的MAC地址"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__manufacturer
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Manufacturer"
-msgstr "制造商"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__mapping_count
-msgid "Mapping Count"
-msgstr "映射数量"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__group_id
-msgid "Mapping Group"
-msgstr "映射组"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__mapping_group_ids
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_report_mapping_group
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_res_users_form_inherit_print_manager
-msgid "Mapping Groups"
-msgstr "映射组"
-
-#. module: ylhc_print_manager
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_mapping_management
-msgid "Mapping Management"
-msgstr "映射管理"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Mapping Name (Optional)"
-msgstr "映射名称(可选)"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__mapping_id
-msgid "Mapping Rule"
-msgstr "映射规则"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Mapping Rules"
-msgstr "映射规则"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_res_users__mapping_group_ids
-msgid "Mapping groups this user belongs to"
-msgstr "此用户所属的映射组"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__priority
-msgid "Mapping priority, higher numbers have higher priority"
-msgstr "映射优先级，数字越大优先级越高"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__mapping_id
-msgid "Mapping rule used"
-msgstr "使用的映射规则"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__mapping_ids
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_form
-msgid "Mappings"
-msgstr "映射"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__mapping_ids
-msgid "Mappings associated with this group"
-msgstr "与此组关联的映射"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__condition
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Matching Conditions"
-msgstr "匹配条件"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__condition
-msgid "Matching conditions in JSON format"
-msgstr "JSON格式的匹配条件"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__max_retries
-msgid "Max Retries"
-msgstr "最大重试次数"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__max_retries
-msgid "Maximum number of retries"
-msgstr "最大重试次数"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__metadata
-msgid "Metadata"
-msgstr "元数据"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Metadata must be in valid JSON format"
-msgstr "元数据必须为JSON有效格式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__model
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Model"
-msgstr "模型"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__document_model
-msgid "Model that the document belongs to"
-msgstr "文档所属的模型"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "My Jobs"
-msgstr "我的作业"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Name"
-msgstr "名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__name
-msgid "Name of the mapping configuration"
-msgstr "映射配置的名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__name
-msgid "Name of the mapping group"
-msgstr "映射组的名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__name
-msgid "Name of the print job"
-msgstr "打印作业的名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__printer_name
-msgid "Name of the printer to execute the print"
-msgstr "执行打印的打印机名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__ip_address
-msgid "Network IP address of the station"
-msgstr "工作站的网络 IP 地址"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Network Information"
-msgstr "网络信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_print_job
-msgid "No print jobs yet!"
-msgstr "还没有打印作业!"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/ir_action_report.py:0
-msgid "No printer configured to print this report."
-msgstr "未配置打印机来打印此报表。"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_printer
-msgid "No printer information yet!"
-msgstr "还没有打印机信息!"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_report_mapping
-msgid "No report mapping configuration yet!"
-msgstr "还没有报表映射配置!"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__active_printer_count
-msgid "Number of active printers under this station"
-msgstr "此工作站下的活动打印机数量"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__copies
-msgid "Number of copies to print"
-msgstr "要打印的份数"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__failed_jobs
-msgid "Number of failed jobs"
-msgstr "失败作业数量"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__retry_count
-msgid "Number of job retries"
-msgstr "作业重试次数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__printer_count
-msgid "Number of printers under this station"
-msgstr "此工作站下的打印机数量"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__mapping_count
-msgid "Number of report mappings using this printer"
-msgstr "使用此打印机的报表映射数量"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__success_jobs
-msgid "Number of successfully completed jobs"
-msgstr "成功完成的作业数量"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__usage_count
-msgid "Number of times this mapping has been used"
-msgstr "此映射被使用的次数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__report_name
-msgid "Odoo report technical name, e.g. sale.order"
-msgstr "Odoo报表技术名称，例如 sale.order"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_printer__status__offline
-msgid "Offline"
-msgstr "离线"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__format__pdf
-msgid "PDF"
-msgstr "PDF"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__pending
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Pending"
-msgstr "待处理"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__responsible_user_id
-msgid "Person responsible for this station"
-msgstr "此工作站的负责人"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__location
-msgid "Physical Location"
-msgstr "物理位置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__location
-msgid ""
-"Physical location description, e.g.: Building 1 Floor 1 - Finance Department"
-msgstr "物理位置描述，例如：1号1楼 - 财务部"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__location
-msgid "Physical location of the printer"
-msgstr "打印机的物理位置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_config_settings__global_default_print_action__print
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__res_users__default_print_action__print
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__action_type__print
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping_group__default_print_action__print
-msgid "Print"
-msgstr "打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__copies
-msgid "Print Copies"
-msgstr "打印份数"
-
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_ylhc_print_job
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Print Job"
-msgstr "打印作业"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: code:addons/ylhc_print_manager/models/report_mapping.py:0
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_ylhc_print_job
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__job_ids
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_print_job
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_list
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Print Jobs"
-msgstr "打印作业"
-
-#. module: ylhc_print_manager
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_print_manager_root
-msgid "Print Management"
-msgstr "打印管理"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-msgid "Print Manager"
-msgstr "打印管理器"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.res_config_settings_view_form
-msgid "Print Manager Settings"
-msgstr "打印管理器设置"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_res_users_form_inherit_mapping_group
-msgid "Print Mappings"
-msgstr "打印映射"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Print Report %s"
-msgstr "打印报表 %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__settings
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__printer_settings
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Print Settings"
-msgstr "打印设置"
-
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_ylhc_station
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: seisei_print_manager
+#: model:ir.module.module,name:seisei_print_manager.module_seisei_print_manager
+msgid "Seisei Print Manager"
+msgstr "Seisei 打印管理器"
+
+#. module: seisei_print_manager
+#: model:ir.module.module,summary:seisei_print_manager.module_seisei_print_manager
+msgid "Print Management System for Odoo"
+msgstr "Odoo 打印管理系统"
+
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_station
 msgid "Print Station"
 msgstr "打印工作站"
 
-#. module: ylhc_print_manager
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_station
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_station
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_list
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-msgid "Print Stations"
-msgstr "打印工作站"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__color_mode
-msgid "Print color mode"
-msgstr "打印颜色模式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Print job message missing job_id"
-msgstr "打印作业消息缺少job_id"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Print job message missing printer_name or station_code: %s"
-msgstr "打印作业消息缺少printer_name或station_code: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Print job message missing status: %s"
-msgstr "打印作业消息缺少status: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__type
-msgid "Print job type for client identification of processing method"
-msgstr "用于客户端识别处理方法的打印作业类型"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_print_job
-msgid ""
-"Print jobs are automatically created when users submit print requests, or "
-"when print commands are received from Service."
-msgstr ""
-"当用户提交打印请求或从服务收到打印命令时，会自动创建打印作业。"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__printer_settings
-msgid "Print settings in JSON format"
-msgstr "JSON格式的打印设置"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/report_mapping.py:0
-msgid "Print settings must be in valid JSON format"
-msgstr "打印设置必须为有效的JSON格式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__printer_id
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__printer_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_printer
 msgid "Printer"
 msgstr "打印机"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer %s lacks station information, cannot print document"
-msgstr "打印机%s缺少工作站信息，无法打印文档"
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_print_job
+msgid "Print Job"
+msgstr "打印任务"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer %s lacks station information, skipping status sync!"
-msgstr "打印机%s缺少工作站信息，跳过状态同步!"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer %s sync successful"
-msgstr "打印机%s同步成功"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__capabilities
-msgid "Printer Capabilities"
-msgstr "打印机功能"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Printer Configuration"
-msgstr "打印机配置"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__printer_count
-msgid "Printer Count"
-msgstr "打印机数量"
-
-#. module: ylhc_print_manager
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_ylhc_printer
-#: model:ir.model,name:ylhc_print_manager.model_ylhc_printer
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_printer
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_list
-msgid "Printer Information"
-msgstr "打印机信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Printer List"
-msgstr "打印机列表"
-
-#. module: ylhc_print_manager
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_printer_management
-msgid "Printer Management"
-msgstr "打印机管理"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__printer_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__printer_name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Printer Name"
-msgstr "打印机名称"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__printer_setting_schema
-msgid "Printer Setting Schema"
-msgstr "打印机设置架构"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_res_users_form_inherit_print_manager
-msgid "Printer Settings"
-msgstr "打印机设置"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer Sync Notification - %s"
-msgstr "打印机同步通知 - %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__capabilities
-msgid "Printer capability information, stored in JSON format"
-msgstr "JSON格式存储的打印机功能信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer data missing name, cannot send sync notification"
-msgstr "打印机数据缺少名称，无法发送同步通知"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__description
-msgid "Printer description information"
-msgstr "打印机描述信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid "Printer information for station %s has been synchronized"
-msgstr "工作站%s的打印机信息已同步"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/ir_action_report.py:0
-msgid "Printer is not available."
-msgstr "打印机不可用。"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer lacks station information, cannot perform test print"
-msgstr "打印机缺少工作站信息，无法执行测试打印"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__manufacturer
-msgid "Printer manufacturer"
-msgstr "打印机制造商"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__model
-msgid "Printer model"
-msgstr "打印机型号"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__name
-msgid "Printer name in the system"
-msgstr "系统中的打印机名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Printer not available: %s"
-msgstr "打印机不可用: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__printer_setting_schema
-msgid "Printer setting schema in JSON format"
-msgstr "JSON格式的打印机设置架构"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer status sync request sent: %s @ %s"
-msgstr "打印机状态同步请求已发送: %s @ %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer sync failed: %s"
-msgstr "打印机同步失败: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Printer sync notification sent: %s @ %s"
-msgstr "打印机同步通知已发送: %s @ %s"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_list
-msgid "Printers"
-msgstr "打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__printing
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_printer__status__printing
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Printing"
-msgstr "打印中"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__priority
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__priority
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Priority"
-msgstr "优先级"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-msgid "Priority:"
-msgstr "优先级:"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Process Job"
-msgstr "处理作业"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__status__processing
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Processing"
-msgstr "处理中"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Processing print job status update: Job %s -> %s"
-msgstr "处理打印作业状态更新: 作业%s -> %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Processing print management sync message: %s"
-msgstr "处理打印管理同步消息: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Processing station sync: %s (type: %s, %d printers)"
-msgstr "处理工作站同步: %s (类型: %s, %d个打印机)"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Related Document"
-msgstr "相关文档"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__printer_ids
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Related Printers"
-msgstr "关联打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__printer_id
-msgid "Related printer record"
-msgstr "相关打印机记录"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Remove Printer - %s"
-msgstr "删除打印机 - %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Remove printer: %s"
-msgstr "删除打印机: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__report_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Report"
-msgstr "报表"
-
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_ir_actions_report
-msgid "Report Action"
-msgstr "报表动作"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__report_display_name
-msgid "Report Display Name"
-msgstr "报表显示名称"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Report Information"
-msgstr "报表信息"
-
-#. module: ylhc_print_manager
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_ylhc_report_mapping
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_report_mapping
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_list
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_report_mapping
 msgid "Report Mapping"
 msgstr "报表映射"
 
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_ylhc_report_mapping_group
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_form
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_report_mapping_group
 msgid "Report Mapping Group"
 msgstr "报表映射组"
 
-#. module: ylhc_print_manager
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_report_mapping_group
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_list
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_search
-msgid "Report Mapping Groups"
-msgstr "报表映射组"
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_ticket_template
+msgid "Ticket Template"
+msgstr "小票模板"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_res_users__report_mapping_ids
-msgid "Report Mappings"
-msgstr "报表映射"
+#. module: seisei_print_manager
+#: model:ir.model,name:seisei_print_manager.model_seisei_ticket_element
+msgid "Ticket Element"
+msgstr "小票元素"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__report_name
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__report_name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Report Name"
-msgstr "报表名称"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__name
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__name
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__name
+msgid "Name"
+msgstr "名称"
 
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_ylhc_report_mapping
-msgid "Report Printer Mapping"
-msgstr "报表打印机映射"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_ylhc_report_mapping
-msgid ""
-"Report mapping is used to define which printer different reports use.\n"
-"                    You can specify a specific printer for each report, or enable intelligent selection."
-msgstr ""
-"报表映射用于定义不同报表使用哪个打印机。\n"
-"                    您可以为每个报表指定特定的打印机，或启用智能选择。"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__report_id
-msgid "Report record"
-msgstr "报表记录"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__responsible_user_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-msgid "Responsible User"
-msgstr "负责人"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_list
-msgid "Retry"
-msgstr "重试"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Retry %s/%s: %s"
-msgstr "重试%s/%s: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__retry_count
-msgid "Retry Count"
-msgstr "重试次数"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__scheduled_time
-msgid "Scheduled Time"
-msgstr "计划时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__scheduled_time
-msgid "Scheduled execution time"
-msgstr "计划执行时间"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Search Print Jobs"
-msgstr "搜索打印作业"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Search Printers"
-msgstr "搜索打印机"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_search
-msgid "Search Report Mapping"
-msgstr "搜索报表映射"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__printer_id
-msgid "Selected printer or get the default printer of user"
-msgstr "选择的打印机或获取用户的默认打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Sent to printer"
-msgstr "已发送到打印机"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__sequence
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__sequence
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__sequence
-msgid "Sequence"
-msgstr "排序"
-
-#. module: ylhc_print_manager
-#: model:ir.model.constraint,message:ylhc_print_manager.constraint_ylhc_station_check_sequence
-msgid "Sequence value must be greater than or equal to 0!"
-msgstr "序列值必须大于或等于0!"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_kanban
-msgid "Service"
-msgstr "服务"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__service_sync
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Service Sync"
-msgstr "服务同步"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Set as Default"
-msgstr "设为默认"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Set as default printer"
-msgstr "设为默认打印机"
-
-#. module: ylhc_print_manager
-#: model:ir.actions.act_window,name:ylhc_print_manager.action_print_manager_config
-msgid "Settings"
-msgstr "设置"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Settings and Metadata"
-msgstr "设置和元数据"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__code
-msgid "Short code for quick identification of the station"
-msgstr "工作站的快速识别短代码"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Skipping printer data without name"
-msgstr "跳过没有名称的打印机数据"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__printer_name
-msgid "Specified printer name"
-msgstr "指定的打印机名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__started_at
-msgid "Started At"
-msgstr "开始时间"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-msgid "Starting job processing"
-msgstr "开始作业处理"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Starting to process station sync data: %s"
-msgstr "开始处理工作站同步数据: %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__station_id
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
-msgid "Station"
-msgstr "所属工作站"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__station_code
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__station_code
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__code
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__code
 msgid "Station Code"
-msgstr "工作站编码"
+msgstr "工作站代码"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__name
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Station Name"
-msgstr "工作站名称"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__location
+msgid "Location"
+msgstr "位置"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid "Station Printers"
-msgstr "工作站打印机"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__ip_address
+msgid "IP Address"
+msgstr "IP 地址"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Station Sync Error Notification - %s"
-msgstr "工作站同步错误通知 - %s"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__mac_address
+msgid "MAC Address"
+msgstr "MAC 地址"
 
-#. module: ylhc_print_manager
-#: model:ir.model.constraint,message:ylhc_print_manager.constraint_ylhc_station_unique_code
-msgid "Station code must be unique!"
-msgstr "工作站代码必须唯一!"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__hostname
+msgid "Hostname"
+msgstr "主机名"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Station information: machine_name=%s, location tag=%s"
-msgstr "工作站信息: machine_name=%s, location tag=%s"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__is_active
+msgid "Active"
+msgstr "启用"
 
-#. module: ylhc_print_manager
-#: model:ir.model.constraint,message:ylhc_print_manager.constraint_ylhc_station_unique_name
-msgid "Station name must be unique!"
-msgstr "工作站名称必须唯一!"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__is_default
+msgid "Default Station"
+msgstr "默认工作站"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Station sync completed: %s, successfully synced %d printers"
-msgstr "工作站同步完成: %s，成功同步%d个打印机"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__last_sync_time
+msgid "Last Sync Time"
+msgstr "最后同步时间"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Station sync failed: %s"
-msgstr "工作站同步失败: %s"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__printer_ids
+msgid "Printers"
+msgstr "打印机"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__station_id
-msgid "Station this printer belongs to"
-msgstr "此打印机所属的工作站"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__printer_count
+msgid "Printer Count"
+msgstr "打印机数量"
 
-#. module: ylhc_print_manager
-#: model_terms:ir.actions.act_window,help:ylhc_print_manager.action_station
-msgid ""
-"Stations are used to organize and manage printers. Each printer belongs to a station.<br>\n"
-"                    Through stations, you can better manage printer resources across multiple locations or departments."
-msgstr ""
-"工作站用于组织和管理打印机。每个打印机都属于一个工作站。<br>\n"
-"                    通过工作站，您可以更好地管理多个位置或部门的打印机资源。"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__active_printer_count
+msgid "Active Printer Count"
+msgstr "活跃打印机数量"
 
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Statistics"
-msgstr "统计"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__station_id
+msgid "Station"
+msgstr "工作站"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__status
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__status
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_search
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__status
 msgid "Status"
 msgstr "状态"
 
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Status Information"
-msgstr "状态信息"
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__idle
+msgid "Idle"
+msgstr "空闲"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__printing
+msgid "Printing"
+msgstr "打印中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__error
+msgid "Error"
+msgstr "错误"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__status__offline
+msgid "Offline"
+msgstr "离线"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__model
+msgid "Model"
+msgstr "型号"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__is_default
+msgid "Default Printer"
+msgstr "默认打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__printer_type
+msgid "Printer Type"
+msgstr "打印机类型"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__thermal
+msgid "Thermal"
+msgstr "热敏打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__laser
+msgid "Laser"
+msgstr "激光打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_printer__printer_type__inkjet
+msgid "Inkjet"
+msgstr "喷墨打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__job_id
+msgid "Job ID"
+msgstr "任务 ID"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__printer_id
+msgid "Printer"
+msgstr "打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__report_name
+msgid "Report Name"
+msgstr "报表名称"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__copies
+msgid "Copies"
+msgstr "份数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__priority
+msgid "Priority"
+msgstr "优先级"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__pending
+msgid "Pending"
+msgstr "等待中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__processing
+msgid "Processing"
+msgstr "处理中"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__completed
+msgid "Completed"
+msgstr "已完成"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__failed
+msgid "Failed"
+msgstr "失败"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__status__cancelled
+msgid "Cancelled"
+msgstr "已取消"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__error_message
+msgid "Error Message"
+msgstr "错误信息"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__retry_count
+msgid "Retry Count"
+msgstr "重试次数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__max_retries
+msgid "Max Retries"
+msgstr "最大重试次数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__scheduled_time
+msgid "Scheduled Time"
+msgstr "计划时间"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__started_at
+msgid "Started At"
+msgstr "开始时间"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__completed_at
+msgid "Completed At"
+msgstr "完成时间"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__report_id
+msgid "Report"
+msgstr "报表"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__printer_id
+msgid "Target Printer"
+msgstr "目标打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__auto_print
+msgid "Auto Print"
+msgstr "自动打印"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__copies
+msgid "Copies"
+msgstr "打印份数"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_ticket_template__paper_width
+msgid "Paper Width"
+msgstr "纸张宽度"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_ticket_template__element_ids
+msgid "Elements"
+msgstr "元素"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_root
+msgid "Print Manager"
+msgstr "打印管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_stations
+msgid "Stations"
+msgstr "工作站"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_printers
+msgid "Printers"
+msgstr "打印机"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_jobs
+msgid "Print Jobs"
+msgstr "打印任务"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_mappings
+msgid "Report Mappings"
+msgstr "报表映射"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_templates
+msgid "Ticket Templates"
+msgstr "小票模板"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_config
+msgid "Configuration"
+msgstr "配置"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_station_list
+msgid "Print Stations"
+msgstr "打印工作站"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_printer_list
+msgid "Printers"
+msgstr "打印机"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_print_job_list
+msgid "Print Jobs"
+msgstr "打印任务"
+
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__status_message
-msgid "Status Message"
-msgstr "状态消息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Status sync request sent, waiting for client response"
-msgstr "状态同步请求已发送，等待客户端响应"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__success_rate
-msgid "Success Rate"
-msgstr "成功率"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__success_jobs
-msgid "Successful Jobs"
-msgstr "成功作业"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-msgid "Successfully sent to printer!"
-msgstr "成功发送到打印机!"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Successfully updated print job status: %s -> %s"
-msgstr "成功更新打印作业状态: %s -> %s"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__supported_formats
-msgid "Supported Formats"
-msgstr "支持的格式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__supported_formats
-msgid "Supported file formats, stored in JSON format"
-msgstr "JSON格式存储的支持文件格式"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid "Sync Complete"
-msgstr "同步完成"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Sync Error Notification - %s"
-msgstr "同步错误通知 - %s"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Sync Printers"
-msgstr "同步打印机"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Sync Result Notification - %s"
-msgstr "同步结果通知 - %s"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Sync Status"
-msgstr "同步状态"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-msgid "Synced Today"
-msgstr "今日已同步"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_search
-msgid "Synced in Last 7 Days"
-msgstr "最近7天已同步"
-
-#. module: ylhc_print_manager
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_system_config
-msgid "System Configuration"
-msgstr "系统配置"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__system_name
-msgid "System Name"
-msgstr "系统名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "System: %s"
-msgstr "系统: %s"
-
-#. module: ylhc_print_manager
-#: model:ir.ui.menu,name:ylhc_print_manager.menu_ylhc_job_management
-msgid "Task Management"
-msgstr "任务管理"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
-msgid "Technical Information"
-msgstr "技术信息"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__report_name
-msgid "Technical name of the report to print"
-msgstr "要打印的报表技术名称"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_kanban
-msgid "Test"
-msgstr "测试"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_print_job__is_test
-msgid "Test Job"
-msgstr "测试作业"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Test Jobs"
-msgstr "测试作业"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Test Mapping"
-msgstr "测试映射"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_printer_form
+#: code:addons/seisei_print_manager/models/printer.py:0
 msgid "Test Print"
 msgstr "测试打印"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Test Print - %s"
-msgstr "测试打印 - %s"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Sync Printers"
+msgstr "同步打印机"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/report_mapping.py:0
-msgid "Test mapping job submitted"
-msgstr "测试映射作业已提交"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Processing print management sync message: %s"
+msgstr "处理打印管理同步消息: %s"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Test print job has been submitted"
-msgstr "测试打印作业已提交"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__format__txt
-msgid "Text"
-msgstr "文本"
-
-#. module: ylhc_print_manager
-#. odoo-javascript
-#: code:addons/ylhc_print_manager/static/src/report_handler.js:0
-msgid "The report"
-msgstr "报表"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "There can only be one default printer."
-msgstr "只能有一个默认打印机。"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/station.py:0
-msgid "There can only be one default station in the system!"
-msgstr "系统中只能有一个默认工作站!"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "This Week"
-msgstr "本周"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/ir_action_report.py:0
-msgid "This report type (%s) is not supported by direct printing!"
-msgstr "此报表类型(%s)不支持直接打印!"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
-msgid "Time Information"
-msgstr "时间信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_station_form
-msgid "Timestamp Information"
-msgstr "时间戳信息"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "Today"
-msgstr "今天"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_printer__total_jobs
-msgid "Total Jobs"
-msgstr "总作业数"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__total_jobs
-msgid "Total number of jobs processed by this printer"
-msgstr "此打印机处理的总作业数"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__code
-msgid "Unique code for the group"
-msgstr "组的唯一代码"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__name
-msgid "Unique identification name of the station"
-msgstr "工作站的唯一标识名称"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__station_code
-msgid "Unique identifier of the station"
-msgstr "工作站的唯一标识符"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__job_id
-msgid "Unique job identifier"
-msgstr "唯一作业ID"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_printer__status__unknown
-msgid "Unknown"
-msgstr "未知"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
+#: code:addons/seisei_print_manager/models/printer.py:0
 msgid "Unknown print management sync type: %s"
 msgstr "未知的打印管理同步类型: %s"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Update Print Job Status Notification - %s"
-msgstr "更新打印作业状态通知 - %s"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Job status updated from client: %s -> %s"
+msgstr "客户端更新任务状态: %s -> %s"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Updated printer information: %s @ %s"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Starting to process station sync data: %s"
+msgstr "开始处理工作站同步数据: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Station information: machine_name=%s, location_tag=%s"
+msgstr "工作站信息: 机器名=%s, 位置标签=%s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Processing station sync: %s (type: %s, %d printers)"
+msgstr "处理工作站同步: %s (类型: %s, %d个打印机)"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Station sync completed: %s, synchronized %d printers"
+msgstr "工作站同步完成: %s，成功同步%d个打印机"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Printer lacks station information, cannot perform test print"
+msgstr "打印机缺少工作站信息，无法执行测试打印"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Updated printer info: %s @ %s"
 msgstr "已更新打印机信息: %s @ %s"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Updated station information: %s"
-msgstr "已更新工作站信息: %s"
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Print job published to message queue: %s"
+msgstr "打印任务已发布到消息队列: %s"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping__usage_count
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Usage Count"
-msgstr "使用次数"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_form
-msgid "Usage Statistics"
-msgstr "使用统计"
-
-#. module: ylhc_print_manager
-#: model:ir.model,name:ylhc_print_manager.model_res_users
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_search
-msgid "User"
-msgstr "用户"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_report_mapping__action_type__user_setting_first
-msgid "User Setting First"
-msgstr "用户设置优先"
-
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Job status updated %s: %s -> %s - %s"
+msgstr "任务状态更新 %s: %s -> %s - %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Retry %s/%s: %s"
+msgstr "重试 %s/%s: %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/print_job.py:0
 msgid "User cancelled"
-msgstr "用户取消"
+msgstr "用户已取消"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__user_id
-msgid "User who created the job"
-msgstr "创建作业的用户"
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Station Information"
+msgstr "工作站信息"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_report_mapping_group__user_ids
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_report_mapping_group_form
-msgid "Users"
-msgstr "用户"
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Network Information"
+msgstr "网络信息"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__user_ids
-msgid "Users belonging to this group"
-msgstr "属于此组的用户"
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Contact Information"
+msgstr "联系信息"
 
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-msgid "Version: %s"
-msgstr "版本: %s"
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_printer_form
+msgid "Printer Information"
+msgstr "打印机信息"
 
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_print_job_form
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Job Information"
+msgstr "任务信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Document Information"
+msgstr "文档信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Time Information"
+msgstr "时间信息"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__description
+msgid "Description"
+msgstr "描述"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_phone
+msgid "Contact Phone"
+msgstr "联系电话"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_email
+msgid "Contact Email"
+msgstr "联系邮箱"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__responsible_user_id
+msgid "Responsible User"
+msgstr "负责人"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__pdf
+msgid "PDF"
+msgstr "PDF"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__html
+msgid "HTML"
+msgstr "HTML"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__txt
+msgid "Text"
+msgstr "文本"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__format
+msgid "Format"
+msgstr "格式"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__type
+msgid "Job Type"
+msgstr "任务类型"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_model
+msgid "Document Model"
+msgstr "文档模型"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_id
+msgid "Document ID"
+msgstr "文档 ID"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Retry"
+msgstr "重试"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Cancel"
+msgstr "取消"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
 msgid "View Document"
 msgstr "查看文档"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__channel_name
-msgid "WebSocket channel name for real-time updates"
-msgstr "用于实时更新的WebSocket通道名称"
+#: code:addons/seisei_print_manager/models/print_job.py:0
+msgid "Related Document"
+msgstr "关联文档"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_station__code
+msgid "Unique station identifier used for WebSocket channel subscription"
+msgstr "用于 WebSocket 频道订阅的唯一工作站标识符"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_printer__is_default
+msgid "If checked, this printer will be used as the default printer for this station"
+msgstr "如果选中，此打印机将作为该工作站的默认打印机"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,help:seisei_print_manager.field_seisei_report_mapping__auto_print
+msgid "If checked, the report will be automatically printed when generated"
+msgstr "如果选中，报表生成时将自动打印"
+
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__service_sync
-msgid "Whether synced from service"
-msgstr "是否从服务同步"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "A printer named \"%s\" already exists in station \"%s\"."
+msgstr "工作站 \"%s\" 中已存在名为 \"%s\" 的打印机。"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping_group__active
-msgid "Whether this group is active"
-msgstr "此组是否活动"
-
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/print_job.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_print_job__is_test
-msgid "Whether this is a test job"
-msgstr "是否为测试作业"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Test Print - %s"
+msgstr "测试打印 - %s"
 
-#. module: ylhc_print_manager
+#. module: seisei_print_manager
 #. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__is_default
-msgid "Whether this is the system default printer"
-msgstr "是否为系统默认打印机"
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Test print initiated for printer %s"
+msgstr "打印机 %s 的测试打印已启动"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__is_default
-msgid "Whether this is the system default station"
-msgstr "是否为系统默认工作站"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__metadata
+msgid "Metadata"
+msgstr "元数据"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__active
-msgid "Whether this mapping is enabled"
-msgstr "此映射是否启用"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__settings
+msgid "Print Settings"
+msgstr "打印设置"
 
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_station__is_active
-msgid "Whether this station is active"
-msgstr "此工作站是否活动"
-
-#. module: ylhc_print_manager
-#. odoo-python
-#: code:addons/ylhc_print_manager/models/printer.py:0
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_printer__active
-msgid "Whether to activate this printer"
-msgstr "是否激活此打印机"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__download_after_print
-msgid "Whether to download the print after print"
-msgstr "是否在打印后下载打印件"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,help:ylhc_print_manager.field_ylhc_report_mapping__duplex
-msgid "Whether to print on both sides"
-msgstr "是否双面打印"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields.selection,name:ylhc_print_manager.selection__ylhc_print_job__format__docx
-msgid "Word"
-msgstr "Word"
-
-#. module: ylhc_print_manager
-#: model:ir.model.fields,field_description:ylhc_print_manager.field_ylhc_station__write_date
-msgid "Write Date"
-msgstr "修改时间"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_kanban
-msgid "优先级:"
-msgstr "优先级:"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_kanban
-msgid "归档"
-msgstr "归档"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_kanban
-msgid "自动选择"
-msgstr "自动选择"
-
-#. module: ylhc_print_manager
-#: model_terms:ir.ui.view,arch_db:ylhc_print_manager.view_ylhc_report_mapping_kanban
-msgid "📊 使用"
-msgstr "📊 使用"
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__is_test
+msgid "Is Test Job"
+msgstr "是测试任务"
