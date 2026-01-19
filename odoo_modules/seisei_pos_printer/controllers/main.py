@@ -39,7 +39,8 @@ class SeiseiPrinterProxyController(http.Controller):
                 'metadata': json.dumps({
                     'source': 'pos_frontend',
                     'action': 'print_receipt',
-                    'escpos_commands': escpos_data,
+                    'doc_data': escpos_data,
+                    'doc_format': 'escpos',
                 }),
             }
             
@@ -82,7 +83,8 @@ class SeiseiPrinterProxyController(http.Controller):
                 'metadata': json.dumps({
                     'source': 'pos_frontend',
                     'action': 'cashbox',
-                    'escpos_commands': escpos_data,
+                    'doc_data': escpos_data,
+                    'doc_format': 'escpos',
                 }),
             }
             

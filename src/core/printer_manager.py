@@ -294,6 +294,8 @@ class PrinterManager:
             return self._print_pdf(job, printer)
         elif job.document_format.lower() == 'txt':
             return self._print_text(job, printer)
+        elif job.document_format.lower() == 'escpos':
+            return self._print_escpos(job, printer)
         else:
             logger.error(f"Unsupported document format: {job.document_format}")
             return False
@@ -424,6 +426,50 @@ class PrinterManager:
 
         except Exception as e:
             logger.error(f"Error printing text: {e}")
+            return False
+        finally:
+            if temp_file and os.path.exists(temp_file.name):
+                try:
+                    os.unlink(temp_file.name)
+                except Exception:
+                    pass
+
+    def _print_escpos(self, job: PrintJob, printer: PrinterInfo) -> bool:
+        """Print ESC/POS raw commands directly to thermal printer"""
+        temp_file = None
+        try:
+            temp_file = tempfile.NamedTemporaryFile(
+                suffix='.bin',
+                delete=False,
+                mode='wb'
+            )
+            temp_file.write(job.document_data)
+            temp_file.close()
+
+            if self.system == 'windows':
+                # On Windows, use raw printing
+                import win32print
+                import win32api
+                printer_handle = win32print.OpenPrinter(printer.system_name)
+                try:
+                    win32print.StartDocPrinter(printer_handle, 1, ("ESC/POS Print", None, "RAW"))
+                    win32print.StartPagePrinter(printer_handle)
+                    win32print.WritePrinter(printer_handle, job.document_data)
+                    win32print.EndPagePrinter(printer_handle)
+                    win32print.EndDocPrinter(printer_handle)
+                finally:
+                    win32print.ClosePrinter(printer_handle)
+                return True
+            else:
+                # On Linux/Mac, send raw data to printer using lp with raw option
+                cmd = ['lp', '-d', printer.system_name, '-o', 'raw', temp_file.name]
+                result = subprocess.run(cmd, capture_output=True, timeout=60)
+                if result.returncode != 0:
+                    logger.error(f"ESC/POS print failed: {result.stderr.decode()}")
+                return result.returncode == 0
+
+        except Exception as e:
+            logger.error(f"Error printing ESC/POS: {e}")
             return False
         finally:
             if temp_file and os.path.exists(temp_file.name):

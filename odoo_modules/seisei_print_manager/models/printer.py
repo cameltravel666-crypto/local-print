@@ -225,10 +225,6 @@ class PrinterInfo(models.Model):
         """Test print"""
         self.ensure_one()
 
-        # 限制用户使用时间
-        if checkUserRegisted():
-            raise UserError(_('This user has exceeded the usage time limit.'))
-        
         if not self.station_id or not self.station_id.code:
             return {
                 'type': 'ir.actions.client',
@@ -539,11 +535,45 @@ class PrinterInfo(models.Model):
                 # Extract station data (containing machine identification and printer list)
                 station_data = message.get('data', {})
                 self._handle_sync_printers(station_data)
+            elif message_type == 'job_status_update':
+                # Handle job status update from client
+                status_data = message.get('data', {})
+                self._handle_job_status_update(status_data)
             else:
                 _logger.warning(_("Unknown print management sync type: %s") % message_type)
                 
         except Exception as e:
             _logger.error(_("Error processing print management sync message: %s") % str(e))
+
+    @api.model
+    def _handle_job_status_update(self, status_data):
+        """
+        Handle job status update from client
+        Args:
+            status_data (dict): Status update data containing job_id, status, message, etc.
+        """
+        try:
+            job_id = status_data.get('job_id')
+            status = status_data.get('status')
+            message = status_data.get('message', '')
+
+            if not job_id:
+                _logger.warning(_("Job status update missing job_id"))
+                return
+
+            # Find and update the job
+            job = self.env['seisei.print.job'].search([('job_id', '=', job_id)], limit=1)
+            if job:
+                job.write({
+                    'status': status,
+                    'error_message': message if status == 'failed' else '',
+                })
+                _logger.info(_("Job status updated from client: %s -> %s") % (job_id, status))
+            else:
+                _logger.warning(_("Job not found for status update: %s") % job_id)
+
+        except Exception as e:
+            _logger.error(_("Error handling job status update: %s") % str(e))
 
     @api.model
     def _handle_sync_printers(self, station_data):

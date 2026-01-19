@@ -311,9 +311,10 @@ class PrintJob(models.Model):
                 'priority': self.priority,
                 'metadata': json.loads(self.metadata or '{}'),
             }
-            
+
             # Use unified printer_manager channel
-            self.env['bus.bus']._sendone(self.channel_name, self.type, data)
+            # Always use 'print_document' as message type for client compatibility
+            self.env['bus.bus']._sendone(self.channel_name, 'print_document', data)
 
             _logger.info(f"Print job published to message queue: {self.job_id}")
             return True

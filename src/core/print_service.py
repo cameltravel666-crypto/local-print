@@ -262,6 +262,7 @@ class PrintService:
 
             # Register message handlers
             conn.ws_client.on_message("print_document", lambda data: self._handle_print_job(conn, data))
+            conn.ws_client.on_message("pos_receipt_print", lambda data: self._handle_print_job(conn, data))
             conn.ws_client.on_message("printer_test", lambda data: self._handle_test_print(conn, data))
             conn.ws_client.on_message("sync_printer_status", lambda data: self._handle_sync_request(conn, data))
 
@@ -330,10 +331,18 @@ class PrintService:
             if self._on_job_received:
                 self._on_job_received(data)
 
-            # Extract document data
+            # Extract document data - support both doc_data and escpos_commands
             doc_data = metadata.get('doc_data', '')
+            escpos_commands = metadata.get('escpos_commands', '')
             doc_format = metadata.get('doc_format', 'pdf')
             paper_format = metadata.get('paper_format', {})
+
+            # Determine document source
+            if escpos_commands:
+                # ESC/POS commands from POS receipt printing
+                doc_data = escpos_commands
+                doc_format = 'escpos'
+                self._log("info", f"Job {job_id}: Using ESC/POS commands")
 
             if not doc_data:
                 self._log("error", f"Job {job_id}: No document data")
