@@ -11,3 +11,13 @@ from . import res_settings
 from . import ir_action_report
 from . import ticket_template
 from . import ticket_element
+
+# POS integration (optional - only if point_of_sale is installed)
+try:
+    from . import pos_config
+    from . import pos_order
+except ImportError:
+    pass
+
+# QR Ordering integration is handled via monkey patching in qr_order_print.py
+# Import is deferred to avoid model loading order issues

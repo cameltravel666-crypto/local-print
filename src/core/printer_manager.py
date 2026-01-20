@@ -537,10 +537,60 @@ class PrinterManager:
         import socket
 
         hostname = socket.gethostname()
+        ip_address = "127.0.0.1"
+
+        # Method 1: Try to get real IP by connecting to external address
         try:
-            ip_address = socket.gethostbyname(hostname)
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.settimeout(1)
+            # Connect to a public DNS server (doesn't actually send data)
+            s.connect(("8.8.8.8", 80))
+            ip_address = s.getsockname()[0]
+            s.close()
         except Exception:
-            ip_address = "127.0.0.1"
+            # Method 2: Fall back to gethostbyname
+            try:
+                ip_address = socket.gethostbyname(hostname)
+            except Exception:
+                pass
+
+        # If still 127.0.0.1, try to get from network interfaces
+        if ip_address == "127.0.0.1":
+            try:
+                import netifaces
+                for iface in netifaces.interfaces():
+                    addrs = netifaces.ifaddresses(iface)
+                    if netifaces.AF_INET in addrs:
+                        for addr in addrs[netifaces.AF_INET]:
+                            ip = addr.get('addr', '')
+                            if ip and not ip.startswith('127.'):
+                                ip_address = ip
+                                break
+                    if ip_address != "127.0.0.1":
+                        break
+            except ImportError:
+                # netifaces not installed, try platform-specific methods
+                if self.system == 'darwin':
+                    try:
+                        result = subprocess.run(
+                            ['ipconfig', 'getifaddr', 'en0'],
+                            capture_output=True, text=True, timeout=5
+                        )
+                        if result.returncode == 0 and result.stdout.strip():
+                            ip_address = result.stdout.strip()
+                    except Exception:
+                        pass
+                elif self.system == 'linux':
+                    try:
+                        result = subprocess.run(
+                            ['hostname', '-I'],
+                            capture_output=True, text=True, timeout=5
+                        )
+                        if result.returncode == 0 and result.stdout.strip():
+                            # Get first IP
+                            ip_address = result.stdout.strip().split()[0]
+                    except Exception:
+                        pass
 
         # Try to get MAC address
         mac_address = ""

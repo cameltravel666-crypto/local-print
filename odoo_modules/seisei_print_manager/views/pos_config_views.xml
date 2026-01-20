@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend POS Config Form View -->
+    <record id="pos_config_view_form_seisei" model="ir.ui.view">
+        <field name="name">pos.config.form.seisei</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <separator string="Seisei Print Manager"/>
+                <group>
+                    <group string="Receipt Printing">
+                        <field name="seisei_receipt_printer_id"
+                               options="{'no_create': True, 'no_quick_create': True}"/>
+                        <field name="seisei_receipt_template_id"
+                               options="{'no_create': True}"
+                               domain="[('template_type', '=', 'pos_receipt')]"/>
+                        <field name="seisei_auto_print_receipt"/>
+                        <field name="seisei_print_on_payment"/>
+                        <field name="seisei_print_copies"/>
+                    </group>
+                    <group string="Kitchen Printing">
+                        <field name="seisei_kitchen_printer_id"
+                               options="{'no_create': True, 'no_quick_create': True}"/>
+                        <field name="seisei_kitchen_template_id"
+                               options="{'no_create': True}"
+                               domain="[('template_type', '=', 'kitchen_ticket')]"/>
+                        <field name="seisei_auto_print_kitchen"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Print Receipt button to POS Order Form -->
+    <record id="pos_order_view_form_seisei" model="ir.ui.view">
+        <field name="name">pos.order.form.seisei</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_print_receipt"
+                        string="Print Receipt"
+                        type="object"
+                        class="btn-secondary"
+                        icon="fa-print"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Seisei Print Info">
+                    <field name="receipt_printed" readonly="1"/>
+                    <field name="print_job_id" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

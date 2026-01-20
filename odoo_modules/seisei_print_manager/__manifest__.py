@@ -47,13 +47,15 @@
         'web',
         'bus',
         'mail',
+        'point_of_sale',
         'seisei_mutex_toggle',
     ],
     'data': [
         'security/ir.model.access.csv',
         'data/printer_data.xml',
         'data/mapping_group_data.xml',
-        
+        'data/ticket_template_data.xml',
+
         'views/station_views.xml',
         'views/printer_views.xml',
         'views/report_mapping_views.xml',
@@ -63,6 +65,7 @@
         'views/res_users.xml',
         'views/station_views.xml',
         'views/ticket_template_views.xml',
+        'views/pos_config_views.xml',
         'views/menu_views.xml',
 
         'wizards/policy_selector_wizard_views.xml',
@@ -85,4 +88,5 @@
     'application': True,
     'sequence': 100,
     'license': 'AGPL-3',
+    'post_init_hook': 'post_init_hook',
 }

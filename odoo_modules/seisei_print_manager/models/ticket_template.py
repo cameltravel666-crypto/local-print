@@ -53,9 +53,9 @@ class TicketTemplate(models.Model):
 
     # Canvas settings
     paper_width = fields.Selection([
-        (58, '58mm'),
-        (80, '80mm'),
-    ], string='Paper Width', default=80, required=True)
+        ('58', '58mm'),
+        ('80', '80mm'),
+    ], string='Paper Width', default='80', required=True)
 
     # Elements (One2many)
     element_ids = fields.One2many(
@@ -100,7 +100,7 @@ class TicketTemplate(models.Model):
                 record.preview_html = '<div class="text-muted text-center p-4">No elements</div>'
                 continue
 
-            width_px = PAPER_WIDTH_MAP.get(record.paper_width, 576)
+            width_px = PAPER_WIDTH_MAP.get(int(record.paper_width) if record.paper_width else 80, 576)
             html_parts = [
                 f'<div class="ticket-preview" style="width:{width_px}px;background:#fff;'
                 f'font-family:monospace;padding:10px;border:1px solid #ddd;">'
@@ -186,7 +186,7 @@ class TicketTemplate(models.Model):
         self.ensure_one()
         try:
             # Create image
-            width = PAPER_WIDTH_MAP.get(self.paper_width, 576)
+            width = PAPER_WIDTH_MAP.get(int(self.paper_width) if self.paper_width else 80, 576)
             height = self._calculate_template_height()
 
             img = Image.new('RGB', (width, height), 'white')
@@ -253,7 +253,7 @@ class TicketTemplate(models.Model):
         self.ensure_one()
         data = data or {}
 
-        width = PAPER_WIDTH_MAP.get(self.paper_width, 576)
+        width = PAPER_WIDTH_MAP.get(int(self.paper_width) if self.paper_width else 80, 576)
         height = self._calculate_template_height()
 
         img = Image.new('RGB', (width, height), 'white')

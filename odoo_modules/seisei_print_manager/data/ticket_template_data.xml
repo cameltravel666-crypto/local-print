@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ============================================ -->
+        <!-- Standard POS Receipt Template (80mm)        -->
+        <!-- ============================================ -->
+        <record id="template_pos_receipt_standard" model="seisei.ticket.template">
+            <field name="name">Standard POS Receipt</field>
+            <field name="code">pos_receipt_standard</field>
+            <field name="template_type">pos_receipt</field>
+            <field name="paper_width">80</field>
+            <field name="is_default">True</field>
+            <field name="description">Standard 80mm POS receipt with logo, order details, and payment info</field>
+        </record>
+
+        <!-- Header - Logo placeholder -->
+        <record id="element_receipt_logo" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">10</field>
+            <field name="element_type">text</field>
+            <field name="text_content">★ RESTAURANT NAME ★</field>
+            <field name="font_size">large</field>
+            <field name="text_align">center</field>
+            <field name="is_bold">True</field>
+            <field name="height">40</field>
+        </record>
+
+        <!-- Shop Address -->
+        <record id="element_receipt_address" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">20</field>
+            <field name="element_type">text</field>
+            <field name="text_content">123 Main Street, Tokyo
+TEL: 03-1234-5678</field>
+            <field name="font_size">small</field>
+            <field name="text_align">center</field>
+            <field name="height">40</field>
+        </record>
+
+        <!-- Separator after header -->
+        <record id="element_receipt_sep1" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">30</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">double</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Order Number -->
+        <record id="element_receipt_order_no" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">40</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Order #: </field>
+            <field name="field_name">order.name</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">left</field>
+            <field name="is_bold">True</field>
+            <field name="height">25</field>
+        </record>
+
+        <!-- Date/Time -->
+        <record id="element_receipt_datetime" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">50</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Date: </field>
+            <field name="field_name">order.date_order</field>
+            <field name="field_format">%Y-%m-%d %H:%M</field>
+            <field name="font_size">small</field>
+            <field name="text_align">left</field>
+            <field name="height">20</field>
+        </record>
+
+        <!-- Cashier -->
+        <record id="element_receipt_cashier" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">60</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Cashier: </field>
+            <field name="field_name">order.user_id.name</field>
+            <field name="font_size">small</field>
+            <field name="text_align">left</field>
+            <field name="height">20</field>
+        </record>
+
+        <!-- Table Number (if applicable) -->
+        <record id="element_receipt_table" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">70</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Table: </field>
+            <field name="field_name">order.table_id.name</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">left</field>
+            <field name="height">25</field>
+        </record>
+
+        <!-- Separator before items -->
+        <record id="element_receipt_sep2" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">80</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">dashed</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Items Header -->
+        <record id="element_receipt_items_header" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">90</field>
+            <field name="element_type">text</field>
+            <field name="text_content">Item                    Qty    Price</field>
+            <field name="font_size">small</field>
+            <field name="text_align">left</field>
+            <field name="is_bold">True</field>
+            <field name="height">20</field>
+        </record>
+
+        <!-- Line Items -->
+        <record id="element_receipt_items" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">100</field>
+            <field name="element_type">line_items</field>
+            <field name="line_model">pos.order.line</field>
+            <field name="line_fields">product_id.name,qty,price_subtotal_incl</field>
+            <field name="font_size">normal</field>
+            <field name="height">200</field>
+        </record>
+
+        <!-- Separator before totals -->
+        <record id="element_receipt_sep3" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">110</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">dashed</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Subtotal -->
+        <record id="element_receipt_subtotal" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">120</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Subtotal: </field>
+            <field name="field_name">order.amount_total</field>
+            <field name="field_format">%.0f</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">right</field>
+            <field name="height">25</field>
+        </record>
+
+        <!-- Tax -->
+        <record id="element_receipt_tax" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">130</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Tax (10%): </field>
+            <field name="field_name">order.amount_tax</field>
+            <field name="field_format">%.0f</field>
+            <field name="font_size">small</field>
+            <field name="text_align">right</field>
+            <field name="height">20</field>
+        </record>
+
+        <!-- Separator before total -->
+        <record id="element_receipt_sep4" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">140</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">solid</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Total -->
+        <record id="element_receipt_total" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">150</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">TOTAL: </field>
+            <field name="field_name">order.amount_total</field>
+            <field name="field_format">¥ %.0f</field>
+            <field name="font_size">xlarge</field>
+            <field name="text_align">right</field>
+            <field name="is_bold">True</field>
+            <field name="height">45</field>
+        </record>
+
+        <!-- Payment Method -->
+        <record id="element_receipt_payment" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">160</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Payment: </field>
+            <field name="field_name">order.payment_ids.payment_method_id.name</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">left</field>
+            <field name="height">25</field>
+        </record>
+
+        <!-- Separator before footer -->
+        <record id="element_receipt_sep5" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">170</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">double</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Thank you message -->
+        <record id="element_receipt_thanks" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">180</field>
+            <field name="element_type">text</field>
+            <field name="text_content">Thank you for your visit!
+またのお越しをお待ちしております</field>
+            <field name="font_size">small</field>
+            <field name="text_align">center</field>
+            <field name="height">40</field>
+        </record>
+
+        <!-- QR Code for feedback -->
+        <record id="element_receipt_qr" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_standard"/>
+            <field name="sequence">190</field>
+            <field name="element_type">qrcode</field>
+            <field name="barcode_type">qr</field>
+            <field name="barcode_field">order.pos_reference</field>
+            <field name="barcode_width">100</field>
+            <field name="barcode_height">100</field>
+            <field name="text_align">center</field>
+            <field name="height">120</field>
+        </record>
+
+        <!-- ============================================ -->
+        <!-- Kitchen Ticket Template (80mm)              -->
+        <!-- ============================================ -->
+        <record id="template_kitchen_ticket_standard" model="seisei.ticket.template">
+            <field name="name">Kitchen Order Ticket</field>
+            <field name="code">kitchen_ticket_standard</field>
+            <field name="template_type">kitchen_ticket</field>
+            <field name="paper_width">80</field>
+            <field name="is_default">True</field>
+            <field name="description">Standard kitchen ticket with large fonts for easy reading</field>
+        </record>
+
+        <!-- Kitchen Header -->
+        <record id="element_kitchen_header" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">10</field>
+            <field name="element_type">text</field>
+            <field name="text_content">*** KITCHEN ORDER ***</field>
+            <field name="font_size">large</field>
+            <field name="text_align">center</field>
+            <field name="is_bold">True</field>
+            <field name="height">45</field>
+        </record>
+
+        <!-- Order Time (Large) -->
+        <record id="element_kitchen_time" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">20</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">TIME: </field>
+            <field name="field_name">order.date_order</field>
+            <field name="field_format">%H:%M</field>
+            <field name="font_size">xlarge</field>
+            <field name="text_align">center</field>
+            <field name="is_bold">True</field>
+            <field name="height">50</field>
+        </record>
+
+        <!-- Table/Order Info -->
+        <record id="element_kitchen_table" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">30</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">TABLE: </field>
+            <field name="field_name">order.table_id.name</field>
+            <field name="font_size">xlarge</field>
+            <field name="text_align">center</field>
+            <field name="is_bold">True</field>
+            <field name="height">50</field>
+        </record>
+
+        <!-- Order Number -->
+        <record id="element_kitchen_order_no" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">40</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Order: </field>
+            <field name="field_name">order.name</field>
+            <field name="font_size">large</field>
+            <field name="text_align">left</field>
+            <field name="is_bold">True</field>
+            <field name="height">35</field>
+        </record>
+
+        <!-- Separator -->
+        <record id="element_kitchen_sep1" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">50</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">double</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Items (Large font for kitchen) -->
+        <record id="element_kitchen_items" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">60</field>
+            <field name="element_type">line_items</field>
+            <field name="line_model">pos.order.line</field>
+            <field name="line_fields">qty,product_id.name,note</field>
+            <field name="font_size">large</field>
+            <field name="is_bold">True</field>
+            <field name="height">300</field>
+        </record>
+
+        <!-- Separator -->
+        <record id="element_kitchen_sep2" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">70</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">double</field>
+            <field name="height">15</field>
+        </record>
+
+        <!-- Special Instructions -->
+        <record id="element_kitchen_notes" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">80</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">NOTES: </field>
+            <field name="field_name">order.note</field>
+            <field name="font_size">large</field>
+            <field name="text_align">left</field>
+            <field name="is_bold">True</field>
+            <field name="height">60</field>
+        </record>
+
+        <!-- Staff Name -->
+        <record id="element_kitchen_staff" model="seisei.ticket.element">
+            <field name="template_id" ref="template_kitchen_ticket_standard"/>
+            <field name="sequence">90</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">Waiter: </field>
+            <field name="field_name">order.user_id.name</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">left</field>
+            <field name="height">25</field>
+        </record>
+
+        <!-- ============================================ -->
+        <!-- Simple Receipt Template (58mm)              -->
+        <!-- ============================================ -->
+        <record id="template_pos_receipt_simple" model="seisei.ticket.template">
+            <field name="name">Simple Receipt (58mm)</field>
+            <field name="code">pos_receipt_simple</field>
+            <field name="template_type">pos_receipt</field>
+            <field name="paper_width">58</field>
+            <field name="is_default">False</field>
+            <field name="description">Compact receipt for 58mm thermal printers</field>
+        </record>
+
+        <!-- Simple Header -->
+        <record id="element_simple_header" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">10</field>
+            <field name="element_type">text</field>
+            <field name="text_content">RESTAURANT</field>
+            <field name="font_size">large</field>
+            <field name="text_align">center</field>
+            <field name="is_bold">True</field>
+            <field name="height">35</field>
+        </record>
+
+        <!-- Simple Separator -->
+        <record id="element_simple_sep1" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">20</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">solid</field>
+            <field name="height">10</field>
+        </record>
+
+        <!-- Simple Order Info -->
+        <record id="element_simple_order" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">30</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">#</field>
+            <field name="field_name">order.name</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">left</field>
+            <field name="height">20</field>
+        </record>
+
+        <!-- Simple Date -->
+        <record id="element_simple_date" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">40</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="field_name">order.date_order</field>
+            <field name="field_format">%m/%d %H:%M</field>
+            <field name="font_size">small</field>
+            <field name="text_align">left</field>
+            <field name="height">18</field>
+        </record>
+
+        <!-- Simple Separator -->
+        <record id="element_simple_sep2" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">50</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">dashed</field>
+            <field name="height">10</field>
+        </record>
+
+        <!-- Simple Items -->
+        <record id="element_simple_items" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">60</field>
+            <field name="element_type">line_items</field>
+            <field name="line_model">pos.order.line</field>
+            <field name="line_fields">product_id.name,qty,price_subtotal_incl</field>
+            <field name="font_size">small</field>
+            <field name="height">150</field>
+        </record>
+
+        <!-- Simple Separator -->
+        <record id="element_simple_sep3" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">70</field>
+            <field name="element_type">separator</field>
+            <field name="separator_style">solid</field>
+            <field name="height">10</field>
+        </record>
+
+        <!-- Simple Total -->
+        <record id="element_simple_total" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">80</field>
+            <field name="element_type">dynamic_field</field>
+            <field name="text_content">TOTAL: ¥</field>
+            <field name="field_name">order.amount_total</field>
+            <field name="field_format">%.0f</field>
+            <field name="font_size">large</field>
+            <field name="text_align">right</field>
+            <field name="is_bold">True</field>
+            <field name="height">40</field>
+        </record>
+
+        <!-- Simple Thank You -->
+        <record id="element_simple_thanks" model="seisei.ticket.element">
+            <field name="template_id" ref="template_pos_receipt_simple"/>
+            <field name="sequence">90</field>
+            <field name="element_type">text</field>
+            <field name="text_content">Thank you!</field>
+            <field name="font_size">normal</field>
+            <field name="text_align">center</field>
+            <field name="height">25</field>
+        </record>
+
+    </data>
+</odoo>

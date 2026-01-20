@@ -62,6 +62,91 @@ msgid "Ticket Element"
 msgstr "小票元素"
 
 #. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_print_manager_root
+msgid "Print Management"
+msgstr "打印管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_printer_management
+msgid "Printer Management"
+msgstr "打印机管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_station
+msgid "Print Stations"
+msgstr "打印工作站"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_printer
+msgid "Printer Information"
+msgstr "打印机信息"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_ticket_templates
+msgid "Ticket Templates"
+msgstr "小票模板"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_mapping_management
+msgid "Mapping Management"
+msgstr "映射管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_report_mapping
+msgid "Report Mapping"
+msgstr "报表映射"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_report_mapping_group
+msgid "Mapping Groups"
+msgstr "映射组"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_job_management
+msgid "Task Management"
+msgstr "任务管理"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_print_job
+msgid "Print Jobs"
+msgstr "打印任务"
+
+#. module: seisei_print_manager
+#: model:ir.ui.menu,name:seisei_print_manager.menu_seisei_system_config
+msgid "System Configuration"
+msgstr "系统配置"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_station
+msgid "Print Stations"
+msgstr "打印工作站"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_seisei_printer
+msgid "Printers"
+msgstr "打印机"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_seisei_print_job
+msgid "Print Jobs"
+msgstr "打印任务"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_ticket_template
+msgid "Ticket Templates"
+msgstr "小票模板"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_seisei_report_mapping
+msgid "Report Mappings"
+msgstr "报表映射"
+
+#. module: seisei_print_manager
+#: model:ir.actions.act_window,name:seisei_print_manager.action_report_mapping_group
+msgid "Mapping Groups"
+msgstr "映射组"
+
+#. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__name
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__name
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__name
@@ -72,6 +157,11 @@ msgstr "名称"
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__code
 msgid "Station Code"
 msgstr "工作站代码"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__sequence
+msgid "Sequence"
+msgstr "序号"
 
 #. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__location
@@ -95,6 +185,7 @@ msgstr "主机名"
 
 #. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__is_active
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__active
 msgid "Active"
 msgstr "启用"
 
@@ -157,6 +248,16 @@ msgstr "离线"
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__model
 msgid "Model"
 msgstr "型号"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__system_name
+msgid "System Name"
+msgstr "系统名称"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__manufacturer
+msgid "Manufacturer"
+msgstr "制造商"
 
 #. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_printer__is_default
@@ -264,6 +365,18 @@ msgid "Completed At"
 msgstr "完成时间"
 
 #. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__create_date
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__create_date
+msgid "Create Date"
+msgstr "创建日期"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__write_date
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__write_date
+msgid "Write Date"
+msgstr "修改日期"
+
+#. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__report_id
 msgid "Report"
 msgstr "报表"
@@ -279,11 +392,6 @@ msgid "Auto Print"
 msgstr "自动打印"
 
 #. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_report_mapping__copies
-msgid "Copies"
-msgstr "打印份数"
-
-#. module: seisei_print_manager
 #: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_ticket_template__paper_width
 msgid "Paper Width"
 msgstr "纸张宽度"
@@ -294,66 +402,185 @@ msgid "Elements"
 msgstr "元素"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_root
-msgid "Print Manager"
-msgstr "打印管理"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__description
+msgid "Description"
+msgstr "描述"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_stations
-msgid "Stations"
-msgstr "工作站"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_phone
+msgid "Contact Phone"
+msgstr "联系电话"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_printers
-msgid "Printers"
-msgstr "打印机"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_email
+msgid "Contact Email"
+msgstr "联系邮箱"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_jobs
-msgid "Print Jobs"
-msgstr "打印任务"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__responsible_user_id
+msgid "Responsible User"
+msgstr "负责人"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_mappings
-msgid "Report Mappings"
-msgstr "报表映射"
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__pdf
+msgid "PDF"
+msgstr "PDF"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_templates
-msgid "Ticket Templates"
-msgstr "小票模板"
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__html
+msgid "HTML"
+msgstr "HTML"
 
 #. module: seisei_print_manager
-#: model:ir.ui.menu,name:seisei_print_manager.menu_print_manager_config
-msgid "Configuration"
-msgstr "配置"
+#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__txt
+msgid "Text"
+msgstr "文本"
 
 #. module: seisei_print_manager
-#: model:ir.actions.act_window,name:seisei_print_manager.action_station_list
-msgid "Print Stations"
-msgstr "打印工作站"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__format
+msgid "Format"
+msgstr "格式"
 
 #. module: seisei_print_manager
-#: model:ir.actions.act_window,name:seisei_print_manager.action_printer_list
-msgid "Printers"
-msgstr "打印机"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__type
+msgid "Job Type"
+msgstr "任务类型"
 
 #. module: seisei_print_manager
-#: model:ir.actions.act_window,name:seisei_print_manager.action_print_job_list
-msgid "Print Jobs"
-msgstr "打印任务"
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_model
+msgid "Document Model"
+msgstr "文档模型"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_id
+msgid "Document ID"
+msgstr "文档 ID"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__metadata
+msgid "Metadata"
+msgstr "元数据"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__settings
+msgid "Print Settings"
+msgstr "打印设置"
+
+#. module: seisei_print_manager
+#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__is_test
+msgid "Is Test Job"
+msgstr "是测试任务"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Basic Information"
+msgstr "基本信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Network Information"
+msgstr "网络信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Contact Information"
+msgstr "联系信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Timestamp Information"
+msgstr "时间信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Related Printers"
+msgstr "关联打印机"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Printer List"
+msgstr "打印机列表"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
+msgid "Sync Printers"
+msgstr "同步打印机"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_printer_form
+msgid "Printer Information"
+msgstr "打印机信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Job Information"
+msgstr "任务信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Document Information"
+msgstr "文档信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Time Information"
+msgstr "时间信息"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Retry"
+msgstr "重试"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "Cancel"
+msgstr "取消"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
+msgid "View Document"
+msgstr "查看文档"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_search
+msgid "Inactive"
+msgstr "已禁用"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_search
+msgid "Synced Today"
+msgstr "今天已同步"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_search
+msgid "Synced in Last 7 Days"
+msgstr "最近7天已同步"
+
+#. module: seisei_print_manager
+#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_search
+msgid "Group By"
+msgstr "分组"
+
+#. module: seisei_print_manager
+#: model_terms:ir.actions.act_window,help:seisei_print_manager.action_station
+msgid "Create your first print station"
+msgstr "创建您的第一个打印工作站"
+
+#. module: seisei_print_manager
+#: model_terms:ir.actions.act_window,help:seisei_print_manager.action_station
+msgid "Stations are used to organize and manage printers. Each printer belongs to a station."
+msgstr "工作站用于组织和管理打印机。每个打印机都属于一个工作站。"
+
+#. module: seisei_print_manager
+#: model_terms:ir.actions.act_window,help:seisei_print_manager.action_station
+msgid "Through stations, you can better manage printer resources across multiple locations or departments."
+msgstr "通过工作站，您可以更好地管理跨多个位置或部门的打印机资源。"
 
 #. module: seisei_print_manager
 #. odoo-python
 #: code:addons/seisei_print_manager/models/printer.py:0
 msgid "Test Print"
 msgstr "测试打印"
-
-#. module: seisei_print_manager
-#. odoo-python
-#: code:addons/seisei_print_manager/models/printer.py:0
-msgid "Sync Printers"
-msgstr "同步打印机"
 
 #. module: seisei_print_manager
 #. odoo-python
@@ -372,6 +599,12 @@ msgstr "未知的打印管理同步类型: %s"
 #: code:addons/seisei_print_manager/models/printer.py:0
 msgid "Job status updated from client: %s -> %s"
 msgstr "客户端更新任务状态: %s -> %s"
+
+#. module: seisei_print_manager
+#. odoo-python
+#: code:addons/seisei_print_manager/models/printer.py:0
+msgid "Job status update missing job_id"
+msgstr "任务状态更新缺少任务ID"
 
 #. module: seisei_print_manager
 #. odoo-python
@@ -434,111 +667,6 @@ msgid "User cancelled"
 msgstr "用户已取消"
 
 #. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
-msgid "Station Information"
-msgstr "工作站信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
-msgid "Network Information"
-msgstr "网络信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_station_form
-msgid "Contact Information"
-msgstr "联系信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_printer_form
-msgid "Printer Information"
-msgstr "打印机信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "Job Information"
-msgstr "任务信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "Document Information"
-msgstr "文档信息"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "Time Information"
-msgstr "时间信息"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__description
-msgid "Description"
-msgstr "描述"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_phone
-msgid "Contact Phone"
-msgstr "联系电话"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__contact_email
-msgid "Contact Email"
-msgstr "联系邮箱"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_station__responsible_user_id
-msgid "Responsible User"
-msgstr "负责人"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__pdf
-msgid "PDF"
-msgstr "PDF"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__html
-msgid "HTML"
-msgstr "HTML"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields.selection,name:seisei_print_manager.selection__seisei_print_job__format__txt
-msgid "Text"
-msgstr "文本"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__format
-msgid "Format"
-msgstr "格式"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__type
-msgid "Job Type"
-msgstr "任务类型"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_model
-msgid "Document Model"
-msgstr "文档模型"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__document_id
-msgid "Document ID"
-msgstr "文档 ID"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "Retry"
-msgstr "重试"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "Cancel"
-msgstr "取消"
-
-#. module: seisei_print_manager
-#: model_terms:ir.ui.view,arch_db:seisei_print_manager.view_print_job_form
-msgid "View Document"
-msgstr "查看文档"
-
-#. module: seisei_print_manager
 #. odoo-python
 #: code:addons/seisei_print_manager/models/print_job.py:0
 msgid "Related Document"
@@ -576,18 +704,3 @@ msgstr "测试打印 - %s"
 #: code:addons/seisei_print_manager/models/printer.py:0
 msgid "Test print initiated for printer %s"
 msgstr "打印机 %s 的测试打印已启动"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__metadata
-msgid "Metadata"
-msgstr "元数据"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__settings
-msgid "Print Settings"
-msgstr "打印设置"
-
-#. module: seisei_print_manager
-#: model:ir.model.fields,field_description:seisei_print_manager.field_seisei_print_job__is_test
-msgid "Is Test Job"
-msgstr "是测试任务"

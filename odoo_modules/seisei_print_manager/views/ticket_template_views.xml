@@ -4,12 +4,12 @@
     <!-- Ticket Template Views                        -->
     <!-- ============================================ -->
 
-    <!-- Tree View -->
+    <!-- List View -->
     <record id="view_ticket_template_tree" model="ir.ui.view">
-        <field name="name">seisei.ticket.template.tree</field>
+        <field name="name">seisei.ticket.template.list</field>
         <field name="model">seisei.ticket.template</field>
         <field name="arch" type="xml">
-            <tree string="Ticket Templates" default_order="sequence,name">
+            <list string="Ticket Templates" default_order="sequence,name">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="code"/>
@@ -20,7 +20,7 @@
                 <field name="element_count"/>
                 <field name="is_default" widget="boolean_toggle"/>
                 <field name="active" invisible="1"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -80,7 +80,7 @@
                     <notebook>
                         <page string="Elements" name="elements">
                             <field name="element_ids">
-                                <tree editable="bottom" default_order="sequence">
+                                <list editable="bottom" default_order="sequence">
                                     <field name="sequence" widget="handle"/>
                                     <field name="element_type"/>
                                     <field name="text_content"
@@ -100,7 +100,7 @@
                                     <field name="barcode_field"
                                            invisible="element_type not in ('barcode', 'qrcode')"/>
                                     <field name="height"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Preview" name="preview">
@@ -123,10 +123,6 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user"/>
-                    <field name="message_ids"/>
-                </div>
             </form>
         </field>
     </record>
@@ -145,36 +141,30 @@
                 <field name="is_default"/>
                 <field name="preview_image"/>
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="o_kanban_image">
-                                <t t-if="record.preview_image.raw_value">
-                                    <img t-att-src="kanban_image('seisei.ticket.template', 'preview_image', record.id.raw_value)"
-                                         alt="Preview" class="o_image_64_contain"/>
-                                </t>
-                                <t t-else="">
-                                    <span class="fa fa-file-text fa-3x text-muted"/>
-                                </t>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click d-flex">
+                            <div class="o_kanban_image me-3">
+                                <span class="fa fa-file-text fa-3x text-muted" title="Ticket Template"/>
                             </div>
-                            <div class="oe_kanban_details">
+                            <div class="oe_kanban_details flex-grow-1">
                                 <strong class="o_kanban_record_title">
                                     <field name="name"/>
                                     <span t-if="record.is_default.raw_value"
-                                          class="badge badge-success ms-2">Default</span>
+                                          class="badge bg-success ms-2">Default</span>
                                 </strong>
-                                <div class="o_kanban_record_subtitle">
+                                <div class="o_kanban_record_subtitle text-muted">
                                     <field name="code"/>
                                 </div>
-                                <div>
+                                <div class="mt-1">
                                     <span class="badge"
-                                          t-att-class="record.template_type.raw_value == 'pos_receipt' ? 'bg-info' : 'bg-success'">
+                                          t-attf-class="#{record.template_type.raw_value == 'pos_receipt' ? 'bg-info' : 'bg-success'}">
                                         <field name="template_type"/>
                                     </span>
                                     <span class="badge bg-secondary ms-1">
                                         <field name="paper_width"/>mm
                                     </span>
                                 </div>
-                                <div class="text-muted">
+                                <div class="text-muted small mt-1">
                                     <field name="element_count"/> elements
                                 </div>
                             </div>
@@ -219,7 +209,7 @@
     <record id="action_ticket_template" model="ir.actions.act_window">
         <field name="name">Ticket Templates</field>
         <field name="res_model">seisei.ticket.template</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="view_ticket_template_search"/>
         <field name="context">{'search_default_filter_active': 1}</field>
         <field name="help" type="html">

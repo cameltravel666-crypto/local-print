@@ -700,11 +700,25 @@ class PrinterInfo(models.Model):
                         'metadata': json.dumps(error_notification)
                     })
                     error_job.action_process()
-            
+
+            # For full sync, remove printers that no longer exist on the client
+            if sync_type == 'full' and station:
+                synced_printer_names = [p.get('name') for p in printers_data if p.get('name')]
+                obsolete_printers = self.search([
+                    ('station_id', '=', station.id),
+                    ('name', 'not in', synced_printer_names),
+                    ('service_sync', '=', True),  # Only remove service-synced printers
+                ])
+                if obsolete_printers:
+                    obsolete_names = obsolete_printers.mapped('name')
+                    _logger.info(_("Removing %d obsolete printers from station %s: %s") % (
+                        len(obsolete_printers), station.display_name, obsolete_names))
+                    obsolete_printers.unlink()
+
             # Update station last sync time
             if station:
                 station.write({'last_sync_time': fields.Datetime.now()})
-            
+
             _logger.info(_("Station sync completed: %s, successfully synced %d printers") % (station.display_name, sync_count))
             
         except Exception as e:

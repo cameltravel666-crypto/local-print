@@ -156,8 +156,9 @@ class TicketElement(models.Model):
 
         elif self.element_type == 'dynamic_field':
             style = self._get_text_style_html()
+            label = self.text_content or ''
             field_display = '{%s}' % (self.field_name or 'field')
-            return f'<div style="{style};color:#007bff;">{field_display}</div>'
+            return f'<div style="{style}"><span>{label}</span><span style="color:#007bff;">{field_display}</span></div>'
 
         elif self.element_type == 'separator':
             char = self._get_separator_char()
@@ -246,10 +247,18 @@ class TicketElement(models.Model):
             value = self._get_field_value(data, self.field_name)
             if self.field_format and value is not None:
                 try:
-                    value = self.field_format % value
+                    # Handle datetime formatting with strftime
+                    from datetime import datetime
+                    if hasattr(value, 'strftime'):
+                        value = value.strftime(self.field_format)
+                    else:
+                        value = self.field_format % value
                 except Exception:
                     value = str(value)
-            commands.extend(self._render_text_escpos(str(value) if value else ''))
+            # Prepend text_content (label) if exists
+            label = self.text_content or ''
+            text = label + (str(value) if value else '')
+            commands.extend(self._render_text_escpos(text))
 
         elif self.element_type == 'separator':
             commands.extend(self._render_separator_escpos())
@@ -319,8 +328,8 @@ class TicketElement(models.Model):
         # Get separator character and create line
         char = self._get_separator_char()
         # 32 chars for 58mm, 48 chars for 80mm paper
-        paper_width = self.template_id.paper_width or 80
-        line_width = 32 if paper_width == 58 else 48
+        paper_width = self.template_id.paper_width or '80'
+        line_width = 32 if paper_width == '58' else 48
         line = char * line_width
 
         try:
@@ -528,7 +537,18 @@ class TicketElement(models.Model):
 
             elif self.element_type == 'dynamic_field':
                 value = self._get_field_value(data, self.field_name)
-                text = str(value) if value else '{%s}' % self.field_name
+                # Handle datetime formatting
+                if self.field_format and value is not None:
+                    try:
+                        if hasattr(value, 'strftime'):
+                            value = value.strftime(self.field_format)
+                        else:
+                            value = self.field_format % value
+                    except Exception:
+                        value = str(value)
+                # Prepend label if exists
+                label = self.text_content or ''
+                text = label + (str(value) if value else '{%s}' % self.field_name)
                 self._draw_text(draw, text, y_offset, canvas_width, font)
                 return y_offset + (self.height or 30)
 

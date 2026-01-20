@@ -81,6 +81,9 @@ class PrintService:
         self._on_job_completed: Optional[Callable[[str, bool, str], None]] = None
         self._on_log: Optional[Callable[[str, str], None]] = None
 
+        # Track processed job IDs to prevent duplicate processing
+        self._processed_jobs: set = set()
+
     @property
     def printer_manager(self) -> PrinterManager:
         """Get printer manager instance"""
@@ -248,7 +251,10 @@ class PrintService:
             ws_host = parsed.hostname
             ws_url = f"{ws_scheme}://{ws_host}:{conn.websocket_port}/websocket"
             # Use configurable channel prefix from module settings
-            from .. import DEFAULT_CHANNEL_PREFIX
+            try:
+                from .. import DEFAULT_CHANNEL_PREFIX
+            except ImportError:
+                DEFAULT_CHANNEL_PREFIX = "seisei_service"
             channel = f"{DEFAULT_CHANNEL_PREFIX}.{self.machine_id}"
 
             ws_config = WebSocketConfig(
@@ -271,14 +277,12 @@ class PrintService:
                 lambda state: self._handle_ws_state_change(conn, state)
             )
 
-            # Connect WebSocket
+            # Connect WebSocket (async - will trigger state change handler when connected)
             conn.ws_client.connect()
-            conn.is_connected = True
+            # Note: is_connected will be set by _handle_ws_state_change when WebSocket connects
+            # Initial sync will also be triggered by the state change handler
 
-            self._log("info", f"Connected to {conn.server_name}")
-
-            # Initial printer sync
-            self._sync_printers(conn)
+            self._log("info", f"Initiating connection to {conn.server_name}...")
 
             return True
 
@@ -319,17 +323,78 @@ class PrintService:
             self._sync_printers(conn)
 
     def _handle_print_job(self, conn: ServerConnection, data: Dict):
-        """Handle incoming print job"""
+        """Handle incoming print job - dispatch to worker thread to avoid blocking WebSocket"""
+        job_id = data.get('id', 'unknown')
+        printer_name = data.get('printer_name', '')
+
+        self._log("info", f"Received print job: {job_id} for {printer_name}")
+
+        if self._on_job_received:
+            try:
+                self._on_job_received(data)
+            except Exception:
+                pass
+
+        # Execute print in separate thread to avoid blocking WebSocket
+        thread = threading.Thread(
+            target=self._execute_print_job,
+            args=(conn, data),
+            daemon=True,
+            name=f"PrintJob-{job_id}"
+        )
+        thread.start()
+
+    def _execute_print_job(self, conn: ServerConnection, data: Dict):
+        """Execute print job in worker thread"""
+        job_id = data.get('id', 'unknown')
+        printer_name = data.get('printer_name', '')
+        job_type = data.get('type', 'print_document')
+
+        # Skip non-print job types (sync notifications, status updates, etc.)
+        non_print_types = [
+            'sync_result_notification',
+            'sync_error_notification',
+            'station_sync_error_notification',
+            'printer_sync_notification',
+            'update_job_status_notification',
+        ]
+        if job_type in non_print_types:
+            self._log("debug", f"Skipping non-print job type: {job_type}")
+            return
+
+        # Prevent duplicate processing of same job
+        if job_id in self._processed_jobs:
+            self._log("debug", f"Skipping already processed job: {job_id}")
+            return
+        self._processed_jobs.add(job_id)
+        # Clean up old job IDs (keep last 1000)
+        if len(self._processed_jobs) > 1000:
+            self._processed_jobs = set(list(self._processed_jobs)[-500:])
+
         try:
-            job_id = data.get('id', 'unknown')
-            printer_name = data.get('printer_name', '')
+            # Handle test print job type
+            if job_type == 'printer_test':
+                self._log("info", f"Job {job_id}: Test print for {printer_name}")
+
+                # Check if printer exists first
+                printer = self._printer_manager.get_printer(printer_name)
+                if not printer:
+                    error_msg = f"Printer not found: {printer_name}"
+                    self._log("error", f"Job {job_id}: {error_msg}")
+                    self._report_job_status(conn, job_id, 'failed', error_msg, printer_name)
+                    return
+
+                success = self._printer_manager.print_test_page(printer_name)
+                if success:
+                    self._log("info", f"Job {job_id}: Test print successful")
+                    self._report_job_status(conn, job_id, 'completed', 'Test print successful', printer_name)
+                else:
+                    self._log("error", f"Job {job_id}: Test print failed")
+                    self._report_job_status(conn, job_id, 'failed', 'Test print failed', printer_name)
+                return
+
             copies = data.get('copies', 1)
             metadata = data.get('metadata', {})
-
-            self._log("info", f"Received print job: {job_id} for {printer_name}")
-
-            if self._on_job_received:
-                self._on_job_received(data)
 
             # Extract document data - support both doc_data and escpos_commands
             doc_data = metadata.get('doc_data', '')
@@ -367,7 +432,7 @@ class PrintService:
                 paper_format=paper_format,
             )
 
-            # Execute print
+            # Execute print (blocking, but in worker thread)
             success = self._printer_manager.print_document(job)
 
             if success:
@@ -378,27 +443,45 @@ class PrintService:
                 self._report_job_status(conn, job_id, 'failed', 'Print failed', printer_name)
 
             if self._on_job_completed:
-                self._on_job_completed(job_id, success, "Print completed" if success else "Print failed")
+                try:
+                    self._on_job_completed(job_id, success, "Print completed" if success else "Print failed")
+                except Exception:
+                    pass
 
         except Exception as e:
-            self._log("error", f"Error handling print job: {e}")
-            self._report_job_status(conn, data.get('id', 'unknown'), 'failed', str(e), data.get('printer_name', ''))
+            self._log("error", f"Error executing print job {job_id}: {e}")
+            self._report_job_status(conn, job_id, 'failed', str(e), printer_name)
 
     def _handle_test_print(self, conn: ServerConnection, data: Dict):
-        """Handle test print request"""
+        """Handle test print request - dispatch to worker thread"""
         job_id = data.get('id', 'unknown')
         printer_name = data.get('printer_name', '')
 
         self._log("info", f"Test print request for: {printer_name}")
 
-        success = self._printer_manager.print_test_page(printer_name)
+        # Execute in separate thread to avoid blocking WebSocket
+        thread = threading.Thread(
+            target=self._execute_test_print,
+            args=(conn, job_id, printer_name),
+            daemon=True,
+            name=f"TestPrint-{job_id}"
+        )
+        thread.start()
 
-        if success:
-            self._log("info", f"Test print successful: {printer_name}")
-            self._report_job_status(conn, job_id, 'completed', 'Test print successful', printer_name)
-        else:
-            self._log("error", f"Test print failed: {printer_name}")
-            self._report_job_status(conn, job_id, 'failed', 'Test print failed', printer_name)
+    def _execute_test_print(self, conn: ServerConnection, job_id: str, printer_name: str):
+        """Execute test print in worker thread"""
+        try:
+            success = self._printer_manager.print_test_page(printer_name)
+
+            if success:
+                self._log("info", f"Test print successful: {printer_name}")
+                self._report_job_status(conn, job_id, 'completed', 'Test print successful', printer_name)
+            else:
+                self._log("error", f"Test print failed: {printer_name}")
+                self._report_job_status(conn, job_id, 'failed', 'Test print failed', printer_name)
+        except Exception as e:
+            self._log("error", f"Error in test print: {e}")
+            self._report_job_status(conn, job_id, 'failed', str(e), printer_name)
 
     def _handle_sync_request(self, conn: ServerConnection, data: Dict):
         """Handle printer sync request"""
@@ -407,15 +490,44 @@ class PrintService:
 
     def _report_job_status(self, conn: ServerConnection, job_id: str, status: str,
                            message: str, printer_name: str):
-        """Report job status back to Odoo"""
-        if conn.ws_client and conn.is_connected:
-            conn.ws_client.update_job_status(
-                job_id=job_id,
-                status=status,
-                message=message,
-                printer_name=printer_name,
-                station_code=self.machine_id,
-            )
+        """Report job status back to Odoo via HTTP API"""
+        self._log("info", f"Reporting job status: {job_id} -> {status}")
+
+        # Use HTTP API to update status (more reliable than WebSocket)
+        if conn.odoo_client:
+            try:
+                # Find job by job_id and update
+                jobs = conn.odoo_client.search_read(
+                    'seisei.print.job',
+                    [('job_id', '=', job_id)],
+                    ['id'],
+                    limit=1
+                )
+                if jobs:
+                    result = conn.odoo_client.write(
+                        'seisei.print.job',
+                        [jobs[0]['id']],
+                        {
+                            'status': status,
+                            'error_message': message if status == 'failed' else '',
+                        }
+                    )
+                    self._log("info", f"Status updated via HTTP: {result}")
+                else:
+                    self._log("warning", f"Job not found in Odoo: {job_id}")
+            except Exception as e:
+                self._log("error", f"Failed to update status via HTTP: {e}")
+                # Fallback to WebSocket
+                if conn.ws_client and conn.is_connected:
+                    conn.ws_client.update_job_status(
+                        job_id=job_id,
+                        status=status,
+                        message=message,
+                        printer_name=printer_name,
+                        station_code=self.machine_id,
+                    )
+        else:
+            self._log("error", "No Odoo client available for status update")
 
     def _sync_printers(self, conn: ServerConnection):
         """Sync printers with Odoo server"""
