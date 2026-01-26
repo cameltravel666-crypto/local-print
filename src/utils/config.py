@@ -53,9 +53,9 @@ class ServerConfig:
     def get_http_url(self) -> str:
         """Get full HTTP URL"""
         url = self.server_url.rstrip('/')
-        # Don't add port for standard ports
-        if (url.startswith('https://') and self.http_port == 443) or \
-           (url.startswith('http://') and self.http_port == 80):
+        # For HTTPS, always use standard port 443 (reverse proxy handles routing)
+        # For HTTP (local dev), use the configured http_port
+        if url.startswith('https://'):
             return url
         return f"{url}:{self.http_port}"
 
@@ -63,9 +63,9 @@ class ServerConfig:
         """Get full WebSocket URL"""
         url = self.server_url.rstrip('/')
         base = url.replace('http://', 'ws://').replace('https://', 'wss://')
-        # Don't add port for standard ports
-        if (url.startswith('https://') and self.websocket_port == 443) or \
-           (url.startswith('http://') and self.websocket_port == 80):
+        # For HTTPS, always use standard port 443 (reverse proxy routes to 8072)
+        # For HTTP (local dev), use the configured websocket_port
+        if url.startswith('https://'):
             return f"{base}/websocket"
         return f"{base}:{self.websocket_port}/websocket"
 

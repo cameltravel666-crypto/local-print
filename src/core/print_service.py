@@ -249,7 +249,12 @@ class PrintService:
             parsed = urlparse(conn.server_url)
             ws_scheme = 'wss' if parsed.scheme == 'https' else 'ws'
             ws_host = parsed.hostname
-            ws_url = f"{ws_scheme}://{ws_host}:{conn.websocket_port}/websocket"
+            # For HTTPS, use standard port 443 (traffic routed by reverse proxy to 8072)
+            # For HTTP (local dev), use the configured websocket_port
+            if parsed.scheme == 'https':
+                ws_url = f"{ws_scheme}://{ws_host}/websocket"
+            else:
+                ws_url = f"{ws_scheme}://{ws_host}:{conn.websocket_port}/websocket"
             # Use configurable channel prefix from module settings
             try:
                 from .. import DEFAULT_CHANNEL_PREFIX
