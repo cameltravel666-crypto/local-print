@@ -7,9 +7,15 @@ Developed by Seisei
 """
 
 import logging
+import os
+import certifi
 import requests
 from typing import Any, Dict, List, Optional
 from dataclasses import dataclass
+
+# Ensure SSL certificates are available in PyInstaller builds
+os.environ.setdefault('SSL_CERT_FILE', certifi.where())
+os.environ.setdefault('REQUESTS_CA_BUNDLE', certifi.where())
 
 logger = logging.getLogger(__name__)
 

@@ -26,6 +26,7 @@ hidden_imports = [
     'PyQt6.QtGui',
     'websocket',
     'requests',
+    'certifi',
     'PIL',
     'PIL.Image',
     'psutil',
@@ -58,6 +59,10 @@ datas = []
 resources_dir = Path('resources')
 if resources_dir.exists() and any(resources_dir.iterdir()):
     datas.append(('resources', 'resources'))
+
+# Include certifi CA bundle for SSL in packaged builds
+import certifi
+datas.append((certifi.where(), 'certifi'))
 
 a = Analysis(
     ['main.py'],

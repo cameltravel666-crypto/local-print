@@ -7,6 +7,7 @@ Developed by Seisei
 """
 
 import json
+import ssl
 import time
 import logging
 import threading
@@ -14,6 +15,7 @@ from typing import Callable, Dict, List, Optional, Any
 from dataclasses import dataclass, field
 from enum import Enum
 
+import certifi
 import websocket
 
 logger = logging.getLogger(__name__)
@@ -147,9 +149,11 @@ class OdooWebSocketClient:
     def _run_forever(self):
         """Run WebSocket connection loop"""
         try:
+            sslopt = {"ca_certs": certifi.where(), "cert_reqs": ssl.CERT_REQUIRED}
             self._ws.run_forever(
                 ping_interval=self.config.ping_interval,
                 ping_timeout=self.config.ping_timeout,
+                sslopt=sslopt,
             )
         except Exception as e:
             logger.error(f"WebSocket run_forever error: {e}")
