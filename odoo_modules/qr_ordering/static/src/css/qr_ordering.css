@@ -1,0 +1,1720 @@
+/* QR Ordering - Mobile First Design */
+/* 针对 iOS Safari / 微信浏览器优化 */
+
+:root {
+    --qr-primary: #FF6B35;
+    --qr-primary-dark: #E55A2B;
+    --qr-secondary: #2D3436;
+    --qr-background: #F8F9FA;
+    --qr-surface: #FFFFFF;
+    --qr-text: #2D3436;
+    --qr-text-light: #636E72;
+    --qr-border: #E0E0E0;
+    --qr-success: #00B894;
+    --qr-warning: #FDCB6E;
+    --qr-danger: #E74C3C;
+    --qr-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --qr-radius: 12px;
+    --qr-sidebar-width: 80px;
+    --qr-sidebar-min-width: 72px; /* 手机最小宽度 */
+    --qr-header-height: 56px;
+    --qr-footer-height: 64px;
+    --bottom-bar-h: 64px; /* P0: 底部栏高度变量 */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==================== ScrollLock 类：仅在弹层打开时锁定滚动 ==================== */
+/* 默认情况下 html/body 允许滚动，只有添加此 class 时才锁定 */
+html.qr-scroll-locked,
+html.qr-scroll-locked body {
+    overflow: hidden !important;
+    /* 防止 iOS 弹性滚动穿透 */
+    overscroll-behavior: none;
+}
+
+/* ==================== P0: 三段式布局核心 ==================== */
+/* 关键：html/body 不滚动，只有 .qr-content 滚动 */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible; /* 默认不锁滚动，只有弹层打开时才锁 */
+}
+
+/* P0: 整页容器 - 测试模式：允许自然滚动 */
+#qr-ordering-app.qr-page,
+.qr-page {
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background-color: var(--qr-background);
+    overflow: visible !important; /* 测试模式：允许滚动 */
+    position: relative !important;
+}
+
+/* Header - 固定高度，不收缩 */
+.qr-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--qr-header-height);
+    min-height: var(--qr-header-height);
+    padding: 0 16px;
+    background: var(--qr-surface);
+    border-bottom: 1px solid var(--qr-border);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.qr-header-left {
+    flex: 1;
+}
+
+.qr-table-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--qr-primary);
+}
+
+.qr-header-center {
+    flex: 0;
+}
+
+.qr-logo {
+    font-size: 24px;
+}
+
+.qr-header-right {
+    flex: 1;
+    text-align: right;
+}
+
+.qr-lang-select {
+    padding: 6px 12px;
+    border: 1px solid var(--qr-border);
+    border-radius: 6px;
+    background: var(--qr-surface);
+    font-size: 14px;
+    cursor: pointer;
+    /* 语言选择器文字居中 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    min-height: 44px;
+    /* 移除原生样式 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Main Content - flex: 1 占满剩余空间 */
+.qr-main {
+    display: flex;
+    flex: 1 1 auto;
+    overflow: visible; /* 测试模式：允许滚动 */
+    min-height: 0; /* 关键：允许 flex 子元素收缩 */
+}
+
+/* Sidebar - 左侧分类，独立滚动 */
+.qr-sidebar {
+    width: var(--qr-sidebar-width);
+    min-width: var(--qr-sidebar-min-width); /* 手机最小宽度 72px */
+    max-width: 88px; /* 手机最大宽度 */
+    background: var(--qr-surface);
+    border-right: 1px solid var(--qr-border);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+    /* iOS 惯性滚动 */
+    -webkit-overflow-scrolling: touch;
+    /* 防止滚动穿透 */
+    overscroll-behavior: contain;
+}
+
+.qr-categories {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+}
+
+.qr-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.qr-category:hover {
+    background: var(--qr-background);
+}
+
+.qr-category.active {
+    background: #FFF5F0;
+    border-left-color: var(--qr-primary);
+}
+
+.qr-category.active .qr-category-name {
+    color: var(--qr-primary);
+    font-weight: 600;
+}
+
+.qr-category-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.qr-category-name {
+    font-size: 11px;
+    text-align: center;
+    color: var(--qr-text-light);
+    /* P0-1: 日文/中文不逐字断开，最多两行省略 */
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.3;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* P0: 内容区 - 测试模式：简化滚动 */
+.qr-content {
+    flex: 1 1 auto !important;
+    overflow: visible !important; /* 测试模式：自然滚动 */
+    padding: 12px;
+    padding-bottom: 80px; /* 简化底部间距 */
+    min-height: 0 !important;
+    position: relative !important;
+}
+
+/* Search Bar */
+.qr-search-bar {
+    margin-bottom: 12px;
+}
+
+.qr-search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--qr-border);
+    border-radius: var(--qr-radius);
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+    background: var(--qr-surface);
+    transition: border-color 0.2s;
+}
+
+.qr-search-input:focus {
+    outline: none;
+    border-color: var(--qr-primary);
+}
+
+/* Products Grid */
+.qr-products {
+    display: grid;
+    /* P0-2: 手机竖屏两列稳定 */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* Product Card */
+.qr-product-card {
+    background: var(--qr-surface);
+    border-radius: var(--qr-radius);
+    overflow: hidden;
+    box-shadow: var(--qr-shadow);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    /* P0-2: 卡片内部 flex 布局 */
+    display: flex;
+    flex-direction: column;
+}
+
+.qr-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.qr-product-card.sold-out {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.qr-product-image-container {
+    position: relative;
+    width: 100%;
+    /* P0-2: 使用 aspect-ratio 固定比例 */
+    aspect-ratio: 1 / 1;
+    background: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.qr-product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.qr-product-video-indicator {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.qr-product-tags {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.qr-product-tag {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.qr-sold-out-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.qr-product-info {
+    padding: 10px;
+    /* P0-2: flex 布局确保内容不挤压 */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.qr-product-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.qr-product-desc {
+    font-size: 12px;
+    color: var(--qr-text-light);
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.qr-product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qr-product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--qr-primary);
+}
+
+.qr-add-btn {
+    /* P1-1: 最小点击区域 44x44 (iOS 规范) */
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: var(--qr-primary);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    /* P1-1: 触控优化 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.qr-add-btn:hover {
+    background: var(--qr-primary-dark);
+}
+
+/* ==================== P0: 底部栏 - 三段式 flex 布局 ==================== */
+.qr-bottom-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: var(--qr-footer-height) !important;
+    padding: 8px 12px !important;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    background: var(--qr-surface) !important;
+    border-top: 1px solid var(--qr-border) !important;
+    gap: 6px !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1) !important;
+}
+
+.qr-cart-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.qr-cart-icon {
+    position: relative;
+    font-size: 24px;
+}
+
+.qr-cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--qr-primary);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-cart-total {
+    font-size: 14px;
+}
+
+.qr-cart-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--qr-primary);
+}
+
+.qr-footer-buttons {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0; /* 绝对不压缩 */
+    min-width: 0; /* 防止 flex 溢出 */
+}
+
+.qr-cart-btn {
+    padding: 8px 14px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    /* 按钮文字居中 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    /* P1-1: 触控优化 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    /* P1-1: 最小点击区域 */
+    min-height: 44px;
+}
+
+.qr-cart-btn:hover {
+    background: var(--qr-primary-dark);
+}
+
+.qr-cart-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.qr-cart-btn.secondary {
+    background: var(--qr-success);
+}
+
+.qr-cart-btn.secondary:hover {
+    background: #00a080;
+}
+
+.qr-cart-btn.outline {
+    background: transparent;
+    border: 2px solid var(--qr-primary);
+    color: var(--qr-primary);
+}
+
+.qr-cart-btn.outline:hover {
+    background: var(--qr-primary);
+    color: white;
+}
+
+/* 主按钮样式（提交订单/追加下单/去前台支付） */
+.qr-cart-btn.primary {
+    background: var(--qr-primary);
+    color: white;
+    flex: 1.5;
+    min-width: 100px;
+}
+
+.qr-cart-btn.primary:hover {
+    background: var(--qr-primary-dark);
+}
+
+.qr-cart-btn.primary:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* 次按钮调整宽度 */
+.qr-cart-btn.secondary {
+    flex: 1;
+    min-width: 80px;
+}
+
+/* ==================== 订单状态紧凑 Chip（中间区域） ==================== */
+.qr-order-status-badge {
+    /* 中间区域：可伸缩但限制宽度 */
+    flex: 1 1 auto;
+    min-width: 0; /* 允许收缩 */
+    max-width: 120px; /* 最大宽度，防止挤压按钮 */
+    overflow: hidden;
+    /* chip 样式 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    background: #e8f5e9;
+    border-radius: 16px;
+    font-size: 12px;
+    color: #2e7d32;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.qr-order-status-badge:hover {
+    background: #c8e6c9;
+}
+
+.qr-order-status-badge:active {
+    background: #a5d6a7;
+}
+
+.qr-order-status-badge .qr-status-text {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* ==================== 底栏提示语 ==================== */
+.qr-footer-hint {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-bottom: 8px;
+}
+
+/* ==================== 购物车图标可点击 ==================== */
+.qr-cart-icon {
+    cursor: pointer;
+    position: relative;
+    font-size: 24px;
+    transition: transform 0.2s;
+}
+
+.qr-cart-icon:active {
+    transform: scale(0.95);
+}
+
+/* ==================== 购物车信息布局 ==================== */
+.qr-cart-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.qr-cart-count {
+    font-size: 12px;
+    color: #666;
+}
+
+/* ==================== 前台支付弹窗样式 ==================== */
+.qr-pay-content {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.qr-pay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--qr-border);
+}
+
+.qr-pay-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.qr-pay-body {
+    padding: 20px 16px;
+}
+
+.qr-pay-instruction {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.qr-pay-info {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.qr-pay-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.qr-pay-row:last-child {
+    border-bottom: none;
+}
+
+.qr-pay-label {
+    font-size: 14px;
+    color: #666;
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.qr-pay-value {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.qr-pay-value.qr-pay-amount {
+    color: var(--qr-primary);
+    font-size: 20px;
+}
+
+.qr-copy-btn {
+    padding: 6px 14px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    min-height: 32px;
+    /* 按钮文字居中 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.qr-copy-btn:active {
+    background: var(--qr-primary-dark);
+}
+
+.qr-pay-footer {
+    padding: 16px;
+    border-top: 1px solid var(--qr-border);
+}
+
+.qr-pay-footer .qr-cart-btn {
+    width: 100%;
+}
+
+/* ==================== 订单状态 Toast（富信息展示） ==================== */
+.qr-order-toast {
+    position: fixed;
+    bottom: calc(var(--qr-footer-height) + env(safe-area-inset-bottom, 0px) + 16px);
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    padding: 16px;
+    z-index: 1100;
+    min-width: 280px;
+    max-width: calc(100vw - 32px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.qr-order-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.qr-order-toast-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.qr-order-toast-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.qr-order-toast-title .qr-toast-icon {
+    font-size: 20px;
+}
+
+.qr-order-toast-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.qr-order-toast-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qr-order-toast-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.qr-order-toast-row:last-child {
+    border-bottom: none;
+}
+
+.qr-order-toast-label {
+    font-size: 13px;
+    color: #666;
+}
+
+.qr-order-toast-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qr-order-toast-copy {
+    padding: 4px 8px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.qr-order-toast-copy:hover {
+    background: #e8f5e9;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.qr-order-toast-copy.copied {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: white;
+}
+
+/* ==================== Modal ==================== */
+.qr-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: flex-end;
+    justify-content: center;
+    /* P1-1: 弹层打开时，背景不滚动 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.qr-modal.active {
+    display: flex;
+}
+
+.qr-modal-content {
+    background: var(--qr-surface);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    max-height: 90dvh;
+    border-radius: var(--qr-radius) var(--qr-radius) 0 0;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.qr-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: var(--qr-background);
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Product Detail Modal */
+.qr-product-detail {
+    padding: 20px;
+}
+
+.qr-product-detail-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--qr-radius);
+    margin-bottom: 16px;
+}
+
+.qr-product-detail-video {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--qr-radius);
+    margin-bottom: 16px;
+}
+
+.qr-product-detail-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.qr-product-detail-desc {
+    font-size: 14px;
+    color: var(--qr-text-light);
+    margin-bottom: 16px;
+}
+
+.qr-product-detail-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--qr-primary);
+    margin-bottom: 16px;
+}
+
+.qr-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.qr-qty-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--qr-primary);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--qr-primary);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.qr-qty-btn:hover {
+    background: var(--qr-primary);
+    color: white;
+}
+
+.qr-qty-value {
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 40px;
+    text-align: center;
+}
+
+.qr-note-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--qr-border);
+    border-radius: var(--qr-radius);
+    font-size: 14px;
+    margin-bottom: 16px;
+    resize: none;
+}
+
+.qr-add-to-cart-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: var(--qr-radius);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Cart Modal */
+.qr-cart-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    max-height: 80dvh;
+    min-height: auto;
+}
+
+.qr-cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--qr-border);
+    flex-shrink: 0;
+}
+
+.qr-cart-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.qr-cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.qr-cart-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--qr-border);
+}
+
+.qr-cart-item-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.qr-cart-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.qr-cart-item-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.qr-cart-item-note {
+    font-size: 12px;
+    color: var(--qr-text-light);
+    margin-bottom: 4px;
+}
+
+.qr-cart-item-batch {
+    font-size: 11px;
+    color: var(--qr-warning);
+    background: #FFF8E1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.qr-cart-item-price {
+    color: var(--qr-primary);
+    font-weight: 600;
+}
+
+.qr-cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.qr-cart-qty-btn {
+    /* P1-1: 最小点击区域 44x44 */
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--qr-border);
+    border-radius: 4px;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    /* P1-1: 触控优化 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.qr-cart-note {
+    padding: 0 20px 16px;
+    flex-shrink: 0;
+}
+
+.qr-cart-note textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--qr-border);
+    border-radius: var(--qr-radius);
+    font-size: 14px;
+    resize: none;
+    height: 60px;
+}
+
+.qr-cart-actions {
+    padding: 16px 20px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--qr-border);
+    background: var(--qr-background);
+    flex-shrink: 0;
+    /* 确保提交按钮区域始终可见 */
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.qr-cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.qr-cart-total-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--qr-primary);
+}
+
+.qr-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: var(--qr-radius);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    /* 确保按钮始终可见 */
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Order Modal */
+.qr-order-content {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    height: 80dvh;
+}
+
+.qr-order-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--qr-border);
+    flex-shrink: 0;
+}
+
+.qr-order-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.qr-order-card {
+    background: var(--qr-background);
+    border-radius: var(--qr-radius);
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.qr-order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.qr-order-number {
+    font-weight: 600;
+}
+
+.qr-order-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.qr-order-status.cart { background: #E0E0E0; color: #666; }
+.qr-order-status.ordered { background: #E3F2FD; color: #1976D2; }
+.qr-order-status.cooking { background: #FFF3E0; color: #F57C00; }
+.qr-order-status.serving { background: #E8F5E9; color: #388E3C; }
+.qr-order-status.paid { background: #F5F5F5; color: #9E9E9E; }
+
+.qr-order-items {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.qr-order-total {
+    text-align: right;
+    font-weight: 600;
+    color: var(--qr-primary);
+}
+
+.qr-order-actions {
+    padding: 16px 20px;
+    border-top: 1px solid var(--qr-border);
+    flex-shrink: 0;
+}
+
+.qr-add-more-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--qr-success);
+    color: white;
+    border: none;
+    border-radius: var(--qr-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Toast */
+.qr-toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    z-index: 300;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.qr-toast.show {
+    opacity: 1;
+}
+
+/* Loading */
+.qr-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    grid-column: 1 / -1;
+    /* P1-1: 确保 loading 不遮挡点击 */
+    pointer-events: none;
+}
+
+.qr-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--qr-border);
+    border-top-color: var(--qr-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error Page */
+.qr-error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px;
+}
+
+.qr-error-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.qr-error-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.qr-error-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.qr-error-message {
+    color: var(--qr-text-light);
+    margin-bottom: 24px;
+}
+
+.qr-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: var(--qr-radius);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .qr-sidebar {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .qr-products {
+        /* 平板/桌面：自动列数 */
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .qr-modal-content {
+        border-radius: var(--qr-radius);
+        margin: auto;
+    }
+}
+
+/* Hide scrollbar but keep functionality */
+.qr-sidebar::-webkit-scrollbar,
+.qr-content::-webkit-scrollbar,
+.qr-cart-items::-webkit-scrollbar,
+.qr-order-list::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+/* Highlight animation for recommended items */
+.qr-product-card.highlight {
+    border: 2px solid var(--qr-primary);
+    position: relative;
+}
+
+.qr-product-card.highlight::after {
+    content: "推荐";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--qr-primary);
+    color: white;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* ==================== P0-3: 底部栏隐藏类 ==================== */
+.qr-bottom-bar.qr-hidden {
+    display: none !important;
+}
+
+/* ==================== P1-2: 菜品卡片已加购数量 badge ==================== */
+.qr-product-qty-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--qr-primary);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 5;
+}
+
+/* ==================== P1-1: 类别空态引导 ==================== */
+/* ==================== P1-5: 类别空态增强样式 ==================== */
+.qr-empty-state {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.qr-empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.qr-empty-title {
+    font-size: 16px;
+    color: var(--qr-text-light);
+    margin-bottom: 20px;
+}
+
+.qr-empty-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 280px;
+}
+
+.qr-empty-btn {
+    padding: 12px 24px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background 0.2s;
+}
+
+.qr-empty-btn:hover {
+    background: var(--qr-primary-dark);
+}
+
+.qr-empty-btn:active {
+    background: var(--qr-primary-dark);
+}
+
+/* ==================== P0-1: 已选菜品空态样式 ==================== */
+.qr-cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 200px;
+}
+
+.qr-cart-empty-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.qr-cart-empty-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--qr-text);
+    margin-bottom: 8px;
+}
+
+.qr-cart-empty-hint {
+    font-size: 14px;
+    color: var(--qr-text-light);
+    margin-bottom: 24px;
+}
+
+.qr-cart-empty-btn {
+    padding: 12px 32px;
+    background: var(--qr-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.qr-cart-empty-btn:active {
+    background: var(--qr-primary-dark);
+}
+
+/* ==================== P1-3: 已下单列表优化样式 ==================== */
+.qr-order-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.qr-order-empty-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.qr-order-empty-title {
+    font-size: 16px;
+    color: var(--qr-text-light);
+}
+
+.qr-order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.qr-order-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.qr-order-short-ref {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--qr-text);
+}
+
+.qr-order-time {
+    font-size: 12px;
+    color: var(--qr-text-light);
+}
+
+.qr-order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--qr-border);
+}
+
+.qr-order-copy-btn {
+    padding: 6px 12px;
+    background: #f5f5f5;
+    border: 1px solid var(--qr-border);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--qr-text-light);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.qr-order-copy-btn:active {
+    background: #e0e0e0;
+}
+
+/* ==================== 税额提示标签样式 ==================== */
+.qr-tax-hint {
+    font-size: 10px;
+    color: var(--qr-text-light);
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+/* 已选菜品税额分解样式 */
+.qr-cart-tax-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--qr-border);
+    margin-bottom: 8px;
+}
+
+.qr-cart-subtotal-row,
+.qr-cart-tax-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--qr-text-light);
+}
+
+.qr-cart-total-incl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 订单卡片金额区域 */
+.qr-order-amount-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.qr-order-tax {
+    font-size: 11px;
+    color: var(--qr-text-light);
+    font-weight: 400;
+}
+
+/* ==================== 订单明细行样式 ==================== */
+.qr-order-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--qr-border);
+}
+
+.qr-order-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.qr-order-line-name {
+    flex: 1;
+    color: var(--qr-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qr-order-line-qty {
+    color: var(--qr-text-light);
+    font-size: 13px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.qr-order-line-price {
+    color: var(--qr-primary);
+    font-weight: 600;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* 订单汇总区域 */
+.qr-order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--qr-border);
+}
+
+.qr-order-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--qr-text-light);
+}
+
+.qr-order-summary-row.qr-order-summary-total {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--qr-text);
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--qr-border);
+}
+
+.qr-order-summary-row.qr-order-summary-total span:last-child {
+    color: var(--qr-primary);
+}
+
+/* ==================== 买单弹窗金额行样式 ==================== */
+.qr-pay-row.qr-pay-amount-row {
+    padding: 8px 0;
+    border-bottom: none;
+}
+
+.qr-pay-row.qr-pay-total-row {
+    padding-top: 12px;
+    margin-top: 4px;
+    border-top: 1px dashed var(--qr-border);
+}
+
+.qr-pay-row.qr-pay-total-row .qr-pay-label {
+    font-weight: 600;
+    color: var(--qr-text);
+}
+
+.qr-pay-row.qr-pay-total-row .qr-pay-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--qr-primary);
+}
+
+/* ==================== T6: 按钮样式规范 - 三语居中 ==================== */
+/* 统一按钮基线：确保所有语言（中/日/英）文字水平垂直居中 */
+.qr-cart-btn,
+.qr-submit-btn,
+.qr-add-more-btn,
+.qr-copy-btn,
+.qr-empty-btn,
+.qr-cart-empty-btn,
+.qr-order-copy-btn,
+.qr-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    /* 确保日语等长文本不换行 */
+    white-space: nowrap;
+    /* 统一行高，避免日语字符导致的偏移 */
+    line-height: 1.2;
+    /* 移动端最小点击区域 */
+    min-height: 44px;
+    /* 内边距确保美观 */
+    padding: 10px 16px;
+    /* 防止 iOS 点击高亮 */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* 复制按钮：较小尺寸但仍需居中 */
+.qr-copy-btn,
+.qr-order-copy-btn,
+.qr-order-toast-copy {
+    min-height: 32px;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* 语言选择器按钮居中 */
+.qr-lang-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 36px;
+    padding: 6px 12px;
+    line-height: 1.2;
+}
+
+/* 主按钮和次按钮在底部栏的样式 */
+.qr-footer-buttons .qr-cart-btn {
+    flex: 1;
+    min-width: 70px;
+    max-width: 140px;
+}
+
+.qr-footer-buttons .qr-cart-btn.primary {
+    flex: 1.2;
+    min-width: 90px;
+}
+
+/* 确保日语长文本在按钮内正确显示 */
+@media (max-width: 360px) {
+    .qr-footer-buttons .qr-cart-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}

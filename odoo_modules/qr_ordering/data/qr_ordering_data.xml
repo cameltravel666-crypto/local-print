@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- 预设菜品标签 -->
+        <record id="tag_spicy" model="qr.product.tag">
+            <field name="name">辣</field>
+            <field name="tag_type">spicy</field>
+            <field name="color">#FF4444</field>
+            <field name="icon">🌶️</field>
+            <field name="sequence">1</field>
+        </record>
+        
+        <record id="tag_vegetarian" model="qr.product.tag">
+            <field name="name">素食</field>
+            <field name="tag_type">vegetarian</field>
+            <field name="color">#4CAF50</field>
+            <field name="icon">🥬</field>
+            <field name="sequence">2</field>
+        </record>
+        
+        <record id="tag_recommended" model="qr.product.tag">
+            <field name="name">推荐</field>
+            <field name="tag_type">recommended</field>
+            <field name="color">#FF9800</field>
+            <field name="icon">👍</field>
+            <field name="sequence">3</field>
+        </record>
+        
+        <record id="tag_new" model="qr.product.tag">
+            <field name="name">新品</field>
+            <field name="tag_type">new</field>
+            <field name="color">#2196F3</field>
+            <field name="icon">✨</field>
+            <field name="sequence">4</field>
+        </record>
+        
+        <record id="tag_popular" model="qr.product.tag">
+            <field name="name">人气</field>
+            <field name="tag_type">popular</field>
+            <field name="color">#E91E63</field>
+            <field name="icon">🔥</field>
+            <field name="sequence">5</field>
+        </record>
+        
+        <record id="tag_healthy" model="qr.product.tag">
+            <field name="name">健康</field>
+            <field name="tag_type">healthy</field>
+            <field name="color">#8BC34A</field>
+            <field name="icon">💚</field>
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- 定时任务：清理过期会话 -->
+        <record id="ir_cron_cleanup_expired_sessions" model="ir.cron">
+            <field name="name">QR Ordering: Cleanup Expired Sessions</field>
+            <field name="model_id" ref="model_qr_session"/>
+            <field name="state">code</field>
+            <field name="code">model.cleanup_expired_sessions()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="active">True</field>
+        </record>
+        
+    </data>
+</odoo>
+

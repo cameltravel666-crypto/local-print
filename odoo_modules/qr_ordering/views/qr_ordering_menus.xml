@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="qr_ordering_menu_root"
+        name="QR Ordering"
+        web_icon="qr_ordering,static/description/icon.png"
+        sequence="60"/>
+
+    <!-- Orders Menu -->
+    <menuitem id="qr_ordering_menu_orders"
+        name="Orders"
+        parent="qr_ordering_menu_root"
+        sequence="10"/>
+
+    <menuitem id="qr_ordering_menu_orders_all"
+        name="All Orders"
+        parent="qr_ordering_menu_orders"
+        action="qr_order_action"
+        sequence="10"/>
+
+    <menuitem id="qr_ordering_menu_sessions"
+        name="Sessions"
+        parent="qr_ordering_menu_orders"
+        action="qr_session_action"
+        sequence="20"/>
+
+    <!-- Tables Menu -->
+    <menuitem id="qr_ordering_menu_tables"
+        name="Tables"
+        parent="qr_ordering_menu_root"
+        action="qr_table_action"
+        sequence="20"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="qr_ordering_menu_config"
+        name="Configuration"
+        parent="qr_ordering_menu_root"
+        sequence="90"/>
+
+    <menuitem id="qr_ordering_menu_tags"
+        name="Product Tags"
+        parent="qr_ordering_menu_config"
+        action="qr_product_tag_action"
+        sequence="10"/>
+
+</odoo>

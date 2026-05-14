@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Register QR Print Service JS for POS -->
+    <record id="qr_print_service_asset" model="ir.asset">
+        <field name="name">QR Print Service</field>
+        <field name="bundle">point_of_sale._assets_pos</field>
+        <field name="path">qr_ordering/static/src/pos/qr_print_service.js</field>
+    </record>
+</odoo>

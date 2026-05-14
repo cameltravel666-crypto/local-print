@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Standalone Ordering Page Template
+        完全独立的 HTML 文档，不使用任何 Odoo 模板，避免 #wrapwrap 问题
+    -->
+    <template id="ordering_page" name="QR Ordering Page Standalone">
+        <t t-set="html_data" t-value="{}"/>
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <!-- viewport-fit=cover 支持 iPhone X+ 的 safe area -->
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+                <meta name="theme-color" content="#ff6b35"/>
+                <!-- 防止 iOS 自动检测电话号码 -->
+                <meta name="format-detection" content="telephone=no"/>
+                <title>扫码点餐</title>
+
+                <!-- 移动端兜底 CSS：解决 iOS Safari / 微信浏览器高度问题 -->
+                <style type="text/css">
+                    /* P0: 三段式布局 - html/body 不滚动（强制，防止全局 CSS 干扰） */
+                    html, body {
+                        height: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        /* 默认不锁滚动！只在弹层打开时通过 JS 添加 .qr-scroll-locked */
+                        overflow: visible !important;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        background: #f5f5f5;
+                        /* 防止 iOS 双击缩放 */
+                        touch-action: manipulation;
+                        -webkit-tap-highlight-color: transparent;
+                    }
+                    /* P0: 整页容器（不滚动）- 强制布局 */
+                    #qr-ordering-app {
+                        width: 100% !important;
+                        min-height: 100vh !important; /* fallback */
+                        min-height: 100dvh !important; /* 动态视口高度，自动适应地址栏 */
+                        display: flex !important;
+                        flex-direction: column !important;
+                        position: relative !important;
+                        overflow: hidden !important; /* 页面容器不滚动 */
+                    }
+                    /* P0: 内容区（唯一滚动容器）- 强制滚动 */
+                    .qr-content {
+                        flex: 1 1 auto !important;
+                        overflow-y: auto !important;
+                        -webkit-overflow-scrolling: touch !important;
+                    }
+                    /* P0: 底部栏（永远可见）- 强制 sticky */
+                    .qr-bottom-bar {
+                        position: sticky !important;
+                        bottom: 0 !important;
+                        z-index: 1000 !important;
+                        display: flex !important;
+                        visibility: visible !important;
+                        padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+                    }
+                </style>
+
+                <!-- 加载点餐页 CSS -->
+                <link type="text/css" rel="stylesheet" t-att-href="'/qr_ordering/static/src/css/qr_ordering.css?v=' + (build_version or 'dev')"/>
+            </head>
+            <body>
+                <!-- Boot Guard: 防止白屏的兜底机制 -->
+                <div id="qr-boot-guard" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fff; z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
+                    <div style="text-align: center; max-width: 400px;">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🍽️</div>
+                        <h1 style="font-size: 24px; margin-bottom: 10px; color: #333;">正在加载...</h1>
+                        <p style="color: #666; margin-bottom: 20px;">如果 3 秒后仍未显示菜单，请刷新页面</p>
+                        <p style="font-size: 12px; color: #999;">Build: <t t-esc="build_version or 'unknown'"/></p>
+                    </div>
+                </div>
+
+                <!-- Debug Panel (only when debug=1) -->
+                <t t-if="debug_mode">
+                    <div id="qr-debug-panel" style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.85); color: #0f0; padding: 10px; font-size: 11px; font-family: monospace; z-index: 100000; border-radius: 4px; max-width: 300px;">
+                        <div style="font-weight: bold; margin-bottom: 5px; color: #fff;">QR Ordering Debug</div>
+                        <div>Build: <span id="qr-debug-build"><t t-esc="build_version or 'unknown'"/></span></div>
+                        <div>Trace: <span id="qr-debug-trace"><t t-esc="trace_id or 'N/A'"/></span></div>
+                        <div>JS: <span id="qr-debug-js">checking...</span></div>
+                        <div>API: <span id="qr-debug-api">pending...</span></div>
+                    </div>
+                </t>
+
+                <!-- 主应用容器 - P0: 三段式布局 -->
+                <div id="qr-ordering-app"
+                     class="qr-page"
+                     t-att-data-table-token="table.qr_token"
+                     t-att-data-access-token="access_token"
+                     t-att-data-table-name="table.name"
+                     t-att-data-lang="lang">
+
+                    <!-- Header -->
+                    <header class="qr-header">
+                        <div class="qr-header-left">
+                            <span class="qr-table-name" t-esc="table.name"/>
+                        </div>
+                        <div class="qr-header-center">
+                            <span class="qr-logo">🍽️</span>
+                        </div>
+                        <div class="qr-header-right">
+                            <select id="qr-lang-select" class="qr-lang-select">
+                                <option value="zh_CN" t-att-selected="lang == 'zh_CN' and 'selected' or None">中文</option>
+                                <option value="ja_JP" t-att-selected="lang == 'ja_JP' and 'selected' or None">日本語</option>
+                                <option value="en_US" t-att-selected="lang == 'en_US' and 'selected' or None">English</option>
+                            </select>
+                        </div>
+                    </header>
+
+                    <!-- Main Content -->
+                    <main class="qr-main">
+                        <!-- Left Sidebar: Categories -->
+                        <aside class="qr-sidebar">
+                            <div class="qr-categories" id="qr-categories">
+                                <div class="qr-category active" data-category-id="all">
+                                    <span class="qr-category-icon">📋</span>
+                                    <span class="qr-category-name" data-i18n="all">全部</span>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <!-- Right Content: Products -->
+                        <section class="qr-content">
+                            <div class="qr-search-bar">
+                                <input type="text" id="qr-search-input" class="qr-search-input"
+                                       placeholder="搜索菜品..." data-i18n-placeholder="search"/>
+                            </div>
+                            <div class="qr-products" id="qr-products">
+                                <div class="qr-loading">
+                                    <div class="qr-spinner"></div>
+                                    <p data-i18n="loading">加载中...</p>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+
+                    <!-- 底部栏 - 四态状态机 -->
+                    <footer class="qr-bottom-bar" id="qr-cart-footer">
+                        <!-- 左侧：已选图标 + 金额/件数 -->
+                        <div class="qr-cart-summary" id="qr-cart-summary">
+                            <div class="qr-cart-icon" id="qr-cart-icon-btn">
+                                <span class="qr-cart-badge" id="qr-cart-badge">0</span>
+                                🍽️
+                            </div>
+                            <div class="qr-cart-info">
+                                <span class="qr-cart-amount" id="qr-cart-amount">¥0</span>
+                                <span class="qr-cart-count" id="qr-cart-count">0 份</span>
+                            </div>
+                        </div>
+                        <!-- 中间：订单状态徽章（已下单时显示） -->
+                        <div class="qr-order-status-badge" id="qr-order-status-badge" style="display: none;">
+                            <span class="qr-status-text" id="qr-status-text">已下单 · #---</span>
+                        </div>
+                        <!-- 右侧：主次两个按钮 -->
+                        <div class="qr-footer-buttons">
+                            <!-- 次按钮（查看已选/查看已点） -->
+                            <button class="qr-cart-btn secondary" id="qr-secondary-btn">查看已选</button>
+                            <!-- 主按钮（下单/追加下单/去买单） -->
+                            <button class="qr-cart-btn primary" id="qr-primary-btn" disabled="disabled">下单</button>
+                        </div>
+                        <!-- 状态 A 提示语 -->
+                        <div class="qr-footer-hint" id="qr-footer-hint" style="display: none;">请选择菜品</div>
+                    </footer>
+
+                    <!-- 前台买单弹窗 -->
+                    <div class="qr-modal" id="qr-pay-modal">
+                        <div class="qr-modal-content qr-pay-content">
+                            <div class="qr-pay-header">
+                                <h2 data-i18n="pay_title">💳 前台买单</h2>
+                                <button class="qr-modal-close" id="qr-pay-close">×</button>
+                            </div>
+                            <div class="qr-pay-body">
+                                <p class="qr-pay-instruction" data-i18n="pay_instruction">请到前台出示以下信息完成买单</p>
+                                <div class="qr-pay-info">
+                                    <div class="qr-pay-row">
+                                        <span class="qr-pay-label" data-i18n="pay_table">桌号</span>
+                                        <span class="qr-pay-value" id="qr-pay-table">---</span>
+                                        <button class="qr-copy-btn" id="qr-copy-table" data-i18n="copy">复制</button>
+                                    </div>
+                                    <div class="qr-pay-row">
+                                        <span class="qr-pay-label" data-i18n="pay_order">订单号</span>
+                                        <span class="qr-pay-value" id="qr-pay-order">---</span>
+                                        <button class="qr-copy-btn" id="qr-copy-order" data-i18n="copy">复制</button>
+                                    </div>
+                                    <!-- 金额明细：未税金额 / 税额 / 含税合计 -->
+                                    <div class="qr-pay-row qr-pay-amount-row">
+                                        <span class="qr-pay-label" data-i18n="pay_subtotal">未税金额</span>
+                                        <span class="qr-pay-value" id="qr-pay-subtotal">¥0</span>
+                                    </div>
+                                    <div class="qr-pay-row qr-pay-amount-row">
+                                        <span class="qr-pay-label" data-i18n="pay_tax">税额</span>
+                                        <span class="qr-pay-value" id="qr-pay-tax">¥0</span>
+                                    </div>
+                                    <div class="qr-pay-row qr-pay-total-row">
+                                        <span class="qr-pay-label" data-i18n="pay_total_incl_tax">含税合计</span>
+                                        <span class="qr-pay-value qr-pay-amount" id="qr-pay-amount">¥0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="qr-pay-footer">
+                                <button class="qr-cart-btn secondary" id="qr-pay-done" data-i18n="done">我知道了</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Detail Modal -->
+                    <div class="qr-modal" id="qr-product-modal">
+                        <div class="qr-modal-content">
+                            <button class="qr-modal-close" id="qr-modal-close">×</button>
+                            <div class="qr-product-detail" id="qr-product-detail"></div>
+                        </div>
+                    </div>
+
+                    <!-- 已选菜品 Modal -->
+                    <div class="qr-modal" id="qr-cart-modal">
+                        <div class="qr-modal-content qr-cart-content">
+                            <div class="qr-cart-header">
+                                <h2 data-i18n="cart">已选菜品</h2>
+                                <button class="qr-modal-close" id="qr-cart-close">×</button>
+                            </div>
+                            <div class="qr-cart-items" id="qr-cart-items"></div>
+                            <div class="qr-cart-note">
+                                <textarea id="qr-cart-note" placeholder="备注（忌口、口味等）..." data-i18n-placeholder="note_placeholder"></textarea>
+                            </div>
+                            <div class="qr-cart-actions">
+                                <div class="qr-cart-total-row">
+                                    <span data-i18n="total">小计</span>:
+                                    <span class="qr-cart-total-amount" id="qr-cart-total-amount">¥0</span>
+                                </div>
+                                <button class="qr-submit-btn" id="qr-submit-order-btn" data-i18n="submit_order">下单</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 已点菜品 Modal -->
+                    <div class="qr-modal" id="qr-order-modal">
+                        <div class="qr-modal-content qr-order-content">
+                            <div class="qr-order-header">
+                                <h2 data-i18n="my_orders">已点菜品</h2>
+                                <button class="qr-modal-close" id="qr-order-close">×</button>
+                            </div>
+                            <div class="qr-order-list" id="qr-order-list"></div>
+                            <div class="qr-order-actions">
+                                <button class="qr-add-more-btn" id="qr-add-more-btn" data-i18n="add_more">继续点餐</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toast Notification -->
+                    <div class="qr-toast" id="qr-toast">
+                        <span id="qr-toast-message"></span>
+                    </div>
+
+                    <!-- 订单状态 Toast（点击 chip 或下单成功时展示） -->
+                    <div class="qr-order-toast" id="qr-order-toast">
+                        <div class="qr-order-toast-header">
+                            <div class="qr-order-toast-title">
+                                <span class="qr-toast-icon">✅</span>
+                                <span id="qr-order-toast-title">订单已提交</span>
+                            </div>
+                            <button class="qr-order-toast-close" id="qr-order-toast-close">×</button>
+                        </div>
+                        <div class="qr-order-toast-body">
+                            <div class="qr-order-toast-row">
+                                <span class="qr-order-toast-label">订单号</span>
+                                <span class="qr-order-toast-value">
+                                    <span id="qr-order-toast-ref">---</span>
+                                    <button class="qr-order-toast-copy" id="qr-order-toast-copy-ref">复制</button>
+                                </span>
+                            </div>
+                            <div class="qr-order-toast-row">
+                                <span class="qr-order-toast-label">桌号</span>
+                                <span class="qr-order-toast-value" id="qr-order-toast-table">---</span>
+                            </div>
+                            <div class="qr-order-toast-row" id="qr-order-toast-hint-row" style="display: none;">
+                                <span class="qr-order-toast-label" style="color: #2e7d32;">可继续点餐追加到同一订单</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boot Guard Script: 诊断脚本执行状态 -->
+                <script type="text/javascript">
+                (function() {
+                    'use strict';
+
+                    window.__qrDiag = {
+                        qrOrderingLoaded: false,
+                        initComplete: false,
+                        errors: [],
+                        traceId: '<t t-esc="trace_id or 'N/A'"/>'
+                    };
+
+                    var bootGuard = document.getElementById('qr-boot-guard');
+                    var qrApp = document.getElementById('qr-ordering-app');
+                    var debugPanel = document.getElementById('qr-debug-panel');
+
+                    function showBootError(title, detail, errorCode) {
+                        window.__qrDiag.errors.push({code: errorCode, title: title, detail: detail, time: new Date().toISOString()});
+                        if (!bootGuard) return;
+                        bootGuard.innerHTML =
+                            '<div style="text-align:center;max-width:400px;padding:20px;">' +
+                                '<div style="font-size:48px;margin-bottom:20px;">⚠️</div>' +
+                                '<h1 style="font-size:20px;margin-bottom:10px;color:#333;">' + title + '</h1>' +
+                                '<p style="color:#666;margin-bottom:15px;font-size:14px;">' + detail + '</p>' +
+                                '<button onclick="location.reload()" style="padding:12px 24px;background:#ff6b35;color:white;border:none;border-radius:4px;cursor:pointer;font-size:16px;">刷新页面</button>' +
+                                '<p style="font-size:11px;color:#999;margin-top:20px;">错误代码: ' + errorCode + '</p>' +
+                                '<p style="font-size:11px;color:#999;">Trace ID: ' + window.__qrDiag.traceId + '</p>' +
+                            '</div>';
+                    }
+
+                    function updateDebug(key, value, isError) {
+                        if (!debugPanel) return;
+                        var el = document.getElementById('qr-debug-' + key);
+                        if (el) {
+                            el.textContent = value;
+                            el.style.color = isError ? '#ff4444' : '#44ff44';
+                        }
+                    }
+
+                    function markInitialized() {
+                        window.__qrDiag.initComplete = true;
+                        if (bootGuard) bootGuard.style.display = 'none';
+                        updateDebug('api', 'success', false);
+                    }
+
+                    window.addEventListener('qr-ordering-initialized', markInitialized);
+                    window.__qrOrderingMarkInit = markInitialized;
+
+                    // 1秒后检查 JS 是否加载
+                    setTimeout(function() {
+                        var qrLoaded = typeof window.QR_ORDERING_BUILD !== 'undefined';
+                        window.__qrDiag.qrOrderingLoaded = qrLoaded;
+                        if (!qrLoaded) {
+                            updateDebug('js', 'NOT EXECUTED', true);
+                            showBootError('点餐脚本未执行', 'qr_ordering.js 未能加载或执行', 'JS_NOT_EXECUTED');
+                        } else {
+                            updateDebug('js', 'v' + window.QR_ORDERING_BUILD, false);
+                        }
+                    }, 1000);
+
+                    // 5秒后检查初始化
+                    setTimeout(function() {
+                        if (window.__qrDiag.initComplete) return;
+                        var diag = window.__qrDiag;
+                        if (!diag.qrOrderingLoaded) {
+                            showBootError('点餐脚本加载失败', '请检查网络连接后重试', 'QR_JS_FAILED');
+                        } else {
+                            showBootError('数据加载超时', '菜单数据请求超时，请刷新重试', 'API_TIMEOUT');
+                        }
+                        updateDebug('api', 'TIMEOUT', true);
+                    }, 5000);
+
+                    window.addEventListener('error', function(e) {
+                        var target = e.target;
+                        if (target &amp;&amp; target.tagName === 'SCRIPT') {
+                            var src = target.src || '';
+                            if (src.indexOf('qr_ordering') !== -1) {
+                                showBootError('JavaScript 加载失败', '点餐脚本无法加载', 'JS_LOAD_ERROR');
+                            }
+                        }
+                    }, true);
+                })();
+                </script>
+
+                <!-- 直接加载点餐 JS（不通过 Odoo assets） -->
+                <script type="text/javascript" t-att-src="'/qr_ordering/static/src/js/qr_ordering.js?v=' + (build_version or 'dev')"></script>
+            </body>
+        </html>
+    </template>
+    
+    <!-- Error Page Template -->
+    <template id="error_page" name="QR Ordering Error">
+        <t t-call="web.html_container">
+            <head>
+                <meta charset="UTF-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+                <title>扫码点餐 - 错误</title>
+                <style>
+                    * { box-sizing: border-box; margin: 0; padding: 0; }
+                    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+                    .qr-error-page { width: 100%; max-width: 400px; padding: 40px 20px; text-align: center; }
+                    .qr-error-icon { font-size: 64px; margin-bottom: 20px; }
+                    .qr-error-title { font-size: 24px; font-weight: 600; color: #333; margin-bottom: 12px; }
+                    .qr-error-message { font-size: 16px; color: #666; margin-bottom: 24px; line-height: 1.5; }
+                    .qr-error-actions { margin-top: 20px; }
+                    .qr-error-actions p { font-size: 14px; color: #666; margin-bottom: 16px; }
+                    .qr-btn { display: inline-block; padding: 12px 32px; background: #ff6b35; color: white; text-decoration: none; border-radius: 8px; font-size: 16px; font-weight: 500; }
+                    .qr-btn:hover { background: #e55a2b; }
+                    .qr-error-trace { font-size: 12px; color: #999; margin-top: 20px; }
+                </style>
+            </head>
+            <body>
+                <div class="qr-error-page">
+                    <div class="qr-error-icon">
+                        <t t-if="error_code == 'TABLE_NOT_FOUND'">🔍</t>
+                        <t t-elif="error_code == 'SYSTEM_ERROR'">⚠️</t>
+                        <t t-else="">😕</t>
+                    </div>
+                    <h1 class="qr-error-title">
+                        <t t-if="error_code == 'TABLE_NOT_FOUND'">餐桌不存在</t>
+                        <t t-elif="error_code == 'SESSION_OCCUPIED'">该餐桌已有人在点餐</t>
+                        <t t-elif="error_code == 'SESSION_EXPIRED'">会话已过期</t>
+                        <t t-elif="error_code == 'TABLE_HAS_ORDERS'">该餐桌有未完成的订单</t>
+                        <t t-elif="error_code == 'SYSTEM_ERROR'">系统繁忙</t>
+                        <t t-else="">出错了</t>
+                    </h1>
+                    <p class="qr-error-message" t-esc="error_message"/>
+                    <div class="qr-error-actions">
+                        <t t-if="error_code in ['SESSION_EXPIRED', 'SESSION_OCCUPIED']">
+                            <p>请联系服务员协助</p>
+                        </t>
+                        <t t-if="error_code == 'TABLE_NOT_FOUND'">
+                            <p>此二维码可能已失效，请联系服务员获取新的二维码</p>
+                        </t>
+                        <a href="javascript:location.reload()" class="qr-btn">重试</a>
+                    </div>
+                    <t t-if="trace_id">
+                        <p class="qr-error-trace">
+                            错误ID: <t t-esc="trace_id"/>
+                        </p>
+                    </t>
+                </div>
+            </body>
+        </t>
+    </template>
+    
+    <!-- Print QR Code Page -->
+    <template id="print_qr_page" name="Print QR Code">
+        <t t-call="web.html_container">
+            <div class="qr-print-page">
+                <style>
+                    .qr-print-page {
+                        width: 100%;
+                        max-width: 400px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        text-align: center;
+                        font-family: Arial, sans-serif;
+                    }
+                    .qr-print-title {
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    .qr-print-subtitle {
+                        font-size: 14px;
+                        color: #666;
+                        margin-bottom: 20px;
+                    }
+                    .qr-print-code {
+                        margin: 20px auto;
+                    }
+                    .qr-print-table-name {
+                        font-size: 36px;
+                        font-weight: bold;
+                        margin: 20px 0;
+                        padding: 10px;
+                        border: 3px solid #000;
+                        display: inline-block;
+                    }
+                    .qr-print-instruction {
+                        font-size: 16px;
+                        margin-top: 20px;
+                    }
+                    @media print {
+                        .no-print { display: none; }
+                    }
+                </style>
+                
+                <div class="qr-print-title">扫码点餐</div>
+                <div class="qr-print-subtitle">Scan to Order</div>
+                
+                <div class="qr-print-code">
+                    <!-- QR Code Image - 从控制器传入完整 URL -->
+                    <img t-att-src="barcode_url" width="300" height="300" alt="QR Code"/>
+                    <div style="font-size: 10px; color: #666; margin-top: 5px; word-break: break-all;" t-esc="qr_content_url"/>
+                </div>
+                
+                <div class="qr-print-table-name" t-esc="table.name"/>
+                
+                <div class="qr-print-instruction">
+                    请扫描二维码点餐<br/>
+                    Please scan to order
+                </div>
+                
+                <div class="no-print" style="margin-top: 30px;">
+                    <button onclick="window.print()" class="btn btn-primary">打印 Print</button>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--
+        V2 Ordering Page Template - Mobile-first Extreme Experience
+        Features: Pinned video carousel, Reco rail with PiP, Sticky chips, 2-col grid with stepper
+        Use with feature flag: menu_ui_v2=1
+    -->
+    <template id="ordering_page_v2" name="QR Ordering Page V2">
+        <t t-set="html_data" t-value="{}"/>
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+                <meta name="theme-color" content="#ff6b35"/>
+                <meta name="format-detection" content="telephone=no"/>
+                <title>扫码点餐</title>
+                <link type="text/css" rel="stylesheet" t-att-href="'/qr_ordering/static/src/css/qr_ordering_v2.css?v=' + (build_version or 'dev')"/>
+            </head>
+            <body>
+                <!-- Boot Guard -->
+                <div id="qr-boot-guard" style="position: fixed; inset: 0; background: #fff; z-index: 99999; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🍽️</div>
+                        <h1 style="font-size: 20px; margin-bottom: 10px; color: #333;">正在加载...</h1>
+                        <p style="color: #666; font-size: 14px;">Build: <t t-esc="build_version or 'unknown'"/></p>
+                    </div>
+                </div>
+
+                <!-- Main App Container -->
+                <div id="qr-ordering-app"
+                     class="qr-page-v2"
+                     t-att-data-table-token="table.qr_token"
+                     t-att-data-access-token="access_token"
+                     t-att-data-table-name="table.name"
+                     t-att-data-lang="lang">
+
+                    <!-- Header -->
+                    <header class="qr-header-v2">
+                        <div>
+                            <div class="qr-header-title" t-esc="table.name"/>
+                            <div class="qr-header-subtitle">扫码点餐</div>
+                        </div>
+                        <select id="qr-lang-select" class="qr-lang-select">
+                            <option value="zh_CN" t-att-selected="lang == 'zh_CN' and 'selected' or None">中文</option>
+                            <option value="ja_JP" t-att-selected="lang == 'ja_JP' and 'selected' or None">日本語</option>
+                            <option value="en_US" t-att-selected="lang == 'en_US' and 'selected' or None">English</option>
+                        </select>
+                    </header>
+
+                    <!-- Search Bar -->
+                    <div class="qr-search-bar">
+                        <input type="text" id="qr-search-input" class="qr-search-input" placeholder="搜索菜品..."/>
+                    </div>
+
+                    <!-- Main Content (scrollable) -->
+                    <main class="qr-main-v2">
+                        <!-- Pinned Video Carousel -->
+                        <section class="qr-pinned-carousel" id="qr-pinned-carousel" style="display:none;">
+                            <!-- Rendered by JS -->
+                        </section>
+
+                        <!-- Recommendation Rail -->
+                        <section class="qr-reco-rail" id="qr-reco-rail" style="display:none;">
+                            <!-- Rendered by JS -->
+                        </section>
+
+                        <!-- Category Chips (sticky) -->
+                        <div class="qr-category-chips" id="qr-category-chips">
+                            <button class="qr-chip active" data-category-id="all">全部</button>
+                        </div>
+
+                        <!-- Product Grid -->
+                        <div class="qr-product-grid" id="qr-product-grid">
+                            <div class="qr-loading">
+                                <div class="qr-spinner"></div>
+                                <p>加载中...</p>
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- Cart Bar (fixed bottom) -->
+                    <footer class="qr-cart-bar" id="qr-cart-bar">
+                        <div class="qr-cart-summary">
+                            <div class="qr-cart-icon">
+                                🛒
+                                <span class="qr-cart-badge" id="qr-cart-badge">0</span>
+                            </div>
+                            <span class="qr-cart-total" id="qr-cart-amount">¥0</span>
+                        </div>
+                        <button class="qr-cart-btn" id="qr-cart-btn" disabled="disabled">查看订单 →</button>
+                    </footer>
+
+                    <!-- Product Detail Modal -->
+                    <div class="qr-modal" id="qr-product-modal">
+                        <div class="qr-modal-content">
+                            <div class="qr-modal-header">
+                                <h2>菜品详情</h2>
+                                <button class="qr-modal-close">×</button>
+                            </div>
+                            <div class="qr-modal-body">
+                                <!-- Rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Modal -->
+                    <div class="qr-modal" id="qr-cart-modal">
+                        <div class="qr-modal-content">
+                            <div class="qr-modal-header">
+                                <h2>购物车</h2>
+                                <button class="qr-modal-close">×</button>
+                            </div>
+                            <div class="qr-modal-body">
+                                <div class="qr-cart-list" id="qr-cart-list"></div>
+                                <div class="qr-cart-note">
+                                    <textarea id="qr-cart-note" placeholder="备注（忌口、口味等）..."></textarea>
+                                </div>
+                            </div>
+                            <div class="qr-cart-actions">
+                                <div class="qr-cart-total-row">
+                                    <span>合计</span>
+                                    <span class="qr-cart-total-amount">¥0</span>
+                                </div>
+                                <button class="qr-submit-btn" id="qr-submit-order-btn">提交订单</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Modal -->
+                    <div class="qr-modal" id="qr-order-modal">
+                        <div class="qr-modal-content">
+                            <div class="qr-modal-header">
+                                <h2>我的订单</h2>
+                                <button class="qr-modal-close">×</button>
+                            </div>
+                            <div class="qr-modal-body">
+                                <div class="qr-order-list" id="qr-order-list"></div>
+                            </div>
+                            <div class="qr-order-actions">
+                                <button class="qr-add-more-btn" id="qr-add-more-btn">继续点餐</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toast -->
+                    <div class="qr-toast" id="qr-toast">
+                        <span class="qr-toast-message"></span>
+                    </div>
+                </div>
+
+                <!-- V2 JavaScript -->
+                <script type="text/javascript" t-att-src="'/qr_ordering/static/src/js/qr_ordering_v2.js?v=' + (build_version or 'dev')"></script>
+            </body>
+        </html>
+    </template>
+
+</odoo>
+

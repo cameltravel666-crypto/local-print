@@ -1,0 +1,691 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* qr_ordering
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-21 00:00+0000\n"
+"PO-Revision-Date: 2026-01-21 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Japanese\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_table_action
+msgid "QR Tables"
+msgstr "QRテーブル"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_session_action
+msgid "QR Sessions"
+msgstr "注文セッション"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_order_action
+msgid "QR Orders"
+msgstr "QR注文"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_product_tag_action
+msgid "Product Tags"
+msgstr "商品タグ"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_root
+msgid "QR Ordering"
+msgstr "QRコード注文"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_orders
+msgid "Orders"
+msgstr "注文"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_orders_all
+msgid "All Orders"
+msgstr "すべての注文"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_sessions
+msgid "Sessions"
+msgstr "セッション"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_tables
+msgid "Tables"
+msgstr "テーブル"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_config
+msgid "Configuration"
+msgstr "設定"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_tags
+msgid "Product Tags"
+msgstr "商品タグ"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_table
+msgid "QR Code Table"
+msgstr "QRコードテーブル"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_session
+msgid "QR Ordering Session"
+msgstr "QRコード注文セッション"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_order
+msgid "QR Order"
+msgstr "QR注文"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_order_line
+msgid "QR Order Line"
+msgstr "QR注文明細"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_product_tag
+msgid "Product Tag"
+msgstr "商品タグ"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__name
+msgid "Table Name"
+msgstr "テーブル名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__short_code
+msgid "Short Code"
+msgstr "ショートコード"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__short_url
+msgid "Short URL"
+msgstr "短縮URL"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__sequence
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__sequence
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__sequence
+msgid "Sequence"
+msgstr "順序"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__pos_table_id
+msgid "POS Table"
+msgstr "POSテーブル"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__pos_config_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_config_id
+msgid "POS Config"
+msgstr "POS設定"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_token
+msgid "QR Token"
+msgstr "QRトークン"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_url
+msgid "QR URL"
+msgstr "注文URL"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_url_v2
+msgid "QR URL V2"
+msgstr "注文URL V2"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_code_image
+msgid "QR Code"
+msgstr "QRコード"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__active
+msgid "Active"
+msgstr "有効"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__state
+msgid "Status"
+msgstr "ステータス"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__available
+msgid "Available"
+msgstr "空き"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__occupied
+msgid "Occupied"
+msgstr "使用中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__reserved
+msgid "Reserved"
+msgstr "予約済み"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__current_session_id
+msgid "Current Session"
+msgstr "現在のセッション"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__order_count
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__order_count
+msgid "Order Count"
+msgstr "注文数"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Open Table"
+msgstr "席を開く"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Close Table"
+msgstr "席を閉じる"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Regenerate QR"
+msgstr "QRコード再生成"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Print QR"
+msgstr "QRコード印刷"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Basic Info"
+msgstr "基本情報"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Auto Generate"
+msgstr "自動生成"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Manual Bind"
+msgstr "手動バインド"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__name
+msgid "Session ID"
+msgstr "セッションID"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__table_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__table_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table_bind_shortcode_wizard__table_id
+msgid "Table"
+msgstr "テーブル"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__access_token
+msgid "Access Token"
+msgstr "アクセストークン"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__active
+msgid "Active"
+msgstr "アクティブ"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__ordering
+msgid "Ordering"
+msgstr "注文中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__waiting
+msgid "Waiting"
+msgstr "待機中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__serving
+msgid "Serving"
+msgstr "配膳中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__closed
+msgid "Closed"
+msgstr "終了"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__expire_time
+msgid "Expire Time"
+msgstr "有効期限"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__end_time
+msgid "End Time"
+msgstr "終了時刻"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__client_ip
+msgid "Client IP"
+msgstr "クライアントIP"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__user_agent
+msgid "User Agent"
+msgstr "ユーザーエージェント"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__order_ids
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__line_ids
+msgid "Orders"
+msgstr "注文"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__total_amount
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__total_amount
+msgid "Total Amount"
+msgstr "合計金額"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Close Session"
+msgstr "セッション終了"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Extend 2 Hours"
+msgstr "2時間延長"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Session Info"
+msgstr "セッション情報"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Time"
+msgstr "時間"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Client Info"
+msgstr "クライアント情報"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__name
+msgid "Order Number"
+msgstr "注文番号"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__session_id
+msgid "Session"
+msgstr "セッション"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_order_id
+msgid "POS Order"
+msgstr "POS注文"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_session_id
+msgid "POS Session"
+msgstr "POSセッション"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__restaurant_table_id
+msgid "Restaurant Table"
+msgstr "レストランテーブル"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__partner_id
+msgid "Customer"
+msgstr "顧客"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__source
+msgid "Source"
+msgstr "注文元"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__qr
+msgid "QR Code"
+msgstr "QRコード"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__pos
+msgid "POS"
+msgstr "POS"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__kiosk
+msgid "Kiosk"
+msgstr "キオスク"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cart
+msgid "Cart"
+msgstr "カート"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__ordered
+msgid "Ordered"
+msgstr "注文済み"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cooking
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__cooking
+msgid "Cooking"
+msgstr "調理中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__serving
+msgid "Serving"
+msgstr "配膳中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__paid
+msgid "Paid"
+msgstr "支払済み"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cancelled
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__cancelled
+msgid "Cancelled"
+msgstr "キャンセル"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__line_ids
+msgid "Order Lines"
+msgstr "注文明細"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__total_qty
+msgid "Total Quantity"
+msgstr "合計数量"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__note
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__note
+msgid "Note"
+msgstr "備考"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__order_time
+msgid "Order Time"
+msgstr "注文時刻"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__cooking_time
+msgid "Cooking Start"
+msgstr "調理開始"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__serve_time
+msgid "Serve Time"
+msgstr "配膳時刻"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__last_print_time
+msgid "Last Print Time"
+msgstr "最終印刷時刻"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Submit Order"
+msgstr "注文送信"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Order Info"
+msgstr "注文情報"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__order_id
+msgid "Order"
+msgstr "注文"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__product_id
+msgid "Product"
+msgstr "商品"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__product_name
+msgid "Product Name"
+msgstr "商品名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__qty
+msgid "Quantity"
+msgstr "数量"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__price_unit
+msgid "Unit Price"
+msgstr "単価"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__subtotal
+msgid "Subtotal"
+msgstr "小計"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__batch_number
+msgid "Batch"
+msgstr "バッチ"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__pending
+msgid "Pending"
+msgstr "保留中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__submitted
+msgid "Submitted"
+msgstr "送信済み"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__served
+msgid "Served"
+msgstr "配膳済み"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__name
+msgid "Tag Name"
+msgstr "タグ名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__color
+msgid "Color"
+msgstr "色"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__icon
+msgid "Icon"
+msgstr "アイコン"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__tag_type
+msgid "Tag Type"
+msgstr "タグタイプ"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__spicy
+msgid "Spicy"
+msgstr "辛い"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__vegetarian
+msgid "Vegetarian"
+msgstr "ベジタリアン"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__recommended
+msgid "Recommended"
+msgstr "おすすめ"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__new
+msgid "New"
+msgstr "新商品"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__popular
+msgid "Popular"
+msgstr "人気"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__healthy
+msgid "Healthy"
+msgstr "ヘルシー"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__custom
+msgid "Custom"
+msgstr "カスタム"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video
+msgid "Product Video"
+msgstr "商品動画"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video_filename
+msgid "Video Filename"
+msgstr "動画ファイル名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video_url
+msgid "Video URL"
+msgstr "動画URL"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_short_desc
+msgid "Short Description"
+msgstr "簡単説明"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_available
+msgid "Available for QR Ordering"
+msgstr "QR注文可能"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_highlight
+msgid "Highlight"
+msgstr "おすすめ"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_pinned
+msgid "Pinned"
+msgstr "ピン留め"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_pinned_sequence
+msgid "Pinned Sequence"
+msgstr "ピン留め順序"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_sold_out
+msgid "Sold Out"
+msgstr "売り切れ"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_tags
+msgid "Tags"
+msgstr "タグ"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "QR Ordering"
+msgstr "QRコード注文"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Display Settings"
+msgstr "表示設定"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Description"
+msgstr "説明"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Video"
+msgstr "動画"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Today"
+msgstr "今日"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Group By"
+msgstr "グループ化"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Date"
+msgstr "日付"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "No Short Code"
+msgstr "ショートコードなし"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "Archived"
+msgstr "アーカイブ済み"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "Search Tables"
+msgstr "テーブル検索"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+msgid "Search Sessions"
+msgstr "セッション検索"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Search Orders"
+msgstr "注文検索"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_table_bind_shortcode_wizard
+msgid "Bind Short Code Wizard"
+msgstr "ショートコードバインドウィザード"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Bind Short Code"
+msgstr "ショートコードをバインド"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Bind"
+msgstr "バインド"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Cancel"
+msgstr "キャンセル"

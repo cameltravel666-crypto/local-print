@@ -525,6 +525,10 @@ class PrinterInfo(models.Model):
         Args:
             message (dict): Sync data, format {'message_type': 'sync_printers', 'data': station_info}
         """
+        # Ensure QR order patch is applied on first print-related activity
+        from ..hooks import ensure_qr_order_patched
+        ensure_qr_order_patched(self.env)
+
         try:
             # Extract message type
             message_type = message.get('message_type', 'unknown')

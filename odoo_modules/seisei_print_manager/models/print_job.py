@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import base64
 import logging
 import json
 import uuid
@@ -255,6 +256,104 @@ class PrintJob(models.Model):
                     json.loads(job.metadata)
                 except (ValueError, TypeError):
                     raise ValidationError(_('Metadata must be in valid JSON format'))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Override create to add cash drawer command for POS receipt prints"""
+        for vals in vals_list:
+            # Check if this is a POS receipt print job
+            if vals.get('type') == 'pos_receipt_print' and vals.get('printer_id'):
+                vals = self._prepend_cash_drawer_command(vals)
+
+        return super().create(vals_list)
+
+    def _prepend_cash_drawer_command(self, vals):
+        """
+        Prepend cash drawer open command to ESC/POS data if enabled in POS config
+
+        Args:
+            vals: Job creation values dict
+
+        Returns:
+            Modified vals dict with cash drawer command prepended
+        """
+        try:
+            printer = self.env['seisei.printer'].browse(vals['printer_id'])
+            if not printer:
+                return vals
+
+            # Find POS config that uses this printer for receipts
+            pos_config = self.env['pos.config'].search([
+                ('seisei_receipt_printer_id', '=', printer.id),
+                ('seisei_open_cash_drawer', '=', True)
+            ], limit=1)
+
+            if not pos_config:
+                return vals
+
+            # Get metadata
+            metadata = vals.get('metadata')
+            if not metadata:
+                return vals
+
+            meta_dict = json.loads(metadata) if isinstance(metadata, str) else metadata
+
+            # Get existing ESC/POS data
+            escpos_b64 = meta_dict.get('doc_data') or meta_dict.get('escpos_commands')
+            if not escpos_b64:
+                return vals
+
+            # Decode existing data
+            escpos_data = base64.b64decode(escpos_b64)
+
+            # Generate cash drawer command
+            cash_drawer_cmd = self._get_cash_drawer_command(pos_config)
+
+            # Prepend cash drawer command
+            new_escpos_data = cash_drawer_cmd + escpos_data
+            new_escpos_b64 = base64.b64encode(new_escpos_data).decode('utf-8')
+
+            # Update metadata
+            if 'doc_data' in meta_dict:
+                meta_dict['doc_data'] = new_escpos_b64
+            if 'escpos_commands' in meta_dict:
+                meta_dict['escpos_commands'] = new_escpos_b64
+
+            vals['metadata'] = json.dumps(meta_dict)
+
+            _logger.info("Cash drawer command prepended to print job for printer %s", printer.name)
+
+        except Exception as e:
+            _logger.error("Failed to prepend cash drawer command: %s", e)
+
+        return vals
+
+    def _get_cash_drawer_command(self, pos_config):
+        """
+        Generate ESC/POS command to open cash drawer
+
+        ESC p m t1 t2
+        - m: drawer pin (0=pin2, 1=pin5)
+        - t1: on time (25 = 50ms)
+        - t2: off time (250 = 500ms)
+
+        Args:
+            pos_config: POS configuration record
+
+        Returns:
+            bytes: ESC/POS cash drawer open command
+        """
+        ESC = b'\x1b'
+
+        # Get pin from config (default to pin 0)
+        pin = 0
+        if pos_config and pos_config.seisei_cash_drawer_pin:
+            pin = int(pos_config.seisei_cash_drawer_pin)
+
+        # ESC p m t1 t2 - Open cash drawer
+        cash_drawer_cmd = ESC + b'p' + bytes([pin, 25, 250])
+
+        return cash_drawer_cmd
 
     def run_job(self):
         """Process print job"""

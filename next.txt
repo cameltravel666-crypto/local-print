@@ -1,0 +1,24 @@
+Odoo客户端错误
+
+UncaughtPromiseError > OwlError
+Uncaught Promise > An error occured in the owl lifecycle (see this Error's "cause" property)
+
+Occured on demo.nagashiro.top on 2026-01-21 05:31:51 GMT
+
+OwlError: An error occured in the owl lifecycle (see this Error's "cause" property)
+    Error: An error occured in the owl lifecycle (see this Error's "cause" property)
+        at handleError (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:972:101)
+        at App.handleError (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:1630:29)
+        at ComponentNode.initiateRender (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:1064:19)
+
+Caused by: Error: "pos.config"."seisei_receipt_printer_id" field is undefined.
+    at Field.parseFieldNode (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:7750:330)
+    at https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:8683:954
+    at visit (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4785:51)
+    at visitChildren (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4784:171)
+    at visit (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4785:129)
+    at visitChildren (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4784:171)
+    at visit (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4785:129)
+    at visitChildren (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4784:171)
+    at visit (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4785:129)
+    at visitChildren (https://demo.nagashiro.top/web/assets/3ffeebf/web.assets_web.min.js:4784:171)

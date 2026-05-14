@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- QR Order Tree View -->
+    <record id="qr_order_view_tree" model="ir.ui.view">
+        <field name="name">qr.order.view.tree</field>
+        <field name="model">qr.order</field>
+        <field name="arch" type="xml">
+            <list string="QR Orders" decoration-info="state in ['cart', 'ordered']" decoration-success="state in ['cooking', 'serving']" decoration-muted="state in ['paid', 'cancelled']">
+                <field name="name"/>
+                <field name="table_id"/>
+                <field name="state" widget="badge" decoration-info="state in ['cart', 'ordered']" decoration-warning="state == 'cooking'" decoration-success="state == 'serving'" decoration-muted="state in ['paid', 'cancelled']"/>
+                <field name="total_qty"/>
+                <field name="total_amount" widget="monetary"/>
+                <field name="order_time"/>
+                <field name="pos_order_id" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- QR Order Form View -->
+    <record id="qr_order_view_form" model="ir.ui.view">
+        <field name="name">qr.order.view.form</field>
+        <field name="model">qr.order</field>
+        <field name="arch" type="xml">
+            <form string="QR Order">
+                <header>
+                    <button name="action_submit_order" string="Submit Order" type="object" class="oe_highlight" invisible="state != 'cart'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="cart,ordered,cooking,serving,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Order Info">
+                            <field name="table_id"/>
+                            <field name="session_id"/>
+                            <field name="pos_config_id"/>
+                            <field name="pos_order_id"/>
+                        </group>
+                        <group string="Time">
+                            <field name="order_time"/>
+                            <field name="cooking_time"/>
+                            <field name="serve_time"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Order Lines" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="batch_number" readonly="1"/>
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="price_unit" readonly="1"/>
+                                    <field name="subtotal" readonly="1"/>
+                                    <field name="note"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Note" name="note">
+                            <field name="note" placeholder="Special requests..."/>
+                        </page>
+                    </notebook>
+                    <group>
+                        <group>
+                            <field name="total_qty"/>
+                        </group>
+                        <group>
+                            <field name="total_amount" widget="monetary" class="oe_subtotal_footer_separator"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- QR Order Search View -->
+    <record id="qr_order_view_search" model="ir.ui.view">
+        <field name="name">qr.order.view.search</field>
+        <field name="model">qr.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Orders">
+                <field name="name"/>
+                <field name="table_id"/>
+                <filter name="cart" string="Cart" domain="[('state', '=', 'cart')]"/>
+                <filter name="ordered" string="Ordered" domain="[('state', '=', 'ordered')]"/>
+                <filter name="cooking" string="Cooking" domain="[('state', '=', 'cooking')]"/>
+                <filter name="serving" string="Serving" domain="[('state', '=', 'serving')]"/>
+                <filter name="paid" string="Paid" domain="[('state', '=', 'paid')]"/>
+                <separator/>
+                <filter name="today" string="Today" domain="[('order_time', '>=', (context_today()).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_table" string="Table" context="{'group_by': 'table_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'order_time:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- QR Order Action -->
+    <record id="qr_order_action" model="ir.actions.act_window">
+        <field name="name">QR Orders</field>
+        <field name="res_model">qr.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="qr_order_view_search"/>
+        <field name="context">{'search_default_today': 1}</field>
+    </record>
+
+</odoo>

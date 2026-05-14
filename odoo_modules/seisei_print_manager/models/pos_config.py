@@ -72,6 +72,19 @@ class PosConfig(models.Model):
         help='Number of receipt copies to print'
     )
 
+    # Cash Drawer Settings
+    seisei_open_cash_drawer = fields.Boolean(
+        string='Open Cash Drawer',
+        default=True,
+        help='Open cash drawer before printing receipt'
+    )
+
+    seisei_cash_drawer_pin = fields.Selection([
+        ('0', 'Pin 2 (Default)'),
+        ('1', 'Pin 5'),
+    ], string='Cash Drawer Pin', default='0',
+        help='Cash drawer connection pin on the printer')
+
     @api.onchange('seisei_receipt_printer_id')
     def _onchange_receipt_printer(self):
         """Set default template when printer is selected"""

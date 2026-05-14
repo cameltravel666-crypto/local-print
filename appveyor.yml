@@ -1,0 +1,30 @@
+version: '1.0.{build}'
+
+image: Visual Studio 2022
+
+environment:
+  PYTHON: "C:\\Python311-x64"
+
+install:
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "python --version"
+  - "python -m pip install --upgrade pip"
+  - "pip install -r requirements.txt"
+  - "pip install pyinstaller"
+
+build_script:
+  - "python build.py"
+
+artifacts:
+  - path: output\builds\windows\LocalPrintAgent.exe
+    name: LocalPrintAgent-windows
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: # Add your encrypted GitHub token here
+  artifact: LocalPrintAgent-windows
+  draft: false
+  prerelease: false
+  on:
+    APPVEYOR_REPO_TAG: true

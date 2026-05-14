@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- QR Session Tree View -->
+    <record id="qr_session_view_tree" model="ir.ui.view">
+        <field name="name">qr.session.view.tree</field>
+        <field name="model">qr.session</field>
+        <field name="arch" type="xml">
+            <list string="QR Sessions">
+                <field name="name"/>
+                <field name="table_id"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-info="state in ['ordering', 'waiting', 'serving']" decoration-muted="state == 'closed'"/>
+                <field name="order_count"/>
+                <field name="total_amount" widget="monetary"/>
+                <field name="create_date"/>
+                <field name="expire_time"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- QR Session Form View -->
+    <record id="qr_session_view_form" model="ir.ui.view">
+        <field name="name">qr.session.view.form</field>
+        <field name="model">qr.session</field>
+        <field name="arch" type="xml">
+            <form string="QR Session">
+                <header>
+                    <button name="action_close" string="Close Session" type="object" class="btn-secondary" invisible="state == 'closed'"/>
+                    <button name="action_extend" string="Extend 2 Hours" type="object" invisible="state == 'closed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="active,ordering,serving,closed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Session Info">
+                            <field name="name"/>
+                            <field name="table_id"/>
+                            <field name="access_token"/>
+                        </group>
+                        <group string="Time">
+                            <field name="create_date"/>
+                            <field name="expire_time"/>
+                        </group>
+                    </group>
+                    <group string="Client Info">
+                        <field name="client_ip"/>
+                        <field name="user_agent"/>
+                    </group>
+                    <notebook>
+                        <page string="Orders" name="orders">
+                            <field name="order_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="state" widget="badge"/>
+                                    <field name="total_qty"/>
+                                    <field name="total_amount" widget="monetary"/>
+                                    <field name="order_time"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- QR Session Search View -->
+    <record id="qr_session_view_search" model="ir.ui.view">
+        <field name="name">qr.session.view.search</field>
+        <field name="model">qr.session</field>
+        <field name="arch" type="xml">
+            <search string="Search Sessions">
+                <field name="name"/>
+                <field name="table_id"/>
+                <filter name="active" string="Active" domain="[('state', 'not in', ['closed'])]"/>
+                <filter name="closed" string="Closed" domain="[('state', '=', 'closed')]"/>
+                <filter name="today" string="Today" domain="[('create_date', '>=', (context_today()).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_table" string="Table" context="{'group_by': 'table_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- QR Session Action -->
+    <record id="qr_session_action" model="ir.actions.act_window">
+        <field name="name">QR Sessions</field>
+        <field name="res_model">qr.session</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="qr_session_view_search"/>
+        <field name="context">{'search_default_active': 1}</field>
+    </record>
+
+</odoo>

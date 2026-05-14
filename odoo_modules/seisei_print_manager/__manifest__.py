@@ -48,7 +48,6 @@
         'bus',
         'mail',
         'point_of_sale',
-        'seisei_mutex_toggle',
     ],
     'data': [
         'security/ir.model.access.csv',

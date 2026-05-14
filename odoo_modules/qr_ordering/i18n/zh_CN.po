@@ -1,0 +1,691 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* qr_ordering
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-21 00:00+0000\n"
+"PO-Revision-Date: 2026-01-21 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_table_action
+msgid "QR Tables"
+msgstr "二维码餐桌"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_session_action
+msgid "QR Sessions"
+msgstr "点餐会话"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_order_action
+msgid "QR Orders"
+msgstr "扫码订单"
+
+#. module: qr_ordering
+#: model:ir.actions.act_window,name:qr_ordering.qr_product_tag_action
+msgid "Product Tags"
+msgstr "产品标签"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_root
+msgid "QR Ordering"
+msgstr "扫码点餐"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_orders
+msgid "Orders"
+msgstr "订单"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_orders_all
+msgid "All Orders"
+msgstr "所有订单"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_sessions
+msgid "Sessions"
+msgstr "会话"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_tables
+msgid "Tables"
+msgstr "餐桌"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_config
+msgid "Configuration"
+msgstr "配置"
+
+#. module: qr_ordering
+#: model:ir.ui.menu,name:qr_ordering.qr_ordering_menu_tags
+msgid "Product Tags"
+msgstr "产品标签"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_table
+msgid "QR Code Table"
+msgstr "二维码餐桌"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_session
+msgid "QR Ordering Session"
+msgstr "扫码点餐会话"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_order
+msgid "QR Order"
+msgstr "扫码订单"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_order_line
+msgid "QR Order Line"
+msgstr "扫码订单行"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_product_tag
+msgid "Product Tag"
+msgstr "产品标签"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__name
+msgid "Table Name"
+msgstr "餐桌名称"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__short_code
+msgid "Short Code"
+msgstr "短代码"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__short_url
+msgid "Short URL"
+msgstr "短链接"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__sequence
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__sequence
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__sequence
+msgid "Sequence"
+msgstr "排序"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__pos_table_id
+msgid "POS Table"
+msgstr "POS餐桌"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__pos_config_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_config_id
+msgid "POS Config"
+msgstr "POS配置"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_token
+msgid "QR Token"
+msgstr "二维码令牌"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_url
+msgid "QR URL"
+msgstr "点餐链接"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_url_v2
+msgid "QR URL V2"
+msgstr "点餐链接V2"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__qr_code_image
+msgid "QR Code"
+msgstr "二维码"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__active
+msgid "Active"
+msgstr "启用"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__state
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__state
+msgid "Status"
+msgstr "状态"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__available
+msgid "Available"
+msgstr "空闲"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__occupied
+msgid "Occupied"
+msgstr "使用中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_table__state__reserved
+msgid "Reserved"
+msgstr "已预订"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__current_session_id
+msgid "Current Session"
+msgstr "当前会话"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table__order_count
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__order_count
+msgid "Order Count"
+msgstr "订单数"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Open Table"
+msgstr "开台"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Close Table"
+msgstr "关台"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Regenerate QR"
+msgstr "重新生成二维码"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Print QR"
+msgstr "打印二维码"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Basic Info"
+msgstr "基本信息"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Auto Generate"
+msgstr "自动生成"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_form
+msgid "Manual Bind"
+msgstr "手动绑定"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__name
+msgid "Session ID"
+msgstr "会话ID"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__table_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__table_id
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_table_bind_shortcode_wizard__table_id
+msgid "Table"
+msgstr "餐桌"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__access_token
+msgid "Access Token"
+msgstr "访问令牌"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__active
+msgid "Active"
+msgstr "活跃"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__ordering
+msgid "Ordering"
+msgstr "点餐中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__waiting
+msgid "Waiting"
+msgstr "等待中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__serving
+msgid "Serving"
+msgstr "上菜中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_session__state__closed
+msgid "Closed"
+msgstr "已关闭"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__expire_time
+msgid "Expire Time"
+msgstr "过期时间"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__end_time
+msgid "End Time"
+msgstr "结束时间"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__client_ip
+msgid "Client IP"
+msgstr "客户端IP"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__user_agent
+msgid "User Agent"
+msgstr "用户代理"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__order_ids
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__line_ids
+msgid "Orders"
+msgstr "订单"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_session__total_amount
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__total_amount
+msgid "Total Amount"
+msgstr "总金额"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Close Session"
+msgstr "关闭会话"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Extend 2 Hours"
+msgstr "延长2小时"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Session Info"
+msgstr "会话信息"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Time"
+msgstr "时间"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_form
+msgid "Client Info"
+msgstr "客户端信息"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__name
+msgid "Order Number"
+msgstr "订单号"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__session_id
+msgid "Session"
+msgstr "会话"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_order_id
+msgid "POS Order"
+msgstr "POS订单"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__pos_session_id
+msgid "POS Session"
+msgstr "POS会话"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__restaurant_table_id
+msgid "Restaurant Table"
+msgstr "餐厅餐桌"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__partner_id
+msgid "Customer"
+msgstr "客户"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__source
+msgid "Source"
+msgstr "来源"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__qr
+msgid "QR Code"
+msgstr "扫码"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__pos
+msgid "POS"
+msgstr "POS"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__source__kiosk
+msgid "Kiosk"
+msgstr "自助机"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cart
+msgid "Cart"
+msgstr "购物车"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__ordered
+msgid "Ordered"
+msgstr "已下单"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cooking
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__cooking
+msgid "Cooking"
+msgstr "制作中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__serving
+msgid "Serving"
+msgstr "上菜中"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__paid
+msgid "Paid"
+msgstr "已付款"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order__state__cancelled
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__cancelled
+msgid "Cancelled"
+msgstr "已取消"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__line_ids
+msgid "Order Lines"
+msgstr "订单明细"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__total_qty
+msgid "Total Quantity"
+msgstr "总数量"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__note
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__note
+msgid "Note"
+msgstr "备注"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__order_time
+msgid "Order Time"
+msgstr "下单时间"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__cooking_time
+msgid "Cooking Start"
+msgstr "开始制作"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__serve_time
+msgid "Serve Time"
+msgstr "上菜时间"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order__last_print_time
+msgid "Last Print Time"
+msgstr "最后打印时间"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Submit Order"
+msgstr "提交订单"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_form
+msgid "Order Info"
+msgstr "订单信息"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__order_id
+msgid "Order"
+msgstr "订单"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__product_id
+msgid "Product"
+msgstr "产品"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__product_name
+msgid "Product Name"
+msgstr "产品名称"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__qty
+msgid "Quantity"
+msgstr "数量"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__price_unit
+msgid "Unit Price"
+msgstr "单价"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__subtotal
+msgid "Subtotal"
+msgstr "小计"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_order_line__batch_number
+msgid "Batch"
+msgstr "批次"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__pending
+msgid "Pending"
+msgstr "待处理"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__submitted
+msgid "Submitted"
+msgstr "已提交"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_order_line__state__served
+msgid "Served"
+msgstr "已上菜"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__name
+msgid "Tag Name"
+msgstr "标签名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__color
+msgid "Color"
+msgstr "颜色"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__icon
+msgid "Icon"
+msgstr "图标"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_qr_product_tag__tag_type
+msgid "Tag Type"
+msgstr "标签类型"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__spicy
+msgid "Spicy"
+msgstr "辣"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__vegetarian
+msgid "Vegetarian"
+msgstr "素食"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__recommended
+msgid "Recommended"
+msgstr "推荐"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__new
+msgid "New"
+msgstr "新品"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__popular
+msgid "Popular"
+msgstr "人气"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__healthy
+msgid "Healthy"
+msgstr "健康"
+
+#. module: qr_ordering
+#: model:ir.model.fields.selection,name:qr_ordering.selection__qr_product_tag__tag_type__custom
+msgid "Custom"
+msgstr "自定义"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video
+msgid "Product Video"
+msgstr "产品视频"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video_filename
+msgid "Video Filename"
+msgstr "视频文件名"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_video_url
+msgid "Video URL"
+msgstr "视频链接"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_short_desc
+msgid "Short Description"
+msgstr "简短描述"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_available
+msgid "Available for QR Ordering"
+msgstr "可扫码点餐"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_highlight
+msgid "Highlight"
+msgstr "推荐"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_pinned
+msgid "Pinned"
+msgstr "置顶"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_pinned_sequence
+msgid "Pinned Sequence"
+msgstr "置顶排序"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_sold_out
+msgid "Sold Out"
+msgstr "售罄"
+
+#. module: qr_ordering
+#: model:ir.model.fields,field_description:qr_ordering.field_product_template__qr_tags
+msgid "Tags"
+msgstr "标签"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "QR Ordering"
+msgstr "扫码点餐"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Display Settings"
+msgstr "显示设置"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Description"
+msgstr "描述"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.product_template_form_view_qr_ordering
+msgid "Video"
+msgstr "视频"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Today"
+msgstr "今天"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Group By"
+msgstr "分组"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Date"
+msgstr "日期"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "No Short Code"
+msgstr "无短代码"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "Archived"
+msgstr "已归档"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_view_search
+msgid "Search Tables"
+msgstr "搜索餐桌"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_session_view_search
+msgid "Search Sessions"
+msgstr "搜索会话"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_order_view_search
+msgid "Search Orders"
+msgstr "搜索订单"
+
+#. module: qr_ordering
+#: model:ir.model,name:qr_ordering.model_qr_table_bind_shortcode_wizard
+msgid "Bind Short Code Wizard"
+msgstr "绑定短代码向导"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Bind Short Code"
+msgstr "绑定短代码"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Bind"
+msgstr "绑定"
+
+#. module: qr_ordering
+#: model_terms:ir.ui.view,arch_db:qr_ordering.qr_table_bind_shortcode_wizard_form
+msgid "Cancel"
+msgstr "取消"

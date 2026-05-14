@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- QR Table Tree View -->
+    <record id="qr_table_view_tree" model="ir.ui.view">
+        <field name="name">qr.table.view.tree</field>
+        <field name="model">qr.table</field>
+        <field name="arch" type="xml">
+            <list string="QR Tables">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="short_code"/>
+                <field name="pos_config_id"/>
+                <field name="pos_table_id" optional="show"/>
+                <field name="state" widget="badge" decoration-success="state == 'available'" decoration-warning="state == 'reserved'" decoration-danger="state == 'occupied'"/>
+                <field name="order_count"/>
+                <field name="short_url" widget="url" optional="show"/>
+                <field name="qr_url" widget="url" optional="hide"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- QR Table Form View -->
+    <record id="qr_table_view_form" model="ir.ui.view">
+        <field name="name">qr.table.view.form</field>
+        <field name="model">qr.table</field>
+        <field name="arch" type="xml">
+            <form string="QR Table">
+                <header>
+                    <button name="action_open_table" string="Open Table" type="object" class="oe_highlight" invisible="state != 'available'"/>
+                    <button name="action_close_table" string="Close Table" type="object" invisible="state != 'occupied'"/>
+                    <button name="action_regenerate_token" string="Regenerate QR" type="object" confirm="This will invalidate the old QR code. Continue?"/>
+                    <button name="action_print_qr_code" string="Print QR" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="available,occupied"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_orders" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                            <field name="order_count" widget="statinfo" string="Orders"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Basic Info">
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="pos_config_id"/>
+                            <field name="pos_table_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Short Code">
+                            <field name="short_code"/>
+                            <field name="short_url" widget="url" readonly="1"/>
+                            <div class="mt-2">
+                                <button name="action_generate_short_code" string="Auto Generate" type="object" class="btn btn-secondary btn-sm"/>
+                                <button name="action_bind_short_code" string="Manual Bind" type="object" class="btn btn-secondary btn-sm ms-2"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="QR Code">
+                            <field name="qr_token" readonly="1"/>
+                            <field name="qr_url" widget="url" readonly="1"/>
+                            <field name="qr_url_v2" widget="url" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="qr_code_image" widget="image" class="oe_avatar" readonly="1" nolabel="1"/>
+                        </group>
+                    </group>
+                    <group string="Current Session" invisible="not current_session_id">
+                        <field name="current_session_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- QR Table Kanban View -->
+    <record id="qr_table_view_kanban" model="ir.ui.view">
+        <field name="name">qr.table.view.kanban</field>
+        <field name="model">qr.table</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="short_code"/>
+                <field name="state"/>
+                <field name="order_count"/>
+                <field name="qr_url"/>
+                <field name="short_url"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    <t t-if="record.short_code.value">
+                                        <span class="badge bg-info ms-2"><field name="short_code"/></span>
+                                    </t>
+                                </strong>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="state" widget="badge"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <span><i class="fa fa-shopping-cart"/> <field name="order_count"/></span>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <a t-att-href="record.short_url.value or record.qr_url.value" target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="fa fa-qrcode"/> View
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- QR Table Search View -->
+    <record id="qr_table_view_search" model="ir.ui.view">
+        <field name="name">qr.table.view.search</field>
+        <field name="model">qr.table</field>
+        <field name="arch" type="xml">
+            <search string="Search Tables">
+                <field name="name"/>
+                <field name="short_code"/>
+                <field name="pos_config_id"/>
+                <filter name="available" string="Available" domain="[('state', '=', 'available')]"/>
+                <filter name="occupied" string="Occupied" domain="[('state', '=', 'occupied')]"/>
+                <filter name="no_short_code" string="No Short Code" domain="[('short_code', '=', False)]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_pos_config" string="POS Config" context="{'group_by': 'pos_config_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- QR Table Action -->
+    <record id="qr_table_action" model="ir.actions.act_window">
+        <field name="name">QR Tables</field>
+        <field name="res_model">qr.table</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="qr_table_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first QR table
+            </p>
+            <p>
+                Create a QR code for each table. Customers can scan to order.
+            </p>
+        </field>
+    </record>
+
+    <!-- Bind Short Code Wizard View -->
+    <record id="qr_table_bind_shortcode_wizard_form" model="ir.ui.view">
+        <field name="name">qr.table.bind.shortcode.wizard.form</field>
+        <field name="model">qr.table.bind.shortcode.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bind Short Code">
+                <group>
+                    <field name="table_id" readonly="1"/>
+                    <field name="short_code" placeholder="e.g., A01, B02"/>
+                </group>
+                <footer>
+                    <button name="action_bind" string="Bind" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

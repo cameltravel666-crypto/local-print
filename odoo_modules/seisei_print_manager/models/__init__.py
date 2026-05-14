@@ -19,5 +19,5 @@ try:
 except ImportError:
     pass
 
-# QR Ordering integration is handled via monkey patching in qr_order_print.py
-# Import is deferred to avoid model loading order issues
+# QR Ordering integration is handled via hooks.py monkey patching
+# The patch is applied when the registry is initialized

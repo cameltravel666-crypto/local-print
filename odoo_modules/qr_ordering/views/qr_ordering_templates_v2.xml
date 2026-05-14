@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ordering_page_v2" name="QR Ordering Page V2 - Mobile Optimized">
+        <t t-set="html_data" t-value="{}"/>
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+                <meta name="mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+                
+                <!-- V2 移动端极致体验版 CSS -->
+                <link type="text/css" rel="stylesheet" t-att-href="'/qr_ordering/static/src/css/qr_ordering_v2.css?v=' + (build_version or 'dev')"/>
+                
+                <!-- Inline Critical CSS -->
+                <style type="text/css">
+                    <![CDATA[
+                    /* Critical CSS for V2 */
+                    html, body {
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                        overflow-x: hidden;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        background: #f5f5f5;
+                        -webkit-font-smoothing: antialiased;
+                    }
+                    #qr-app-v2 {
+                        width: 100%;
+                        min-height: 100vh;
+                        min-height: 100dvh;
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                    }
+                    /* Boot Guard */
+                    #qr-boot-guard {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: #fff;
+                        z-index: 99999;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    ]]>
+                </style>
+                
+                <title>扫码点餐 V2</title>
+            </head>
+
+            <body class="qr-ordering-v2">
+                <!-- Boot Guard -->
+                <div id="qr-boot-guard">
+                    <div style="text-align: center; padding: 20px;">
+                        <div class="qr-spinner" style="width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #ff6b6b; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+                        <h1 style="font-size: 20px; margin-bottom: 10px; color: #333;">正在加载...</h1>
+                        <p style="color: #666; font-size: 14px;">Build: <t t-esc="build_version or 'unknown'"/></p>
+                    </div>
+                </div>
+
+                <!-- Main App Container -->
+                <div id="qr-app-v2"
+                     t-att-data-table-token="table.qr_token"
+                     t-att-data-access-token="access_token"
+                     t-att-data-table-name="table.name"
+                     t-att-data-lang="lang">
+
+                    <!-- Header: 店名/桌号 + 搜索 -->
+                    <header class="qr-v2-header">
+                        <div class="qr-v2-header-top">
+                            <div class="qr-v2-header-left">
+                                <div class="qr-v2-store-name">🍽️ 餐厅名称</div>
+                                <div class="qr-v2-table-name" t-esc="table.name"/>
+                            </div>
+                            <div class="qr-v2-header-right">
+                                <select id="qr-v2-lang-select" class="qr-v2-lang-select">
+                                    <option value="zh_CN" t-att-selected="lang == 'zh_CN' and 'selected' or None">中文</option>
+                                    <option value="ja_JP" t-att-selected="lang == 'ja_JP' and 'selected' or None">日本語</option>
+                                    <option value="en_US" t-att-selected="lang == 'en_US' and 'selected' or None">EN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="qr-v2-search-bar">
+                            <input type="text" 
+                                   id="qr-v2-search-input" 
+                                   class="qr-v2-search-input"
+                                   placeholder="搜索菜品..." />
+                        </div>
+                    </header>
+
+                    <!-- Pinned Carousel: 置顶视频轮播 -->
+                    <section class="qr-v2-pinned-carousel" id="qr-v2-pinned-carousel" style="display: none;">
+                        <div class="qr-v2-carousel-container">
+                            <div class="qr-v2-carousel-track" id="qr-v2-carousel-track">
+                                <!-- Slides will be injected by JS -->
+                            </div>
+                            <div class="qr-v2-carousel-controls">
+                                <div class="qr-v2-carousel-dots" id="qr-v2-carousel-dots"></div>
+                                <div class="qr-v2-carousel-badges">
+                                    <span class="qr-v2-badge">🔇</span>
+                                    <span class="qr-v2-badge">AUTO</span>
+                                </div>
+                            </div>
+                            <div class="qr-v2-carousel-progress" id="qr-v2-carousel-progress"></div>
+                        </div>
+                    </section>
+
+                    <!-- Reco Rail: 推荐横向滑动 -->
+                    <section class="qr-v2-reco-rail" id="qr-v2-reco-rail" style="display: none;">
+                        <div class="qr-v2-reco-header">
+                            <h2 class="qr-v2-reco-title">🔥 今日推荐</h2>
+                        </div>
+                        <div class="qr-v2-reco-scroll" id="qr-v2-reco-scroll">
+                            <!-- Reco cards will be injected by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Sticky Category Chips -->
+                    <section class="qr-v2-category-chips" id="qr-v2-category-chips">
+                        <div class="qr-v2-chips-scroll" id="qr-v2-chips-scroll">
+                            <!-- Category chips will be injected by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Product Grid: 两列商品 -->
+                    <section class="qr-v2-product-grid" id="qr-v2-product-grid">
+                        <!-- Product cards will be injected by JS -->
+                        <div class="qr-v2-loading">
+                            <div class="qr-spinner"></div>
+                            <p>加载中...</p>
+                        </div>
+                    </section>
+
+                    <!-- Bottom Cart Bar: 固定底栏 -->
+                    <footer class="qr-v2-bottom-bar" id="qr-v2-bottom-bar">
+                        <div class="qr-v2-cart-summary">
+                            <div class="qr-v2-cart-icon">
+                                <span class="qr-v2-cart-badge" id="qr-v2-cart-badge">0</span>
+                                🛒
+                            </div>
+                            <div class="qr-v2-cart-info">
+                                <div class="qr-v2-cart-items" id="qr-v2-cart-items">0 件</div>
+                                <div class="qr-v2-cart-total" id="qr-v2-cart-total">¥0</div>
+                            </div>
+                        </div>
+                        <button class="qr-v2-review-btn" id="qr-v2-review-btn">
+                            查看订单 →
+                        </button>
+                    </footer>
+
+                    <!-- PiP Video Overlay -->
+                    <div class="qr-v2-pip-overlay" id="qr-v2-pip-overlay" style="display: none;">
+                        <div class="qr-v2-pip-container">
+                            <video id="qr-v2-pip-video" 
+                                   class="qr-v2-pip-video" 
+                                   playsinline="playsinline" 
+                                   webkit-playsinline="webkit-playsinline"
+                                   preload="metadata"></video>
+                            <div class="qr-v2-pip-controls">
+                                <button class="qr-v2-pip-btn" id="qr-v2-pip-play">▶</button>
+                                <button class="qr-v2-pip-btn" id="qr-v2-pip-mute">🔇</button>
+                                <button class="qr-v2-pip-btn qr-v2-pip-close" id="qr-v2-pip-close">✕</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Modal -->
+                    <div class="qr-v2-modal" id="qr-v2-cart-modal">
+                        <div class="qr-v2-modal-content">
+                            <div class="qr-v2-modal-header">
+                                <h2>购物车</h2>
+                                <button class="qr-v2-modal-close" id="qr-v2-cart-close">✕</button>
+                            </div>
+                            <div class="qr-v2-modal-body" id="qr-v2-cart-items-list">
+                                <!-- Cart items -->
+                            </div>
+                            <div class="qr-v2-modal-footer">
+                                <div class="qr-v2-cart-total-row">
+                                    <span>合计</span>
+                                    <span id="qr-v2-cart-modal-total">¥0</span>
+                                </div>
+                                <button class="qr-v2-btn-primary" id="qr-v2-checkout-btn">提交订单</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Modal -->
+                    <div class="qr-v2-modal" id="qr-v2-orders-modal">
+                        <div class="qr-v2-modal-content">
+                            <div class="qr-v2-modal-header">
+                                <h2>已下单</h2>
+                                <button class="qr-v2-modal-close" id="qr-v2-orders-close">✕</button>
+                            </div>
+                            <div class="qr-v2-modal-body" id="qr-v2-orders-list">
+                                <!-- Orders -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toast -->
+                    <div class="qr-v2-toast" id="qr-v2-toast"></div>
+                </div>
+
+                <!-- Scripts -->
+                <script type="text/javascript" t-att-src="'/qr_ordering/static/src/js/qr_ordering_v2.js?v=' + (build_version or 'dev')"/>
+                
+                <!-- Spinner animation -->
+                <style>
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                </style>
+
+                <!-- Inline Boot Script -->
+                <script>
+                    <![CDATA[
+                    // Remove boot guard after 3s or when page loads
+                    const bootGuard = document.getElementById('qr-boot-guard');
+                    let removed = false;
+
+                    function removeBootGuard() {
+                        if (!removed && bootGuard) {
+                            removed = true;
+                            bootGuard.style.opacity = '0';
+                            bootGuard.style.transition = 'opacity 0.3s';
+                            setTimeout(() => bootGuard.remove(), 300);
+                        }
+                    }
+
+                    // Auto remove after 3s
+                    setTimeout(removeBootGuard, 3000);
+
+                    // Remove when QR Ordering V2 initializes
+                    window.addEventListener('qr-v2-ready', removeBootGuard);
+
+                    // Fallback: DOMContentLoaded
+                    if (document.readyState === 'complete') {
+                        setTimeout(removeBootGuard, 500);
+                    } else {
+                        window.addEventListener('load', () => setTimeout(removeBootGuard, 500));
+                    }
+                    ]]>
+                </script>
+            </body>
+        </html>
+    </template>
+</odoo>
+

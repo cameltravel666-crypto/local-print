@@ -29,6 +29,13 @@
                         <field name="seisei_auto_print_kitchen"/>
                     </group>
                 </group>
+                <group>
+                    <group string="Cash Drawer">
+                        <field name="seisei_open_cash_drawer"/>
+                        <field name="seisei_cash_drawer_pin"
+                               invisible="not seisei_open_cash_drawer"/>
+                    </group>
+                </group>
             </xpath>
         </field>
     </record>

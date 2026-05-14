@@ -102,6 +102,12 @@ class PosOrder(models.Model):
         # Render to ESC/POS commands
         try:
             escpos_commands = template.render_to_escpos(receipt_data)
+
+            # Prepend cash drawer open command if enabled
+            if config.seisei_open_cash_drawer:
+                cash_drawer_cmd = self._get_cash_drawer_command(config)
+                escpos_commands = cash_drawer_cmd + escpos_commands
+
             escpos_base64 = base64.b64encode(escpos_commands).decode('utf-8')
         except Exception as e:
             _logger.error("Failed to render receipt template: %s", e)
@@ -267,3 +273,28 @@ class PosOrder(models.Model):
                     'sticky': False,
                 }
             }
+
+    def _get_cash_drawer_command(self, config=None):
+        """
+        Generate ESC/POS command to open cash drawer
+
+        ESC p m t1 t2
+        - m: drawer pin (0=pin2, 1=pin5)
+        - t1: on time (25 = 50ms)
+        - t2: off time (250 = 500ms)
+
+        Returns:
+            bytes: ESC/POS cash drawer open command
+        """
+        ESC = b'\x1b'
+
+        # Get pin from config (default to pin 0)
+        pin = 0
+        if config and hasattr(config, 'seisei_cash_drawer_pin') and config.seisei_cash_drawer_pin:
+            pin = int(config.seisei_cash_drawer_pin)
+
+        # ESC p m t1 t2 - Open cash drawer
+        # t1=25 (50ms on), t2=250 (500ms off) - standard timing
+        cash_drawer_cmd = ESC + b'p' + bytes([pin, 25, 250])
+
+        return cash_drawer_cmd
